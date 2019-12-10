@@ -1,0 +1,9 @@
+--- src/utils/string.h.orig	2019-12-10 15:21:00.774781815 +1100
++++ src/utils/string.h	2019-12-10 15:21:24.638781815 +1100
+@@ -67,3 +67,6 @@
+ void uppercase(char * sPtr);
+ int sc_isprint(int d);
+ int count_width_widestring(const wchar_t * s, int p);
++
++int wcwidth(wchar_t ucs);
++int wcswidth(const wchar_t *pwcs, size_t n);
