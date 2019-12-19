@@ -24,11 +24,11 @@ Run this to fetch, patch, build, bundle and deploy dev tools for the playbook.
 
 OPTIONS:
    -h      Show this message
-   -b      The absolute path to your BB Playbook SDK folder [/abs/path/tp/bbpb-sdk]
+   -b      The absolute path to your BB Native SDK folder [/abs/path/tp/bbndk]
    -i      The IP address of this machine (will prompt if not specified)
    -l      The login you use for the QNX Foundry27 site, if you have one [user@host]
    -p      The prefix on your BB10 device to install to (default $DEFAULTPREFIX)
-   -t      The build task to perform: [ bootstrap | bundle | deploy]
+   -t      The build task to perform: [ build_all | bundle | deploy]
    -s      The task to pass to each package [fetch | patch | build | install | bundle]
 EOF
 }
@@ -42,7 +42,6 @@ process_args()
     case "$OPTION" in
       h) usage; exit 1;;
       b) echo "$OPTARG" > conf/bbtools;;
-      i) echo "$OPTARG" > conf/ip;;
       l) echo "$OPTARG" > conf/login;;
       p) echo "$OPTARG" > conf/prefix;;
       t) TASK="$OPTARG";;
@@ -104,34 +103,6 @@ function get_prefix()
   fi
 }
 
-function get_myip()
-{
-  MYIP=
-  if [ -e "$ROOTDIR/conf/ip" ]; then
-    MYIP=`cat "$ROOTDIR/conf/ip"`
-  else
-    IPS=( `ifconfig | grep "inet " | awk '{print $2}' | tr -d addr:` )
-    NUMOFIPS=${#IPS[@]}
-    if [ $NUMOFIPS -gt 1 ]; then
-      j=-1
-      while [ $j -eq -1 ]; do
-        echo "Please choose on which IP we'll be listening to download requests from PlayBook:"
-        for (( i=0;i<$NUMOFIPS;i++)); do echo $i\) ${IPS[$i]}; done
-        echo -n Your choice:
-        read j
-        if [ $j -lt 0 ] ; then j=-1; fi
-        let i=$NUMOFIPS-1
-        if [ $j -gt $i ] ; then j=-1; fi
-      done
-    else
-      j=0
-    fi
-    MYIP=${IPS[$j]}
-    echo "$MYIP" > "$ROOTDIR/conf/ip"
-  fi
-  URL="http://$MYIP:8888"
-}
-
 function init_confdir()
 {
   mkdir -p conf
@@ -153,7 +124,7 @@ function configure_dirs()
     init_confdir
     ROOTDIR=`cat conf/rootdir`
   fi
-  DESTDIR="$ROOTDIR/pbhome"
+  DESTDIR="$ROOTDIR/clitools"
   mkdir -p "$DESTDIR"
   ARCHIVEDIR="$ROOTDIR/archive"
   mkdir -p "$ARCHIVEDIR"
@@ -161,8 +132,8 @@ function configure_dirs()
   mkdir -p "$PKGDIR"
   WORKROOT="$ROOTDIR/work"
   mkdir -p "$WORKROOT"
-  BOOTSTRAPDIR="$ROOTDIR/bootstrap"
-  ZIPFILE="$ROOTDIR/pbhome.zip"
+  PORTSDIR="$ROOTDIR/ports"
+  ZIPFILE="$ROOTDIR/clitools.zip"
 }
 
 function init()
@@ -172,31 +143,29 @@ function init()
   configure_dirs
   source_bbtools
   get_foundry_login
-  get_myip
   get_prefix
 }
 
-function bootstrap()
+function build_all()
 {
-  ALLPROGS="bash bc bison bzip2 cflow coreutils curl diffutils ed fakeroot file gcc gdb gdbm gettext git grep groff gzip jansson libevent libmpg123 libuuid m4 make man openssh openssl patch rsync sqlite tar taskwarrior tmux vim xz yaml zeromq zlib"
-  BROKEN="cronie findutils git ruby"
+  ALLPORTS="bash bc bison bzip2 cflow coreutils curl diffutils ed fakeroot file gcc gdb gdbm gettext git grep groff gzip jansson libevent libmpg123 libuuid m4 make man openssh openssl patch rsync sqlite tar taskwarrior tmux vim xz yaml zeromq zlib"
+  BROKEN="cronie findutils ruby"
 
-  cd "$BOOTSTRAPDIR"
-  for dir in $ALLPROGS
+  cd "$PORTSDIR"
+  for dir in $ALLPORTS
   do
-    if [ -d "$dir" ] && [ -e "$dir/build.sh" ]
-    then
-	[ -f "$dir/vars.sh" ] && {
-		. $dir/vars.sh
-		[ -f ../packages/$DISTVER.zip ] && {
-			echo "Warning: skipping build of $DISTVER (file packages/$DISTVER.zip already exists) "
-			continue;
-		}
-	}
+    if [ -d "$dir" ] && [ -e "$dir/build.sh" ]; then
+      [ -f "$dir/vars.sh" ] && {
+        . $dir/vars.sh
+        [ -f ../packages/$DISTVER.zip ] && {
+          echo "Warning: skipping build of $DISTVER (file packages/$DISTVER.zip already exists) "
+          continue;
+        }
+      }
       echo "Building $dir"
       cd "$dir"
       ./build.sh $SUBTASKFLAG $SUBTASK
-      cd "$BOOTSTRAPDIR"
+      cd "$PORTSDIR"
     fi
   done
 }
@@ -212,7 +181,7 @@ OPTIONS:
    -h      Show this message
    -b      The absolute path to your bbpb-sdk folder [/abs/path/tp/bbpb-sdk]
    -t      The build task to start at: [fetch | patch | build | install | bundle]
-   -i      The IP address of this machine (will prompt if not specified)
+   -i      The IP address of this machine
    -l      The login you use for the QNX Foundry27 site, if you have one [user@host]
    -p      The prefix on your BB10 device to install to (default $DEFAULTPREFIX)
 EOF
@@ -225,7 +194,6 @@ do
   case "$OPTION" in
     h) subusage; exit 1;;
     b) echo "$OPTARG" > "$ROOTDIR/conf/bbtools";;
-    i) echo "$OPTARG" > "$ROOTDIR/conf/ip";;
     l) echo "$OPTARG" > "$ROOTDIR/conf/login";;
     p) echo "$OPTARG" > "$ROOTDIR/conf/prefix";;
     t) TASK="$OPTARG";;
@@ -239,7 +207,6 @@ function package_init()
   process_subargs "$@"
   source_bbtools
   get_foundry_login
-  get_myip
   get_prefix
 
   EXECDIR="$PWD"
@@ -299,7 +266,7 @@ then
   # configure
   eval $CONFIGURE_CMD
   eval $MAKE_PREFIX make $MYMAKEFLAGS || \
-	eval $MAKE_PREFIX make
+  eval $MAKE_PREFIX make
   TASK=install
 fi
 }
@@ -328,5 +295,4 @@ fi
 # we call configure_dirs here so when the library is included,
 # the directories get set up early.
 configure_dirs
-
 

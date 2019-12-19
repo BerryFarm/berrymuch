@@ -6,10 +6,10 @@ work/
 *.tar.gz
 *.tar.bz2
 *.zip
-pbinstall.sh
+install.sh
 .profile
 conf/
-pbhome/
+clitools/
 archive/
 env.sh
 sample_profile

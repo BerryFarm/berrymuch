@@ -5,19 +5,17 @@
 # You may do whatever you like with this code, provided the above
 # copyright notice and this paragraph are preserved.
 
-
 set -e
 
 source lib.sh
 
-
-TASK=bootstrap
+TASK=build_all
 
 init "$@"
 
-if [ "$TASK" == "bootstrap" ]
+if [ "$TASK" == "build_all" ]
 then
-  bootstrap
+  build_all
   TASK=bundle
 fi
 
@@ -26,7 +24,6 @@ then
   cd "$ROOTDIR"
   echo "Setting up target env"
   echo "export NATIVE_TOOLS=\"$PREFIX\"" > env.sh
-  echo "export NATIVE_TOOLS_URL=\"$URL\"" >> env.sh
   echo "QNX_TARGET=\$NATIVE_TOOLS/$TARGETNAME/qnx6" >> env.sh
   cat profile >> env.sh
   echo "umask 002"                   >  sample_profile
@@ -43,30 +40,27 @@ fi
 if [ "$TASK" == "deploy" ]
 then
   cd "$ROOTDIR"
-  echo "#!/bin/sh"                        >  pbinstall.sh
-  echo "mkdir -p \"$PREFIX\""             >> pbinstall.sh
-  echo "cd \"$PREFIX\""                   >> pbinstall.sh
-  echo "export NATIVE_TOOLS=\"$PREFIX\""  >> pbinstall.sh
-  echo "export NATIVE_TOOLS_URL=\"$URL\"" >> pbinstall.sh
-  cat pbinstallhead.sh                    >> pbinstall.sh
-  echo "./bin/pwget \"$URL/pbhome.zip\""  >> pbinstall.sh
-  echo "unzip pbhome.zip"                 >> pbinstall.sh
-  echo 'cp pbpkgadd bin/'                 >> pbinstall.sh
-  echo 'for pkg in packages/*.zip'        >> pbinstall.sh
-  echo 'do'                               >> pbinstall.sh
-  echo './bin/pbpkgadd $pkg'              >> pbinstall.sh
-  echo 'done'                             >> pbinstall.sh
-  echo '. ./env.sh'                       >> pbinstall.sh
-  echo 'cd'                               >> pbinstall.sh
-  echo 'if [ ! -e .profile ]; then'                   >> pbinstall.sh
-  echo '  cp "$NATIVE_TOOLS/sample_profile" .profile' >> pbinstall.sh
-  echo 'else'                                         >> pbinstall.sh
-  echo '  echo "You already have a .profile."'        >> pbinstall.sh
-  echo '  echo "You can set up your paths by sourcing $NATIVE_TOOLS/env.sh"'    >> pbinstall.sh 
-  echo '  echo "See $NATIVE_TOOLS/sample_profile for a snippet that does this"' >> pbinstall.sh
-  echo 'fi'                                           >> pbinstall.sh
-  echo "---- On your BB10 device, direct your browser to: $URL/pbinstall.sh"
-  echo "---- Save the file, then in the shell, execute: sh /accounts/1000/shared/downloads/pbinstall.sh"
-  ./localserver.rb
+  echo "#!/bin/sh"                                                              >  install.sh
+  echo "mkdir -p \"$PREFIX\""                                                   >> install.sh
+  echo "mv clitools.zip \"$PREFIX\""                                            >> install.sh
+  echo "cd \"$PREFIX\""                                                         >> install.sh
+  echo "export NATIVE_TOOLS=\"$PREFIX\""                                        >> install.sh
+  echo "unzip clitools.zip"                                                     >> install.sh
+  echo 'for pkg in packages/*.zip'                                              >> install.sh
+  echo 'do'                                                                     >> install.sh
+  echo './pbpkgadd $pkg'                                                        >> install.sh
+  echo 'done'                                                                   >> install.sh
+  echo '. ./env.sh'                                                             >> install.sh
+  echo 'cd'                                                                     >> install.sh
+  echo 'if [ ! -e .profile ]; then'                                             >> install.sh
+  echo '  cp "$NATIVE_TOOLS/sample_profile" .profile'                           >> install.sh
+  echo 'else'                                                                   >> install.sh
+  echo '  echo "You already have a .profile."'                                  >> install.sh
+  echo '  echo "You can set up your paths by sourcing $NATIVE_TOOLS/env.sh"'    >> install.sh
+  echo '  echo "See $NATIVE_TOOLS/sample_profile for a snippet that does this"' >> install.sh
+  echo 'fi'                                                                     >> install.sh
+  cat install_footer.sh                                                         >> install.sh
+  echo "---- You can now download clitools.zip and install.sh to your device from http://thismachine:8888"
+  python3 -m http.server 8888
 fi
 

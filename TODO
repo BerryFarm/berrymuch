@@ -1,3 +1,8 @@
+## Infra
+
 - lib.sh, build.sh: add support for additional parameter, to build only a specific package
-- add lynx text browser ( or https://www.brow.sh )
-- add mplayer support (depends on availability of audio library on bb10 )
+
+## Packages
+
+- Web browser, e.g. lynx, links, brow.sh
+- Audio player, e.g. mplayer, cmus, mpd

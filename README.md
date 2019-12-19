@@ -42,7 +42,7 @@ The project is standing on the shoulders of giants including [playbook-dev-tools
 * Install the [BlackBerry Native SDK](https://developer.blackberry.com/native/download/)
 * Install a few other packages:
   ```
-  sudo apt install git subversion curl texinfo autopoint m4 autoconf groff ruby lunzip
+  sudo apt install git subversion curl texinfo autopoint m4 autoconf groff lunzip
   ```
 * Clone this repository and run `./build.sh`
 * Follow the instructions at the end of the build process
