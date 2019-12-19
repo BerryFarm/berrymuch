@@ -44,21 +44,12 @@ then
   echo "mkdir -p \"$PREFIX\""                                                   >> install.sh
   echo "mv clitools.zip \"$PREFIX\""                                            >> install.sh
   echo "cd \"$PREFIX\""                                                         >> install.sh
-  echo "export NATIVE_TOOLS=\"$PREFIX\""                                        >> install.sh
   echo "unzip clitools.zip"                                                     >> install.sh
   echo 'for pkg in packages/*.zip'                                              >> install.sh
   echo 'do'                                                                     >> install.sh
   echo './pbpkgadd $pkg'                                                        >> install.sh
   echo 'done'                                                                   >> install.sh
   echo '. ./env.sh'                                                             >> install.sh
-  echo 'cd'                                                                     >> install.sh
-  echo 'if [ ! -e .profile ]; then'                                             >> install.sh
-  echo '  cp "$NATIVE_TOOLS/sample_profile" .profile'                           >> install.sh
-  echo 'else'                                                                   >> install.sh
-  echo '  echo "You already have a .profile."'                                  >> install.sh
-  echo '  echo "You can set up your paths by sourcing $NATIVE_TOOLS/env.sh"'    >> install.sh
-  echo '  echo "See $NATIVE_TOOLS/sample_profile for a snippet that does this"' >> install.sh
-  echo 'fi'                                                                     >> install.sh
   cat install_footer.sh                                                         >> install.sh
   echo "---- You can now download clitools.zip and install.sh to your device from http://thismachine:8888"
   python3 -m http.server 8888
