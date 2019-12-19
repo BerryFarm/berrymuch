@@ -8,20 +8,20 @@
 
 set -e
 source ../../lib.sh
-DISTVER="curl-7.51.0"
+DISTVER="curl-7.67.0"
 DISTSUFFIX="tar.bz2"  # so much for bootstrapping..
 TASK=fetch
 
 DISTFILES="https://curl.haxx.se/download/$DISTVER.$DISTSUFFIX"
 UNPACKCOMD="tar -xf"
 package_init "$@"
-CONFIGURE_CMD="./configure 
+CONFIGURE_CMD="./configure
                 --host=$PBHOSTARCH
-                --build=$PBBUILDARCH 
-                --target=$PBTARGETARCH 
-                --prefix=$PREFIX 
-                --disable-nls 
-                CC=$PBTARGETARCH-gcc 
+                --build=$PBBUILDARCH
+                --target=$PBTARGETARCH
+                --prefix=$PREFIX
+                --disable-nls
+                CC=$PBTARGETARCH-gcc
                 LIBS=-lsocket
                 "
 package_fetch

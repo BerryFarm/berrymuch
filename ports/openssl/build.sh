@@ -1,4 +1,4 @@
-#!/usr/bin/env bash 
+#!/usr/bin/env bash
 
 set -x
 
@@ -13,7 +13,7 @@ set -x
 
 set -e
 source ../../lib.sh
-DISTVER="openssl-1.0.2o"
+DISTVER="openssl-1.0.2t"
 DISTSUFFIX="tar.gz"
 TASK=fetch
 
@@ -22,7 +22,7 @@ UNPACKCOMD="tar -xzf"
 package_init "$@"
 CONFIGURE_CMD="
 		./Configure -DNO_SYSLOG -lsocket
-                --prefix=$PREFIX 
+                --prefix=$PREFIX
 		QNX6 os/compiler:arm-unknown-nto-qnx8.0.0eabi-gcc
                 "
 package_fetch
