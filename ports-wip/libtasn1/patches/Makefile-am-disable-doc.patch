@@ -1,0 +1,24 @@
+--- libtasn1-4.9.orig/Makefile.am	2016-06-03 06:18:29.000000000 +0200
++++ libtasn1-4.9/Makefile.am	2018-05-26 11:29:45.000000000 +0200
+@@ -16,7 +16,7 @@
+ # You should have received a copy of the GNU General Public License
+ # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ 
+-DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc
++#DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc
+ 
+ EXTRA_DIST = windows/asn1-parser/asn1-parser.vcproj			\
+ 	windows/asn1-parser/config.h windows/libtasn1.ncb		\
+@@ -28,9 +28,9 @@
+ 
+ SUBDIRS = gl lib src examples tests
+ 
+-if ENABLE_DOC
+-SUBDIRS += doc
+-endif
++#if ENABLE_DOC
++#SUBDIRS += doc
++#endif
+ 
+ ACLOCAL_AMFLAGS = -I m4 -I gl/m4 -I lib/glm4
+ 

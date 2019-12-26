@@ -1,0 +1,15 @@
+--- alpine.orig/configure.ac	2018-09-21 10:01:38.683114230 +0200
++++ alpine/configure.ac	2018-09-21 10:12:37.395139031 +0200
+@@ -1218,6 +1218,12 @@
+     alpine_mode_readonly="(0600)"
+     alpine_c_client_target="s40"
+     ;;
++  *-nto-qnx*)
++    systype="QNX"
++    alpine_path_delim="/"
++    alpine_mode_readonly="(0600)"
++    alpine_c_client_target="nto"
++    ;;
+   *-*-sco3.2v5*)
+     if test x$GCC = "xyes" ; then
+       systype="GO5"

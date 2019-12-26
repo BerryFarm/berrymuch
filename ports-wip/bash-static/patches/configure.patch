@@ -1,0 +1,10 @@
+--- configure.orig	2017-01-09 16:07:32.096666673 +0900
++++ configure	2017-01-09 16:08:41.653333341 +0900
+@@ -30633,6 +30633,7 @@
+ _ACEOF
+  ;;
+ 		esac ;;
++*qnx8*)		LOCAL_CFLAGS="-Dqnx -Dqnx6" LOCAL_LIBS="-lncurses" ;;
+ *qnx6*)		LOCAL_CFLAGS="-Dqnx -Dqnx6" LOCAL_LIBS="-lncurses" ;;
+ *qnx*)		LOCAL_CFLAGS="-Dqnx -F -3s" LOCAL_LDFLAGS="-3s" LOCAL_LIBS="-lunix -lncurses" ;;
+ powerux*)	LOCAL_LIBS="-lgen" ;;

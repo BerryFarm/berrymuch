@@ -1,0 +1,50 @@
+--- src/Makefile.orig	2019-12-10 15:25:17.956713399 +1100
++++ src/Makefile	2019-12-10 15:51:03.871854510 +1100
+@@ -2,7 +2,7 @@
+ name = scim
+ 
+ # The base directory where everything should be installed.
+-prefix  = /usr/local
++prefix=${DESTDIR}/${PREFIX}
+ 
+ EXDIR   = $(prefix)/bin
+ HELPDIR = $(prefix)/share/$(name)
+@@ -12,6 +12,9 @@
+ MANDIR  = $(prefix)/share/man/man1
+ 
+ # Change these to your liking or use `make CC=gcc` etc
++CC=arm-unknown-nto-qnx8.0.0eabi-gcc
++AR=arm-unknown-nto-qnx8.0.0eabi-ar¬
++LD=arm-unknown-nto-qnx8.0.0eabi-ld
+ #CC   = cc
+ #YACC = bison -y
+ #SED  = sed
+@@ -68,10 +71,6 @@
+ # Have threads? Set these two, if you want the autobackup feature to work with threads.
+ CFLAGS += -DHAVE_PTHREAD
+ 
+-ifneq ($(shell uname -s),Darwin)
+-  LDLIBS += -pthread
+-endif
+-
+ # NOTE: libxlsxwriter is required for xlsx file export support
+ ifneq (,$(wildcard /usr/include/xlsxwriter.h))
+   CFLAGS += -DXLSX_EXPORT
+@@ -87,11 +86,6 @@
+   CFLAGS += -DGNUPLOT
+ endif
+ 
+-# dynamic linking (should not be used in FreeBSD
+-ifneq ($(shell uname -s),FreeBSD)
+-  LDLIBS += -ldl
+-endif
+-
+ ifneq (, $(shell which pkg-config))
+   # Any system with pkg-config
+ 
+@@ -192,4 +186,4 @@
+ 	rm -f *res.h y.tab.h
+ 	rm -f core gram.c y.output pxmalloc.c pvmtbl.c tags $(name)qref
+ 	rm -f qhelp.c $(name)
+-	rm -rf ../docs/ 
++	rm -rf ../docs/

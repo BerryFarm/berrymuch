@@ -1,0 +1,35 @@
+To have the build.sh script running on Darwin 15.6.0
+aclocal installed from brew, I had to follow the below instructions
+
+Please add the files
+  codeset.m4 gettext.m4 glibc21.m4 iconv.m4 isc-posix.m4 lcmessage.m4
+  progtest.m4
+from the /usr/local/Cellar/glib/2.56.0/share/aclocal directory to your autoconf macro directory
+or directly to your aclocal.m4 file.
+You will also need config.guess and config.sub, which you can get from
+ftp://ftp.gnu.org/pub/gnu/config/.
+
+
+Please add the files
+  codeset.m4 gettext.m4 glibc21.m4 iconv.m4 isc-posix.m4 lcmessage.m4
+  progtest.m4
+from the /usr/local/Cellar/glib/2.56.0/share/aclocal directory to your autoconf macro directory
+or directly to your aclocal.m4 file.
+You will also need config.guess and config.sub, which you can get from
+ftp://ftp.gnu.org/pub/gnu/config/.
+
+Here is what I did:
+
+-rw-r--r--  1 testuser  staff  100 31 mar 05:24 /usr/local/Cellar/automake/1.15.1/share/aclocal/dirlist
+-rw-r--r--  1 testuser  wheel   53 31 mar 05:26 /usr/local/Cellar/automake/1.15.1/share/aclocal-1.15/dirlist
+
+bash-3.2$ cat  /usr/local/Cellar/automake/1.15.1/share/aclocal/dirlist
+/usr/local/share/aclocal
+/usr/share/aclocal
+/usr/local/Cellar/automake/1.15.1/share/aclocal/dirlist
+
+bash-3.2$ cat  /usr/local/Cellar/automake/1.15.1/share/aclocal-1.15/dirlist
+/usr/local/Cellar/automake/1.15.1/share/aclocal-1.15
+
+cp /usr/local/Cellar/gettext/0.19.8.1/share/aclocal/{codeset,gettext,glibc21,iconv,lcmessage,progtest}.m4 /usr/local/Cellar/automake/1.15.1/share/aclocal-1.15
+cp /usr/local/Cellar/gettext/0.19.8.1/share/aclocal/{codeset,gettext,glibc21,iconv,lcmessage,progtest}.m4 /usr/local/Cellar/automake/1.15.1/share/aclocal

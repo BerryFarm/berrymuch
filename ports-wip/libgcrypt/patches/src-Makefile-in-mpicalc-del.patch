@@ -1,0 +1,11 @@
+--- libgcrypt.orig/src/Makefile.am   2018-09-20 08:46:18.000000000 +0200
++++ libgcrypt/src/Makefile.am    2018-09-20 08:46:57.000000000 +0200
+@@ -29,7 +29,7 @@
+ nodist_include_HEADERS = gcrypt.h
+
+ lib_LTLIBRARIES = libgcrypt.la
+-bin_PROGRAMS = dumpsexp hmac256 mpicalc
++bin_PROGRAMS = dumpsexp hmac256
+ if USE_RANDOM_DAEMON
+ sbin_PROGRAMS = gcryptrnd
+ bin_PROGRAMS += getrandom

@@ -1,0 +1,196 @@
+diff -Naur tgl.orig/configure tgl/configure
+--- tgl.orig/configure	2018-05-10 19:09:35.000000000 +0200
++++ tgl/configure	2018-05-10 19:50:12.000000000 +0200
+@@ -3556,62 +3556,7 @@
+ 
+ fi
+ 
+-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing backtrace" >&5
+-$as_echo_n "checking for library containing backtrace... " >&6; }
+-if ${ac_cv_search_backtrace+:} false; then :
+-  $as_echo_n "(cached) " >&6
+-else
+-  ac_func_search_save_LIBS=$LIBS
+-cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+-/* end confdefs.h.  */
+-
+-/* Override any GCC internal prototype to avoid an error.
+-   Use char because int might match the return type of a GCC
+-   builtin and then its argument prototype would still apply.  */
+-#ifdef __cplusplus
+-extern "C"
+-#endif
+-char backtrace ();
+-int
+-main ()
+-{
+-return backtrace ();
+-  ;
+-  return 0;
+-}
+-_ACEOF
+-for ac_lib in '' execinfo; do
+-  if test -z "$ac_lib"; then
+-    ac_res="none required"
+-  else
+-    ac_res=-l$ac_lib
+-    LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
+-  fi
+-  if ac_fn_c_try_link "$LINENO"; then :
+-  ac_cv_search_backtrace=$ac_res
+-fi
+-rm -f core conftest.err conftest.$ac_objext \
+-    conftest$ac_exeext
+-  if ${ac_cv_search_backtrace+:} false; then :
+-  break
+-fi
+-done
+-if ${ac_cv_search_backtrace+:} false; then :
+-
+-else
+-  ac_cv_search_backtrace=no
+-fi
+-rm conftest.$ac_ext
+-LIBS=$ac_func_search_save_LIBS
+-fi
+-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_backtrace" >&5
+-$as_echo "$ac_cv_search_backtrace" >&6; }
+-ac_res=$ac_cv_search_backtrace
+-if test "$ac_res" != no; then :
+-  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+-
+-fi
+-
++#AC_SEARCH_LIBS([backtrace], [execinfo])
+ { $as_echo "$as_me:${as_lineno-$LINENO}: checking for event_base_new in -levent" >&5
+ $as_echo_n "checking for event_base_new in -levent... " >&6; }
+ if ${ac_cv_lib_event_event_base_new+:} false; then :
+@@ -6524,7 +6469,7 @@
+ 
+ 
+ # Checks for header files.
+-for ac_header in execinfo.h fcntl.h malloc.h netdb.h stdlib.h string.h unistd.h arpa/inet.h mach/mach.h netinet/in.h sys/file.h sys/socket.h termios.h
++for ac_header in fcntl.h malloc.h netdb.h stdlib.h string.h unistd.h arpa/inet.h mach/mach.h netinet/in.h sys/file.h sys/socket.h termios.h
+ do :
+   as_ac_Header=`$as_echo "ac_cv_header_$ac_header" | $as_tr_sh`
+ ac_fn_c_check_header_mongrel "$LINENO" "$ac_header" "$as_ac_Header" "$ac_includes_default"
+diff -Naur tgl.orig/configure.ac tgl/configure.ac
+--- tgl.orig/configure.ac	2018-05-10 19:09:35.000000000 +0200
++++ tgl/configure.ac	2018-05-10 19:50:08.000000000 +0200
+@@ -18,7 +18,7 @@
+ 
+ # Checks for libraries.
+ AC_SEARCH_LIBS([clock_gettime], [rt])
+-AC_SEARCH_LIBS([backtrace], [execinfo])
++#AC_SEARCH_LIBS([backtrace], [execinfo])
+ AC_CHECK_LIB([event], [event_base_new], [], [AC_MSG_ERROR([no libevent found])])
+ 
+ EVENT_VER=""
+@@ -175,7 +175,7 @@
+     
+     
+ # Checks for header files.
+-AC_CHECK_HEADERS([execinfo.h fcntl.h malloc.h netdb.h stdlib.h string.h unistd.h arpa/inet.h mach/mach.h netinet/in.h sys/file.h sys/socket.h termios.h])
++AC_CHECK_HEADERS([fcntl.h malloc.h netdb.h stdlib.h string.h unistd.h arpa/inet.h mach/mach.h netinet/in.h sys/file.h sys/socket.h termios.h])
+ 
+ # Checks for typedefs, structures, and compiler characteristics.
+ AC_TYPE_SIZE_T
+diff -Naur tgl.orig/tgl/configure tgl/tgl/configure
+--- tgl.orig/tgl/configure	2018-05-10 19:09:42.000000000 +0200
++++ tgl/tgl/configure	2018-05-10 19:50:55.000000000 +0200
+@@ -4190,76 +4190,9 @@
+ 
+ 
+ # FreeBSD needs -lexecinfo
+-for ac_header in execinfo.h
+-do :
+-  ac_fn_c_check_header_mongrel "$LINENO" "execinfo.h" "ac_cv_header_execinfo_h" "$ac_includes_default"
+-if test "x$ac_cv_header_execinfo_h" = xyes; then :
+-  cat >>confdefs.h <<_ACEOF
+-#define HAVE_EXECINFO_H 1
+-_ACEOF
+- tgl_found_execinfo_header=yes; break;
+-fi
+-
+-done
+-
+-if test "x$tgl_found_execinfo_header" = "xyes"; then :
+-  { $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing backtrace_symbols_fd" >&5
+-$as_echo_n "checking for library containing backtrace_symbols_fd... " >&6; }
+-if ${ac_cv_search_backtrace_symbols_fd+:} false; then :
+-  $as_echo_n "(cached) " >&6
+-else
+-  ac_func_search_save_LIBS=$LIBS
+-cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+-/* end confdefs.h.  */
+-
+-/* Override any GCC internal prototype to avoid an error.
+-   Use char because int might match the return type of a GCC
+-   builtin and then its argument prototype would still apply.  */
+-#ifdef __cplusplus
+-extern "C"
+-#endif
+-char backtrace_symbols_fd ();
+-int
+-main ()
+-{
+-return backtrace_symbols_fd ();
+-  ;
+-  return 0;
+-}
+-_ACEOF
+-for ac_lib in '' execinfo; do
+-  if test -z "$ac_lib"; then
+-    ac_res="none required"
+-  else
+-    ac_res=-l$ac_lib
+-    LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
+-  fi
+-  if ac_fn_c_try_link "$LINENO"; then :
+-  ac_cv_search_backtrace_symbols_fd=$ac_res
+-fi
+-rm -f core conftest.err conftest.$ac_objext \
+-    conftest$ac_exeext
+-  if ${ac_cv_search_backtrace_symbols_fd+:} false; then :
+-  break
+-fi
+-done
+-if ${ac_cv_search_backtrace_symbols_fd+:} false; then :
+-
+-else
+-  ac_cv_search_backtrace_symbols_fd=no
+-fi
+-rm conftest.$ac_ext
+-LIBS=$ac_func_search_save_LIBS
+-fi
+-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_backtrace_symbols_fd" >&5
+-$as_echo "$ac_cv_search_backtrace_symbols_fd" >&6; }
+-ac_res=$ac_cv_search_backtrace_symbols_fd
+-if test "$ac_res" != no; then :
+-  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+-
+-fi
+-
+-fi
++#AC_CHECK_HEADERS([execinfo.h], [tgl_found_execinfo_header=yes; break;])
++#AS_IF([test "x$tgl_found_execinfo_header" = "xyes"],
++#	[AC_SEARCH_LIBS([backtrace_symbols_fd], [execinfo])])
+ 
+ 
+ # Checks for typedefs, structures, and compiler characteristics.
+diff -Naur tgl.orig/tgl/configure.ac tgl/tgl/configure.ac
+--- tgl.orig/tgl/configure.ac	2018-05-10 19:09:42.000000000 +0200
++++ tgl/tgl/configure.ac	2018-05-10 19:50:52.000000000 +0200
+@@ -72,9 +72,9 @@
+ AC_CHECK_HEADERS([fcntl.h malloc.h netdb.h stdlib.h string.h unistd.h arpa/inet.h mach/mach.h netinet/in.h sys/file.h sys/socket.h termios.h])
+ 
+ # FreeBSD needs -lexecinfo
+-AC_CHECK_HEADERS([execinfo.h], [tgl_found_execinfo_header=yes; break;])
+-AS_IF([test "x$tgl_found_execinfo_header" = "xyes"],
+-	[AC_SEARCH_LIBS([backtrace_symbols_fd], [execinfo])])
++#AC_CHECK_HEADERS([execinfo.h], [tgl_found_execinfo_header=yes; break;])
++#AS_IF([test "x$tgl_found_execinfo_header" = "xyes"],
++#	[AC_SEARCH_LIBS([backtrace_symbols_fd], [execinfo])])
+ 
+ 
+ # Checks for typedefs, structures, and compiler characteristics.

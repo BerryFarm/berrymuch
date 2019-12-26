@@ -1,0 +1,29 @@
+Currently following most of the instructions described here:
+
+https://stackoverflow.com/questions/5464538/cross-compile-perl-for-arm
+
+To be able to communicate with the BlackBerry, you have to share the wifi connexion from the BlackBerry (HotSpot Mode), use this connection to go to internet on your compilation host (Linux, Darwin, etc.)
+
+The BlackBerry will receive ip address 192.168.0.1.
+Now you may start Term48 on your BlackBerry
+Then, using playbook-dev-tools, launch "/accounts/1000/shared/documents/clitools/sshd" witch will be listening to port 2022 by default.
+
+You may now add the following compilation option to perl so he can ssh to your BlackBerry phone and ./try some commands to validate the good results of compilation. 
+
+-Dtargethost=192.168.0.1
+
+*** FIXME ***
+
+-Dtargethost=192.168.0.1
+
+We would like to enable this second option as well;
+
+-Dtargetport=2022
+
+But something has to be tweeked inside (./Configure): 
+
+$targetrun -l $targetuser $targethost "cd \$cwd && ./\$exe \$@"
+
+to become something like
+
+$targetrun -l $targetuser $targethost -p $port "cd \$cwd && ./\$exe \$@"

@@ -1,0 +1,92 @@
+--- rsync-3.1.3.orig/config.h	2018-05-11 00:34:21 +0200
++++ rsync-3.1.3/config.h	2018-02-28 02:01:15 +0100
+@@ -5,7 +5,7 @@
+ /* #undef AC_APPLE_UNIVERSAL_BUILD */
+ 
+ /* Define to 1 if link() can hard-link special files. */
+-/* #undef CAN_HARDLINK_SPECIAL */
++#define CAN_HARDLINK_SPECIAL 1
+ 
+ /* Define to 1 if link() can hard-link symlinks. */
+ /* #undef CAN_HARDLINK_SYMLINK */
+@@ -75,7 +75,7 @@
+ /* #undef HAVE_BROKEN_READDIR */
+ 
+ /* Define to 1 if vsprintf has a C99-compatible return value */
+-/* #undef HAVE_C99_VSNPRINTF */
++#define HAVE_C99_VSNPRINTF 1
+ 
+ /* Define to 1 if you have the `chmod' function. */
+ #define HAVE_CHMOD 1
+@@ -349,7 +349,7 @@
+ /* #undef HAVE_REMSH */
+ 
+ /* Define to 1 if mkstemp() is available and works right */
+-/* #undef HAVE_SECURE_MKSTEMP */
++#define HAVE_SECURE_MKSTEMP 1
+ 
+ /* Define to 1 if you have the `setattrlist' function. */
+ /* #undef HAVE_SETATTRLIST */
+@@ -397,7 +397,7 @@
+ /* #undef HAVE_SOCKADDR_UN_LEN */
+ 
+ /* Define to 1 if you have the "socketpair" function */
+-/* #undef HAVE_SOCKETPAIR */
++#define HAVE_SOCKETPAIR 1
+ 
+ /* true if you have solaris ACLs */
+ /* #undef HAVE_SOLARIS_ACLS */
+@@ -451,7 +451,7 @@
+ #define HAVE_STRUCT_SOCKADDR_STORAGE 1
+ 
+ /* Define to 1 if the system has the type `struct stat64'. */
+-/* #undef HAVE_STRUCT_STAT64 */
++#define HAVE_STRUCT_STAT64 1
+ 
+ /* Define to 1 if `st_mtimensec' is a member of `struct stat'. */
+ /* #undef HAVE_STRUCT_STAT_ST_MTIMENSEC */
+@@ -612,7 +612,7 @@
+ #define MAJOR_IN_SYSMACROS 1
+ 
+ /* Define to 1 if makedev() takes 3 args */
+-/* #undef MAKEDEV_TAKES_3_ARGS */
++#define MAKEDEV_TAKES_3_ARGS 1
+ 
+ /* Define to 1 if mknod() can create FIFOs. */
+ /* #undef MKNOD_CREATES_FIFOS */
+@@ -699,7 +699,7 @@
+ #define SIZEOF_OFF64_T 8
+ 
+ /* The size of `off_t', as computed by sizeof. */
+-#define SIZEOF_OFF_T 8
++#define SIZEOF_OFF_T 4
+ 
+ /* The size of `short', as computed by sizeof. */
+ #define SIZEOF_SHORT 2
+@@ -757,7 +757,7 @@
+ #endif
+ 
+ /* Number of bits in a file offset, on hosts where this is settable. */
+-#define _FILE_OFFSET_BITS 64
++/* #undef _FILE_OFFSET_BITS */
+ 
+ /* Define _GNU_SOURCE so that we get all necessary prototypes */
+ #define _GNU_SOURCE 1
+@@ -334,7 +334,7 @@
+ /* #undef HAVE_POPT_POPT_H */
+ 
+ /* true if you have posix ACLs */
+-#define HAVE_POSIX_ACLS 1
++/* #undef HAVE_POSIX_ACLS */
+ 
+ /* Define to 1 if you have the `posix_fallocate' function. */
+ #define HAVE_POSIX_FALLOCATE 1
+@@ -725,7 +725,7 @@
+ #define STDC_HEADERS 1
+ 
+ /* Define to 1 to add support for ACLs */
+-#define SUPPORT_ACLS 1
++/* #undef SUPPORT_ACLS */
+ 
+ /* Define to 1 to add support for extended attributes */
+ /* #undef SUPPORT_XATTRS */

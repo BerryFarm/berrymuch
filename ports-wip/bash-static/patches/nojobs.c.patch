@@ -1,0 +1,15 @@
+--- nojobs.c.orig	2017-01-09 16:23:19.006666674 +0900
++++ nojobs.c	2017-01-09 16:28:55.120000007 +0900
+@@ -455,10 +455,12 @@
+ 
+   sigaction (sig, (struct sigaction *)NULL, &act);
+ 
++#ifdef SA_RESTART
+   if (flag)
+     act.sa_flags &= ~SA_RESTART;
+   else
+     act.sa_flags |= SA_RESTART;
++#endif
+ 
+   return (sigaction (sig, &act, (struct sigaction *)NULL));
+ }

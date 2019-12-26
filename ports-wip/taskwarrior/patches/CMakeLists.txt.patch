@@ -1,0 +1,15 @@
+--- CMakeLists.txt.orig	2018-05-19 07:55:57.418510300 +1000
++++ CMakeLists.txt	2018-05-19 07:56:40.098510300 +1000
+@@ -63,6 +63,12 @@
+   set (SOLARIS true)
+ elseif (${CMAKE_SYSTEM_NAME} STREQUAL "GNU")
+   set (GNUHURD true)
++elseif (${CMAKE_SYSTEM_NAME} STREQUAL "QNX")
++  set (QNX true)
++  # NOTE: Not setting -std=gnu++0x leads to compile errors even with
++  #       GCC 4.8.3, and debugging those leads to insanity. Adding this
++  #       workaround similar to Cygwin.
++  set (_CXX11_FLAGS "-std=gnu++0x")
+ elseif (${CMAKE_SYSTEM_NAME} STREQUAL "CYGWIN")
+   set (CYGWIN true)
+   # NOTE: Not setting -std=gnu++0x leads to compile errors even with

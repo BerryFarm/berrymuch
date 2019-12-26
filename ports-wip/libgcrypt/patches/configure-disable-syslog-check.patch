@@ -1,0 +1,11 @@
+--- libgcrypt.orig/configure.ac 2018-09-19 12:53:30.000000000 +0200
++++ libgcrypt/configure.ac      2018-09-19 23:36:53.000000000 +0200
+@@ -1761,7 +1761,7 @@
+ AC_CHECK_FUNCS(strtoul memmove stricmp atexit raise)
+ # Other checks
+ AC_CHECK_FUNCS(strerror rand mmap getpagesize sysconf waitpid wait4)
+-AC_CHECK_FUNCS(gettimeofday getrusage gethrtime clock_gettime syslog)
++AC_CHECK_FUNCS(gettimeofday getrusage gethrtime clock_gettime)
+ AC_CHECK_FUNCS(syscall fcntl ftruncate flockfile)
+
+ GNUPG_CHECK_MLOCK

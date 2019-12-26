@@ -1,0 +1,10 @@
+--- rpm-4.13.1-release.orig/autogen.sh	2018-10-08 08:49:00.000000000 +0200
++++ rpm-4.13.1-release/autogen.sh	2018-10-08 12:39:45.000000000 +0200
+@@ -4,6 +4,7 @@
+ export CFLAGS
+ export LDFLAGS
+ 
++glibtoolize --force
+ autoreconf -i
+ 
+ case "$1" in

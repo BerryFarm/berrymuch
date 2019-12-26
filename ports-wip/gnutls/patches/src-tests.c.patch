@@ -1,0 +1,66 @@
+--- gnutls-3.3.29.orig/src/tests.c.orig	2018-02-25 21:53:33 +0100
++++ gnutls-3.3.29/src/tests.c	2018-02-25 22:01:42 +0100
+@@ -410,63 +410,6 @@
+ 	alrm = 1;
+ }
+ 
+-test_code_t test_bye(gnutls_session_t session)
+-{
+-	int ret;
+-	char data[20];
+-	int secs = 6;
+-#ifndef _WIN32
+-	int old;
+-
+-	signal(SIGALRM, got_alarm);
+-#endif
+-
+-	sprintf(prio_str, INIT_STR
+-		ALL_CIPHERS ":" ALL_COMP ":" ALL_CERTTYPES ":%s:" ALL_MACS
+-		":" ALL_KX ":%s", protocol_str, rest);
+-	_gnutls_priority_set_direct(session, prio_str);
+-
+-	gnutls_credentials_set(session, GNUTLS_CRD_CERTIFICATE, xcred);
+-
+-	ret = do_handshake(session);
+-	if (ret == TEST_FAILED)
+-		return ret;
+-
+-	ret = gnutls_bye(session, GNUTLS_SHUT_WR);
+-	if (ret < 0)
+-		return TEST_FAILED;
+-
+-#ifndef _WIN32
+-	old = siginterrupt(SIGALRM, 1);
+-	alarm(secs);
+-#else
+-	setsockopt((int) gnutls_transport_get_ptr(session), SOL_SOCKET,
+-		   SO_RCVTIMEO, (char *) &secs, sizeof(int));
+-#endif
+-
+-	do {
+-		ret = gnutls_record_recv(session, data, sizeof(data));
+-	}
+-	while (ret > 0);
+-
+-#ifndef _WIN32
+-	siginterrupt(SIGALRM, old);
+-#else
+-	if (WSAGetLastError() == WSAETIMEDOUT ||
+-	    WSAGetLastError() == WSAECONNABORTED)
+-		alrm = 1;
+-#endif
+-	if (ret == 0)
+-		return TEST_SUCCEED;
+-
+-	if (alrm == 0)
+-		return TEST_UNSURE;
+-
+-	return TEST_FAILED;
+-}
+-
+-
+-
+ test_code_t test_aes(gnutls_session_t session)
+ {
+ 	int ret;

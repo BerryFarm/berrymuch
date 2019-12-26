@@ -1,0 +1,12 @@
+--- git-2.9.5.orig/git-compat-util.h	2017-08-09 21:48:31.000000000 +0200
++++ git-2.9.5/git-compat-util.h	2018-05-18 03:03:26.000000000 +0200
+@@ -179,7 +179,9 @@
+ #include <assert.h>
+ #include <regex.h>
+ #include <utime.h>
++#ifndef __QNXNTO__
+ #include <syslog.h>
++#endif
+ #ifndef NO_SYS_POLL_H
+ #include <sys/poll.h>
+ #else

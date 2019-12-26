@@ -1,0 +1,44 @@
+--- work/cronie-1.5.2.orig/src/cron.c	2017-09-14 13:53:21.000000000 +0200
++++ work/cronie-1.5.2/src/cron.c	2018-09-05 19:30:09.000000000 +0200
+@@ -29,7 +29,6 @@
+ #define	MAIN_PROGRAM
+ 
+ #include <errno.h>
+-#include <langinfo.h>
+ #include <locale.h>
+ #include <pwd.h>
+ #include <signal.h>
+@@ -218,7 +217,6 @@
+ 	MailCmd[0] = '\0';
+ 	cron_default_mail_charset[0] = '\0';
+ 
+-	setlocale(LC_ALL, "");
+ 
+ #if defined(BSD)
+ 	setlinebuf(stdout);
+@@ -245,7 +243,7 @@
+ 	(void) sigaction(SIGTERM, &sact, NULL);
+ 
+ 	acquire_daemonlock(0);
+-	set_cron_uid();
++	//set_cron_uid();
+ 	check_spool_dir();
+ 
+ 	if (ChangePath) {
+@@ -256,15 +254,7 @@
+ 		}
+ 	}
+ 
+-	/* Get the default locale character set for the mail 
+-	 * "Content-Type: ...; charset=" header
+-	 */
+-	setlocale(LC_ALL, "");	/* set locale to system defaults or to
+-							 * that specified by any  LC_* env vars */
+-	if ((cs = nl_langinfo(CODESET)) != 0L)
+-		strncpy(cron_default_mail_charset, cs, MAX_ENVSTR-1);
+-	else
+-		strcpy(cron_default_mail_charset, "US-ASCII");
++        strcpy(cron_default_mail_charset, "US-ASCII");
+ 
+ 	/* if there are no debug flags turned on, fork as a daemon should.
+ 	 */

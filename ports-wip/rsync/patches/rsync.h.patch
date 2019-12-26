@@ -1,0 +1,11 @@
+--- rsync.h.orig	2018-02-28 01:30:59 +0100
++++ rsync.h	2018-02-28 01:31:26 +0100
+@@ -420,7 +420,7 @@
+ #ifdef HAVE_NETDB_H
+ #include <netdb.h>
+ #endif
+-#include <syslog.h>
++//#include <syslog.h>
+ #include <sys/file.h>
+ 
+ #ifdef HAVE_DIRENT_H

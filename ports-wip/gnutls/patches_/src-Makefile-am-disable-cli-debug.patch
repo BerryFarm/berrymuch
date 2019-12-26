@@ -1,0 +1,51 @@
+--- gnutls-3.3.29.orig/src/Makefile.am	2017-09-08 21:20:31.000000000 +0200
++++ gnutls-3.3.29/src/Makefile.am	2018-05-26 12:20:00.000000000 +0200
+@@ -49,7 +49,7 @@
+ 	-I$(srcdir)/../extra/includes	\
+ 	$(LIBOPTS_CFLAGS)
+ 
+-bin_PROGRAMS = psktool gnutls-cli-debug certtool
++bin_PROGRAMS = psktool certtool
+ if ENABLE_SRP
+ bin_PROGRAMS += srptool
+ endif
+--- gnutls-3.3.29.orig/src/Makefile.am	2018-05-26 15:05:34.000000000 +0200
++++ gnutls-3.3.29/src/Makefile.am	2018-05-26 16:53:43.000000000 +0200
+@@ -22,7 +22,7 @@
+ BUILT_SOURCES = srptool-args.c srptool-args.h \
+ 	psktool-args.c psktool-args.h ocsptool-args.h ocsptool-args.c \
+ 	serv-args.c serv-args.h cli-args.c cli-args.h \
+-	cli-debug-args.c cli-debug-args.h certtool-args.c certtool-args.h \
++	certtool-args.c certtool-args.h \
+ 	danetool-args.c danetool-args.h p11tool-args.c p11tool-args.h \
+ 	tpmtool-args.c tpmtool-args.h
+ 
+@@ -132,15 +132,6 @@
+ endif
+ endif
+ 
+-gnutls_cli_debug_SOURCES = cli-debug.c tests.h tests.c \
+-		socket.c socket.h common.h common.c
+-gnutls_cli_debug_LDADD = ../lib/libgnutls.la libcmd-cli-debug.la 
+-gnutls_cli_debug_LDADD += $(LIBOPTS) ../gl/libgnu.la gl/libgnu_gpl.la
+-gnutls_cli_debug_LDADD += $(LTLIBINTL)
+-gnutls_cli_debug_LDADD += $(LIBSOCKET) $(GETADDRINFO_LIB)
+-noinst_LTLIBRARIES += libcmd-cli-debug.la
+-libcmd_cli_debug_la_SOURCES = cli-debug-args.def cli-debug-args.c cli-debug-args.h
+-
+ #certtool
+ 
+ certtool_SOURCES = certtool.c certtool-common.c certtool-extras.c common.c
+@@ -233,12 +224,6 @@
+ 	-$(AUTOGEN) $<
+ 	touch $@
+ 
+-cli-debug-args.h: cli-debug-args.stamp
+-cli-debug-args.c: cli-debug-args.stamp
+-cli-debug-args.stamp: $(srcdir)/cli-debug-args.def $(srcdir)/args-std.def
+-	-$(AUTOGEN) $<
+-	touch $@
+-
+ cli-args.h: cli-args.stamp
+ cli-args.c: cli-args.stamp
+ cli-args.stamp: $(srcdir)/cli-args.def $(srcdir)/args-std.def

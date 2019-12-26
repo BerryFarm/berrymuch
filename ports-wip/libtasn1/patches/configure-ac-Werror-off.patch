@@ -1,0 +1,11 @@
+--- libtasn1-4.9.orig/configure.ac	2016-07-25 22:27:47.000000000 +0200
++++ libtasn1-4.9/configure.ac	2018-05-26 11:08:41.000000000 +0200
+@@ -70,7 +70,7 @@
+ )
+ 
+ if test "$gl_gcc_warnings" = yes; then
+-  gl_WARN_ADD([-Werror], [WERROR_CFLAGS])
++#  gl_WARN_ADD([-Werror], [WERROR_CFLAGS])
+ 
+   nw="$nw -Wsystem-headers"         # Don't let system headers trigger warnings
+   nw="$nw -Wc++-compat"             # We don't care strongly about C++ compilers

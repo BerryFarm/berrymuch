@@ -1,0 +1,24 @@
+--- alpine.orig/imap/src/osdep/unix/os_nto.c	2018-10-02 00:05:51.000000000 +0200
++++ alpine/imap/src/osdep/unix/os_nto.c	2018-10-03 00:38:09.000000000 +0200
+@@ -62,15 +62,11 @@
+  * Returns: direct struct or NIL if failed
+  */
+ 
+-#undef readdir
+ 
+-struct direct *Readdir (DIR *dirp)
++int 
++ustat(dev_t dev, struct ustat *ub) 
+ {
+-  static struct direct dc;
+-  struct dirent *de = readdir (dirp);
+-  if (!de) return NIL;		/* end of data */
+-  dc.d_fileno = 0;		/* could get from de->stat.st_ino */
+-  dc.d_namlen = strlen (strcpy (dc.d_name,de->d_name));
+-  dc.d_reclen = sizeof (dc);
+-  return &dc;
+-}
++    /* fstatvfs() should have been tried before this */ 
++    errno = ENOSYS; 
++    return -1; 
++} 

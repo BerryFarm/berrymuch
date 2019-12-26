@@ -1,0 +1,10 @@
+--- configure.ac.orig	2017-01-09 16:07:37.193333337 +0900
++++ configure.ac	2017-01-09 16:08:51.206666673 +0900
+@@ -1032,6 +1032,7 @@
+ 		case "`uname -r`" in
+ 		2.[[456789]]*|3*)	AC_DEFINE(PGRP_PIPE) ;;
+ 		esac ;;
++*qnx8*)		LOCAL_CFLAGS="-Dqnx -Dqnx6" LOCAL_LIBS="-lncurses" ;;
+ *qnx6*)		LOCAL_CFLAGS="-Dqnx -Dqnx6" LOCAL_LIBS="-lncurses" ;;
+ *qnx*)		LOCAL_CFLAGS="-Dqnx -F -3s" LOCAL_LDFLAGS="-3s" LOCAL_LIBS="-lunix -lncurses" ;;
+ powerux*)	LOCAL_LIBS="-lgen" ;;

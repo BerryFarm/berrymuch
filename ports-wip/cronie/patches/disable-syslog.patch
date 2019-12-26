@@ -1,0 +1,58 @@
+--- work/cronie-1.5.2.orig/src/misc.c	2017-09-14 13:53:21.000000000 +0200
++++ work/cronie-1.5.2/src/misc.c	2018-09-04 08:43:16.000000000 +0200
+@@ -36,10 +36,6 @@
+ #include <string.h>
+ #include <sys/stat.h>
+ 
+-#if defined(SYSLOG)
+-# include <syslog.h>
+-#endif
+-
+ #ifdef WITH_AUDIT
+ # include <libaudit.h>
+ #endif
+@@ -72,10 +68,6 @@
+ 
+ static int LogFD = ERR;
+ 
+-#if defined(SYSLOG)
+-static int syslog_open = FALSE;
+-#endif
+-
+ #if defined(HAVE_FLOCK)
+ # define trylock_file(fd)      flock((fd), LOCK_EX|LOCK_NB)
+ #elif defined(HAVE_FCNTL) && defined(F_SETLK)
+@@ -578,22 +570,6 @@
+ 	free(msg);
+ #endif /*LOG_FILE */
+ 
+-#if defined(SYSLOG)
+-	if (!syslog_open) {
+-# ifdef LOG_DAEMON
+-		openlog(ProgramName, LOG_PID, FACILITY);
+-# else
+-		openlog(ProgramName, LOG_PID);
+-# endif
+-		syslog_open = TRUE;	/* assume openlog success */
+-	}
+-
+-	syslog(err != 0 ? LOG_ERR : LOG_INFO,
+-		"(%s) %s (%s)%s%s", username, event, detail,
+-		err != 0 ? ": " : "", err != 0 ? strerror(err) : "");
+-
+-
+-#endif	 /*SYSLOG*/
+ #if DEBUGGING
+ 	if (DebugFlags) {
+ 		fprintf(stderr, "log_it: (%s %ld) %s (%s)%s%s\n",
+@@ -608,10 +584,6 @@
+ 		close(LogFD);
+ 		LogFD = ERR;
+ 	}
+-#if defined(SYSLOG)
+-	closelog();
+-	syslog_open = FALSE;
+-#endif	 /*SYSLOG*/
+ }
+ 
+ /* char *first_word(const char *s, const char *t)

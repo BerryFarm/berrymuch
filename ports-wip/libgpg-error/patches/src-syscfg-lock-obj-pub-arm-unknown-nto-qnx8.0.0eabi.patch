@@ -1,0 +1,25 @@
+diff -Naur libgpg-error-1.32.orig/src/syscfg/lock-obj-pub.arm-unknown-nto-qnx8.0.0eabi.h libgpg-error-1.32/src/syscfg/lock-obj-pub.arm-unknown-nto-qnx8.0.0eabi.h
+--- libgpg-error-1.32.orig/src/syscfg/lock-obj-pub.arm-unknown-nto-qnx8.0.0eabi.h	1970-01-01 01:00:00.000000000 +0100
++++ libgpg-error-1.32/src/syscfg/lock-obj-pub.arm-unknown-nto-qnx8.0.0eabi.h	2018-09-19 09:18:48.000000000 +0200
+@@ -0,0 +1,21 @@
++## lock-obj-pub.arm-unknown-nto-qnx8.0.0eabi.h
++## File created by gen-posix-lock-obj - DO NOT EDIT
++## To be included by mkheader into gpg-error.h
++
++typedef struct
++{
++  long _vers;
++  union {
++    volatile char _priv[8];
++    long _x_align;
++    long *_xp_align;
++  } u;
++} gpgrt_lock_t;
++
++#define GPGRT_LOCK_INITIALIZER {1,{{0,0,0,128,255,255,255,255}}}
++##
++## Local Variables:
++## mode: c
++## buffer-read-only: t
++## End:
++##

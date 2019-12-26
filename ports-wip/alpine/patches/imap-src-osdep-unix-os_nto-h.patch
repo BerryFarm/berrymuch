@@ -1,0 +1,10 @@
+--- alpine.orig/imap/src/osdep/unix/os_nto.h    2018-10-04 09:14:53.000000000 +0200
++++ alpine/imap/src/osdep/unix/os_nto.h    2018-10-04 09:32:24.000000000 +0200
+@@ -36,6 +36,7 @@
+ #include <sys/types.h>
+ #include <time.h>
+ #include <utime.h>
++#include <ustat.h>
+
+
+ /* QNX gets these wrong */

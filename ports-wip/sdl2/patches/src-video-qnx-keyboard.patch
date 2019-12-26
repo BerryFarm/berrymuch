@@ -1,0 +1,10 @@
+--- SDL2-2.0.8.orig/src/video/qnx/keyboard.c	2018-03-01 17:34:43.000000000 +0100
++++ SDL2-2.0.8/src/video/qnx/keyboard.c	2018-09-15 21:08:14.000000000 +0200
+@@ -24,6 +24,7 @@
+ #include "SDL_scancode.h"
+ #include "SDL_events.h"
+ #include "sdl_qnx.h"
++#include <screen/screen.h>
+ #include <sys/keycodes.h>
+ 
+ /**

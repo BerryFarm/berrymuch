@@ -1,0 +1,19 @@
+--- libgcrypt.orig/configure.ac    2018-09-19 12:53:30.000000000 +0200
++++ libgcrypt/configure.ac    2018-09-19 12:57:15.000000000 +0200
+@@ -707,11 +707,11 @@
+ #
+ # gpg-error is required.
+ #
+-AM_PATH_GPG_ERROR("$NEED_GPG_ERROR_VERSION")
+-if test "x$GPG_ERROR_LIBS" = "x"; then
+-  AC_MSG_ERROR([libgpg-error is needed.
+-                See ftp://ftp.gnupg.org/gcrypt/libgpg-error/ .])
+-fi
++#AM_PATH_GPG_ERROR("$NEED_GPG_ERROR_VERSION")
++#if test "x$GPG_ERROR_LIBS" = "x"; then
++#  AC_MSG_ERROR([libgpg-error is needed.
++#                    See ftp://ftp.gnupg.org/gcrypt/libgpg-error/ .])
++#fi
+
+ AC_DEFINE(GPG_ERR_SOURCE_DEFAULT, GPG_ERR_SOURCE_GCRYPT,
+           [The default error source for libgcrypt.])

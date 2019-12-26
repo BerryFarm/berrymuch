@@ -1,0 +1,28 @@
+--- src/c/demos/utilLoadWav.c.orig	2018-04-13 18:49:55.000000000 +0200
++++ src/c/demos/utilLoadWav.c	2018-04-13 18:50:02.000000000 +0200
+@@ -9,6 +9,8 @@
+ #ifndef NIXTLA_UTIL_LOAD_WAV_H
+ #define NIXTLA_UTIL_LOAD_WAV_H
+ 
++#include "nixtla-audio.h"
++
+ int loadDataFromWavFile(const char* pathToWav, STNix_audioDesc* audioDesc, NixUI8** audioData, NixUI32* audioDataBytes){
+ 	int success = 0;
+ 	FILE* wavFile = fopen(pathToWav, "rb");
+@@ -132,4 +134,4 @@
+ 	return success;
+ }
+ 
+-#endif
+\ No newline at end of file
++#endif
+--- src/c/demos/utilLoadWav.c.orig	2018-04-13 18:53:01.000000000 +0200
++++ src/c/demos/utilLoadWav.c	2018-04-13 18:53:14.000000000 +0200
+@@ -10,6 +10,7 @@
+ #define NIXTLA_UTIL_LOAD_WAV_H
+ 
+ #include "nixtla-audio.h"
++#include <stdio.h>
+ 
+ int loadDataFromWavFile(const char* pathToWav, STNix_audioDesc* audioDesc, NixUI8** audioData, NixUI32* audioDataBytes){
+ 	int success = 0;

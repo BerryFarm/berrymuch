@@ -1,0 +1,22 @@
+pkgsrc port for QNX
+
+dukzcry
+Updates on this so far: 1. Daniel now provides...
+Updates on this so far: 
+1. Daniel now provides QNX pkgsrc mirror http://forums.crackberry.com/developers-lounge-f9/pkgsrc-more-6000-open-source-apps-libraries-blackberry-10-os-857820/#post11152281...
+
+Thread: pkgsrc (more that 6000 open source apps and libraries) for BlackBerry 10 OS
+https://forums.crackberry.com/search.php?searchid=161940326
+
+http://community.qnx.com/sf/projects/pkgsrc
+
+http://chiselapp.com/user/danjcla/repository/bb10qnx/wiki?name=bb10qnx
+
+pkgsrc
+hardware for effort: http://community.qnx.com/sf/discussion/do/listPosts/projects.bsp/discussion.bsp.topc24332
+from qnx pov: http://community.qnx.com/sf/discussion/do/listPosts/projects.pkgsrc/discussion.general.topc24329
+from bb pov: http://forums.crackberry.com/developers-lounge-f9/pkgsrc-more-6000-open-source-apps-libraries-blackberry-10-os-857820
+
+
+PKG SRC DEVELOPPER GUIDE
+https://www.netbsd.org/docs/pkgsrc/tools.html

@@ -1,0 +1,16 @@
+--- src/c/demos/Makefile.orig	2018-04-09 13:05:39.000000000 +0200
++++ src/c/demos/Makefile	2018-04-09 13:05:39.000000000 +0200
+@@ -0,0 +1,2 @@
++CFLAGS=-I../../../include
++LDFLAGS=-L.. -lnixtla-audio -lOpenAL -L/Applications/Momentics.app/target_10_3_1_995/qnx6/x86/usr/lib
+--- src/c/demos/Makefile.orig	2018-04-13 18:54:56.000000000 +0200
++++ src/c/demos/Makefile	2018-04-13 18:55:21.000000000 +0200
+@@ -1,5 +1,8 @@
+ CFLAGS=-I../../../include
+ LDFLAGS=-L.. -lnixtla-audio -lopenal
+ 
+-all: demoCaptureEco demoPlayWav utilLoadWav
++all: demoCaptureEco demoPlayWav
++
++demoPlayWav: utilLoadWav.o ../libnixtla-audio.so
++    $(CC) $(LDFLAGS) demoPlayWav.o ../libnixtla-audio.so -o demoPlayWav

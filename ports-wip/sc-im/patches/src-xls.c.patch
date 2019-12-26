@@ -1,0 +1,22 @@
+--- src/xls.c.orig	2019-12-10 15:04:35.778781815 +1100
++++ src/xls.c	2019-12-10 15:15:32.298781815 +1100
+@@ -77,19 +77,6 @@
+     // Set date format reading LOCALE
+     char fmt[15] = "%d/%m/%Y";
+ 
+-    #ifdef USELOCALE
+-    #include <locale.h>
+-    #include <langinfo.h>
+-    char * loc = NULL;
+-    char * f = NULL;
+-    loc = setlocale(LC_TIME, "");
+-
+-    if (loc != NULL) {
+-        f = nl_langinfo(D_FMT);
+-        strcpy(fmt, f);
+-    }
+-    #endif
+-
+     // Read XLS file
+     xlsWorkBook * pWB;
+     xlsWorkSheet * pWS;

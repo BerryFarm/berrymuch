@@ -1,0 +1,81 @@
+--- gnutls-3.3.29.orig/doc/doxygen/Doxyfile.orig	2014-07-29 22:22:47 +0200
++++ gnutls-3.3.29/doc/doxygen/Doxyfile	2018-02-25 18:23:01 +0100
+@@ -25,13 +25,13 @@
+ # The PROJECT_NAME tag is a single word (or a sequence of words surrounded 
+ # by quotes) that should identify the project.
+ 
+-PROJECT_NAME           = 
++PROJECT_NAME           = gnutls
+ 
+ # The PROJECT_NUMBER tag can be used to enter a project or revision number. 
+ # This could be handy for archiving the generated documentation or 
+ # if some version control system is used.
+ 
+-PROJECT_NUMBER         = 
++PROJECT_NUMBER         = 3.3.29
+ 
+ # The OUTPUT_DIRECTORY tag is used to specify the (relative or absolute) 
+ # base path where the generated documentation will be put. 
+@@ -193,7 +193,7 @@
+ # For instance, some of the names that are used will be different. The list 
+ # of all members will be omitted, etc.
+ 
+-OPTIMIZE_OUTPUT_FOR_C  = NO
++OPTIMIZE_OUTPUT_FOR_C  = YES
+ 
+ # Set the OPTIMIZE_OUTPUT_JAVA tag to YES if your project consists of Java 
+ # sources only. Doxygen will then generate output that is more tailored for 
+@@ -277,7 +277,7 @@
+ # Private class members and static file members will be hidden unless 
+ # the EXTRACT_PRIVATE and EXTRACT_STATIC tags are set to YES
+ 
+-EXTRACT_ALL            = NO
++EXTRACT_ALL            = YES
+ 
+ # If the EXTRACT_PRIVATE tag is set to YES all private members of a class 
+ # will be included in the documentation.
+@@ -534,7 +534,7 @@
+ # directories like "/usr/src/myproject". Separate the files or directories 
+ # with spaces.
+ 
+-INPUT                  = 
++INPUT                  = ../../
+ 
+ # This tag can be used to specify the character encoding of the source files 
+ # that doxygen parses. Internally doxygen uses the UTF-8 encoding, which is 
+@@ -557,7 +557,7 @@
+ # should be searched for input files as well. Possible values are YES and NO. 
+ # If left blank NO is used.
+ 
+-RECURSIVE              = NO
++RECURSIVE              = YES
+ 
+ # The EXCLUDE tag can be used to specify files and/or directories that should 
+ # excluded from the INPUT source files. This way you can easily exclude a 
+@@ -577,7 +577,7 @@
+ # against the file with absolute path, so to exclude all test directories 
+ # for example use the pattern */test/*
+ 
+-EXCLUDE_PATTERNS       = 
++EXCLUDE_PATTERNS       = */config.h */doc/* */build-aux/* */gl/* */src/*-gaa.? */src/cfg/* */tests/* */guile/* *.cpp */gnutlsxx.h */lib/minitasn1/* *openssl*
+ 
+ # The EXCLUDE_SYMBOLS tag can be used to specify one or more symbol names 
+ # (namespaces, classes, functions, etc.) that should be excluded from the 
+@@ -636,7 +636,7 @@
+ # INPUT_FILTER) will be used to filter the input files when producing source 
+ # files to browse (i.e. when SOURCE_BROWSER is set to YES).
+ 
+-FILTER_SOURCE_FILES    = NO
++FILTER_SOURCE_FILES    = YES
+ 
+ #---------------------------------------------------------------------------
+ # configuration options related to source browsing
+@@ -647,7 +647,7 @@
+ # Note: To get rid of all source code in the generated output, make sure also 
+ # VERBATIM_HEADERS is set to NO.
+ 
+-SOURCE_BROWSER         = NO
++SOURCE_BROWSER         = YES
+ 
+ # Setting the INLINE_SOURCES tag to YES will include the body 
+ # of functions and classes directly in the documentation.

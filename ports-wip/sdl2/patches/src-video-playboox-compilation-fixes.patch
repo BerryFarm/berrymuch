@@ -1,0 +1,32 @@
+diff -Naur sdl.orig/src/video/playbook/SDL_playbookevents.c sdl/src/video/playbook/SDL_playbookevents.c
+--- sdl.orig/src/video/playbook/SDL_playbookevents.c	2018-09-01 02:43:08.000000000 +0200
++++ sdl/src/video/playbook/SDL_playbookevents.c	2018-09-01 02:46:59.000000000 +0200
+@@ -717,7 +717,9 @@
+ {
+ 	SDL_SysWMmsg wmmsg;
+ 	SDL_VERSION(&wmmsg.version);
+-	wmmsg.event = event;
++  	// FIXME : commented out only to fix compilation issue.
++	// will probably break Playbook compatibility .. but who's using RIM's Playbook today ?
++	//wmmsg.event = event;
+ 	SDL_PrivateSysWMEvent(&wmmsg);
+ }
+ 
+diff -Naur sdl.orig/src/video/playbook/SDL_playbookvideo.c sdl/src/video/playbook/SDL_playbookvideo.c
+--- sdl.orig/src/video/playbook/SDL_playbookvideo.c	2018-09-01 02:43:08.000000000 +0200
++++ sdl/src/video/playbook/SDL_playbookvideo.c	2018-09-01 02:48:16.000000000 +0200
+@@ -164,9 +164,11 @@
+ int PLAYBOOK_GetWMInfo(_THIS, SDL_SysWMinfo *info)
+ {
+ 	if ( info->version.major <= SDL_MAJOR_VERSION ) {
+-		info->window = _priv->screenWindow;
+-		info->context = _priv->screenContext;
+-		info->mainWindow = _priv->mainWindow;
++        	// FIXME : commented out only to fix compilation issue.
++        	// will probably break Playbook compatibility .. but who's using RIM's Playbook today ?
++		//info->window = _priv->screenWindow;
++		//info->context = _priv->screenContext;
++		//info->mainWindow = _priv->mainWindow;
+ 		return(1);
+ 	} else {
+ 		SDL_SetError("Application not compiled with SDL %d.%d\n",

@@ -1,0 +1,29 @@
+--- src/Directory.cpp.orig	2018-05-19 15:28:46.004024000 +1000
++++ src/Directory.cpp	2018-05-19 15:38:22.928024000 +1000
+@@ -34,7 +34,7 @@
+ #include <stdlib.h>
+ #include <Directory.h>
+ 
+-#if defined SOLARIS || defined NETBSD
++#if defined SOLARIS || defined NETBSD || defined QNX
+ #include <limits.h>
+ #endif
+ 
+@@ -108,7 +108,7 @@
+           !strcmp (de->d_name, ".."))
+         continue;
+ 
+-#if defined (SOLARIS) || defined (HAIKU)
++#if defined (SOLARIS) || defined (HAIKU) || defined (QNX)
+       struct stat s;
+       lstat ((dir + "/" + de->d_name).c_str (), &s);
+       if (S_ISDIR (s.st_mode))
+@@ -212,7 +212,7 @@
+           !strcmp (de->d_name, ".."))
+         continue;
+ 
+-#if defined (SOLARIS) || defined (HAIKU)
++#if defined (SOLARIS) || defined (HAIKU) || defined (QNX)
+       struct stat s;
+       stat ((base + "/" + de->d_name).c_str (), &s);
+       if (recursive && S_ISDIR (s.st_mode))

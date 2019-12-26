@@ -1,0 +1,39 @@
+
+
+https://gist.github.com/berryamin/2aec2396486eed9e7f72919871fce634
+
+How to compile wget for blackberry 10
+Prepare
+Download from here http://ftp.gnu.org/gnu/wget/
+Extract sources archive, (using extract for example)
+Or run tar xf wget-1.15.tar.xz
+Copy file bb10_compile from this gist to source folder
+Compile
+cd wget-1.15
+chmod +x bb10_compile
+./bb10_compile
+If it worked well then run make:
+
+# load variables
+tmp_pwd=`pwd`; cd /Applications/Momentics.app && source bbndk-* && cd $tmp_pwd; unset tmp_pwd;
+make
+No you can see ./src/wget - executable for blackberry.
+
+Run
+You can put ./src/wget to your application and upload to phone. Then run with ssh.
+
+If you can't compile, this is download link https://dl.dropboxusercontent.com/u/586048/bb10/wget
+
+ bb10_compile
+#! /bin/sh
+
+tmp_pwd=`pwd`
+cd /Applications/Momentics.app && source bbndk-* && cd $tmp_pwd
+
+QNX_BINS="${QNX_HOST}/usr/bin"
+
+./configure CC="${QNX_BINS}/qcc" CXX="${QNX_BINS}/qcc" \
+  LDFLAGS="-Vgcc_ntoarmv7le" RANLIB="ntoarmv7-ranlib" AR="ntoarmv7-ar" \
+  CFLAGS="-Vgcc_ntoarmv7le" \
+  OS=qnx6 --target=armv7 \
+  --host=armv7 --with-ssl=openssl

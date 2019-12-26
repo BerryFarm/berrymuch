@@ -1,0 +1,13 @@
+--- CMakeLists.txt.orig	2018-05-20 01:41:27.270492712 +1000
++++ CMakeLists.txt	2018-05-20 01:44:59.028318712 +1000
+@@ -603,6 +603,10 @@
+ endmacro ()
+
+ #-----------------------------------------------------------------------
++if(CMAKE_SYSTEM_NAME STREQUAL "QNX")
++  add_definitions( -D_XOPEN_SOURCE=600 )
++endif()
++#------------------------------------------------------------------------
+ if(NOT CMake_TEST_EXTERNAL_CMAKE)
+   if(CMAKE_CXX_PLATFORM_ID MATCHES "OpenBSD")
+     execute_process(COMMAND ${CMAKE_CXX_COMPILER}

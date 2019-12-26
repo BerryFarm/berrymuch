@@ -1,0 +1,38 @@
+--- SDL2-2.0.8.orig/src/video/qnx/video.c	2018-03-01 17:34:43.000000000 +0100
++++ SDL2-2.0.8/src/video/qnx/video.c	2018-09-15 21:23:39.000000000 +0200
+@@ -21,6 +21,7 @@
+ #include "../../SDL_internal.h"
+ #include "../SDL_sysvideo.h"
+ #include "sdl_qnx.h"
++#include <screen/screen.h>
+ 
+ static screen_context_t context;
+ static screen_event_t   event;
+@@ -158,10 +159,10 @@
+     screen_buffer_t buffer;
+ 
+     // Get a pointer to the buffer's memory.
+-    if (screen_get_window_property_pv(impl->window, SCREEN_PROPERTY_BUFFERS,
+-                                      (void **)&buffer) < 0) {
++    //if (screen_get_window_property_pv(impl->window, SCREEN_PROPERTY_BUFFERS,
++    //                                  (void **)&buffer) < 0) {
+         return -1;
+-    }
++    //}
+ 
+     if (screen_get_buffer_property_pv(buffer, SCREEN_PROPERTY_POINTER,
+                                       pixels) < 0) {
+@@ -193,10 +194,10 @@
+     window_impl_t   *impl = (window_impl_t *)window->driverdata;
+     screen_buffer_t buffer;
+ 
+-    if (screen_get_window_property_pv(impl->window, SCREEN_PROPERTY_BUFFERS,
+-                                      (void **)&buffer) < 0) {
++    //if (screen_get_window_property_pv(impl->window, SCREEN_PROPERTY_BUFFERS,
++    //                                  (void **)&buffer) < 0) {
+         return -1;
+-    }
++    //}
+ 
+     screen_post_window(impl->window, buffer, numrects, (int *)rects, 0);
+     screen_flush_context(context, 0);

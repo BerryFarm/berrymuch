@@ -1,0 +1,20 @@
+--- flac123-0.0.11.orig/Makefile	2018-11-01 03:01:33.000000000 +0100
++++ flac123-0.0.11/Makefile	2018-11-01 03:02:00.000000000 +0100
+@@ -69,7 +69,7 @@
+ AWK = awk
+ CC = arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3
+ DEPDIR = .deps
+-FLAC_LIBS = -lFLAC -logg -lm
++FLAC_LIBS = -lFLAC -lm
+ INSTALL_STRIP_PROGRAM = ${SHELL} $(install_sh) -c -s
+ PACKAGE = flac123
+ POPT_LIBS = -lpopt
+@@ -88,7 +88,7 @@
+ 	vorbiscomment.c
+ 
+ 
+-flac123_LDADD = -lFLAC -logg -lm -lpopt -L/lib -lao 
++flac123_LDADD = -lFLAC -lm -lpopt -L/lib -lao 
+ 
+ EXTRA_DIST = README.remote BUGS reconf
+ subdir = .

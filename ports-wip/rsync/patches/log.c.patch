@@ -1,0 +1,17 @@
+--- log.c.orig	2018-02-28 01:37:31 +0100
++++ log.c	2018-02-28 02:14:20 +0100
+@@ -23,6 +23,14 @@
+ #include "itypes.h"
+ #include "inums.h"
+ 
++// No syslog.h on qnx / nto
++
++#define LOG_PID 0
++#define LOG_NDELAY 0
++#define LOG_DAEMON 0
++#define LOG_INFO 0
++#define LOG_WARNING 0
++
+ extern int dry_run;
+ extern int am_daemon;
+ extern int am_server;

@@ -1,0 +1,11 @@
+--- git-2.9.5.orig/compat/precompose_utf8.c	2017-08-09 21:48:31.000000000 +0200
++++ git-2.9.5/compat/precompose_utf8.c	2018-09-11 22:22:16.000000000 +0200
+@@ -128,7 +128,7 @@
+ 		}
+ 
+ 		prec_dir->dirent_nfc->d_ino  = res->d_ino;
+-		prec_dir->dirent_nfc->d_type = res->d_type;
++		//prec_dir->dirent_nfc->d_type = res->d_type;
+ 
+ 		if ((precomposed_unicode == 1) && has_non_ascii(res->d_name, (size_t)-1, NULL)) {
+ 			if (prec_dir->ic_precompose == (iconv_t)-1) {

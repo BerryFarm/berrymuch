@@ -1,0 +1,19 @@
+--- work/flac-1.3.2.orig/src/flac/utils.h	2016-12-07 21:10:26.000000000 +0100
++++ work/flac-1.3.2/src/flac/utils.h	2018-10-16 08:38:54.000000000 +0200
+@@ -27,6 +27,7 @@
+ #include "FLAC/ordinals.h"
+ #include "FLAC/format.h" /* for FLAC__StreamMetadata_CueSheet */
+ #include <stdio.h> /* for FILE */
++#include <wchar.h>
+ 
+ typedef enum { FORMAT_RAW, FORMAT_WAVE, FORMAT_WAVE64, FORMAT_RF64, FORMAT_AIFF, FORMAT_AIFF_C, FORMAT_FLAC, FORMAT_OGGFLAC } FileFormat;
+ 
+@@ -71,3 +72,8 @@
+ FLAC__bool flac__utils_get_channel_mask_tag(const FLAC__StreamMetadata *object, FLAC__uint32 *channel_mask);
+ 
+ #endif
++
++#ifndef HAVE_WCWIDTH
++int wcwidth(wchar_t ucs);
++int wcswidth(const wchar_t *pwcs, size_t n);
++#endif

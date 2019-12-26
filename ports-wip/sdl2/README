@@ -1,0 +1,8 @@
+ Maybe TODO:
+
+   add this for SDL2 ...
+
+  cd $DISTVER
+  git clone https://github.com/berryamin/TouchControlOverlay.git
+
+

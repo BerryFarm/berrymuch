@@ -1,0 +1,78 @@
+--- gnutls-3.3.29.orig/doc/examples/Makefile.orig	2018-02-25 23:19:09 +0100
++++ gnutls-3.3.29/doc/examples/Makefile	2018-02-25 23:20:22 +0100
+@@ -116,7 +116,6 @@
+ 	$(am__EXEEXT_4) $(am__EXEEXT_5) $(am__EXEEXT_6) \
+ 	$(am__EXEEXT_7) $(am__EXEEXT_8)
+ am__append_1 = ex-serv-x509
+-am__append_2 = ex-cxx
+ am__append_3 = ex-client-anon ex-serv-anon
+ am__append_4 = ex-serv-pgp
+ #am__append_5 = ex-cert-select-pkcs11
+@@ -250,7 +249,6 @@
+ am__v_lt_0 = --silent
+ am__v_lt_1 = 
+ am__EXEEXT_1 = ex-serv-x509$(EXEEXT)
+-am__EXEEXT_2 = ex-cxx$(EXEEXT)
+ am__EXEEXT_3 = ex-client-anon$(EXEEXT) \
+ 	ex-serv-anon$(EXEEXT)
+ am__EXEEXT_4 = ex-serv-pgp$(EXEEXT)
+@@ -318,15 +316,11 @@
+ 	../../gl/libgnu.la ../../src/gl/libgnu_gpl.la \
+ 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+ 	$(am__DEPENDENCIES_1)
+-am__ex_cxx_SOURCES_DIST = ex-cxx.cpp
+-am_ex_cxx_OBJECTS = ex-cxx.$(OBJEXT)
+-ex_cxx_OBJECTS = $(am_ex_cxx_OBJECTS)
+ am__DEPENDENCIES_2 = libexamples.la ../../lib/libgnutls.la \
+ 	../../gl/libgnu.la ../../src/gl/libgnu_gpl.la \
+ 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+ 	$(am__DEPENDENCIES_1)
+ am__DEPENDENCIES_3 = ../../lib/libgnutlsxx.la $(am__DEPENDENCIES_2)
+-ex_cxx_DEPENDENCIES = $(am__DEPENDENCIES_3)
+ ex_ocsp_client_SOURCES = ex-ocsp-client.c
+ ex_ocsp_client_OBJECTS = ex-ocsp-client.$(OBJEXT)
+ ex_ocsp_client_LDADD = $(LDADD)
+@@ -438,13 +432,13 @@
+ SOURCES = $(libexamples_la_SOURCES) ex-cert-select.c \
+ 	ex-cert-select-pkcs11.c ex-client-anon.c ex-client-dtls.c \
+ 	ex-client-psk.c ex-client-resume.c ex-client-srp.c \
+-	ex-client-x509.c $(ex_cxx_SOURCES) ex-ocsp-client.c \
++	ex-client-x509.c ex-ocsp-client.c \
+ 	ex-serv-anon.c ex-serv-dtls.c ex-serv-pgp.c ex-serv-psk.c \
+ 	ex-serv-srp.c ex-serv-x509.c print-ciphersuites.c
+ DIST_SOURCES = $(libexamples_la_SOURCES) ex-cert-select.c \
+ 	ex-cert-select-pkcs11.c ex-client-anon.c ex-client-dtls.c \
+ 	ex-client-psk.c ex-client-resume.c ex-client-srp.c \
+-	ex-client-x509.c $(am__ex_cxx_SOURCES_DIST) ex-ocsp-client.c \
++	ex-client-x509.c ex-ocsp-client.c \
+ 	ex-serv-anon.c ex-serv-dtls.c ex-serv-pgp.c ex-serv-psk.c \
+ 	ex-serv-srp.c ex-serv-x509.c print-ciphersuites.c
+ am__can_run_installinfo = \
+@@ -1459,8 +1453,6 @@
+ CXX_LDADD = ../../lib/libgnutlsxx.la \
+ 	$(LDADD)
+ 
+-ex_cxx_SOURCES = ex-cxx.cpp
+-ex_cxx_LDADD = $(CXX_LDADD)
+ noinst_LTLIBRARIES = libexamples.la
+ libexamples_la_SOURCES = examples.h ex-alert.c ex-pkcs12.c \
+ 	ex-session-info.c ex-x509-info.c ex-verify.c	\
+@@ -1555,10 +1547,6 @@
+ 	@rm -f ex-client-x509$(EXEEXT)
+ 	$(AM_V_CCLD)$(LINK) $(ex_client_x509_OBJECTS) $(ex_client_x509_LDADD) $(LIBS)
+ 
+-ex-cxx$(EXEEXT): $(ex_cxx_OBJECTS) $(ex_cxx_DEPENDENCIES) $(EXTRA_ex_cxx_DEPENDENCIES) 
+-	@rm -f ex-cxx$(EXEEXT)
+-	$(AM_V_CXXLD)$(CXXLINK) $(ex_cxx_OBJECTS) $(ex_cxx_LDADD) $(LIBS)
+-
+ ex-ocsp-client$(EXEEXT): $(ex_ocsp_client_OBJECTS) $(ex_ocsp_client_DEPENDENCIES) $(EXTRA_ex_ocsp_client_DEPENDENCIES) 
+ 	@rm -f ex-ocsp-client$(EXEEXT)
+ 	$(AM_V_CCLD)$(LINK) $(ex_ocsp_client_OBJECTS) $(ex_ocsp_client_LDADD) $(LIBS)
+@@ -1606,7 +1594,6 @@
+ include ./$(DEPDIR)/ex-client-resume.Po
+ include ./$(DEPDIR)/ex-client-srp.Po
+ include ./$(DEPDIR)/ex-client-x509.Po
+-include ./$(DEPDIR)/ex-cxx.Po
+ include ./$(DEPDIR)/ex-ocsp-client.Po
+ include ./$(DEPDIR)/ex-pkcs11-list.Plo
+ include ./$(DEPDIR)/ex-pkcs12.Plo

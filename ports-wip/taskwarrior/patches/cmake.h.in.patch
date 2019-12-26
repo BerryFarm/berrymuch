@@ -1,0 +1,10 @@
+--- cmake.h.in.orig	2018-05-19 08:27:20.960725302 +1000
++++ cmake.h.in	2018-05-19 08:27:32.216725302 +1000
+@@ -47,6 +47,7 @@
+ #cmakedefine SOLARIS
+ #cmakedefine KFREEBSD
+ #cmakedefine GNUHURD
++#cmakedefine QNX
+ #cmakedefine UNKNOWN
+ 
+ /* Found the GnuTLS library */

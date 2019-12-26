@@ -1,0 +1,11 @@
+--- gnutls-3.3.29.orig/src/gl/strerror-override.c.orig	2018-02-25 18:58:14 +0100
++++ gnutls-3.3.29/src/gl/strerror-override.c	2018-02-25 18:58:39 +0100
+@@ -32,7 +32,7 @@
+ /* If ERRNUM maps to an errno value defined by gnulib, return a string
+    describing the error.  Otherwise return NULL.  */
+ const char *
+-strerror_override (int errnum)
++strerror_override_commented_out (int errnum)
+ {
+   /* These error messages are taken from glibc/sysdeps/gnu/errlist.c.  */
+   switch (errnum)

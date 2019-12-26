@@ -1,0 +1,11 @@
+--- work/flac-1.3.2.orig/libtool	2018-10-16 08:19:33.000000000 +0200
++++ work/flac-1.3.2/libtool	2018-10-16 08:47:17.000000000 +0200
+@@ -11807,7 +11807,7 @@
+ predep_objects="/Applications/Momentics.app/target_10_2_0_1155/qnx6/armle-v7/lib/crti.o /Applications/Momentics.app/host_10_2_0_15/darwin/x86/usr/lib/gcc/arm-unknown-nto-qnx8.0.0eabi/4.6.3/pic/crtbegin.o"
+ postdep_objects="/Applications/Momentics.app/host_10_2_0_15/darwin/x86/usr/lib/gcc/arm-unknown-nto-qnx8.0.0eabi/4.6.3/pic/crtend.o /Applications/Momentics.app/target_10_2_0_1155/qnx6/armle-v7/lib/crtn.o"
+ predeps=""
+-postdeps="-lstdc++ -lm -lgcc -L -L -L -L -lc -lcS -lgcc"
++postdeps="-lgcc -L -L -L -L -lc -lgcc"
+ 
+ # The library search path used internally by the compiler when linking
+ # a shared library.
