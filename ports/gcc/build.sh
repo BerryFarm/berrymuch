@@ -16,23 +16,26 @@ package_init "$@"
 
 if [ "$TASK" == "fetch" ]
 then
-  cd "$WORKDIR"
+  cd "$EXECDIR"
   # fetch
   echo "Fetching gcc sources if not already present"
 pwd
   ls -d gcc 2>/dev/null 2>&1 || \
- 
-  git clone https://github.com/berryfarm/gcc
+{ 
+  git clone https://github.com/berryfarm/gcc gcc.tmp
+  mv gcc.tmp/gcc .
+  rm -rf gcc.tmp
+}
 
   TASK=build
 fi
 
-CONFIGURE_CMD="$WORKDIR/gcc/configure 
+CONFIGURE_CMD="$EXECDIR/gcc/configure 
                    --host=$PBHOSTARCH 
                    --build=$PBBUILDARCH 
                    --target=$PBTARGETARCH 
                    MAKEINFO='/usr/bin/makeinfo --force'
-                   --srcdir=$WORKDIR/gcc 
+                   --srcdir=$EXECDIR/gcc 
                    --with-as=ntoarm-as 
                    --with-ld=ntoarm-ld 
                    --with-sysroot=$QNX_TARGET 
