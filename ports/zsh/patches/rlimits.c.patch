@@ -1,0 +1,61 @@
+--- Src/Builtins/rlimits.c.orig	2012-08-21 17:59:33.000000000 +0000
++++ Src/Builtins/rlimits.c	2020-06-18 11:51:48.049587520 +0000
+@@ -320,22 +320,22 @@
+ 	    printf("-r: threads                         ");
+ 	break;
+ #endif /* HAVE_RLIMIT_NTHR */
+-# if defined(HAVE_RLIMIT_VMEM) && (!defined(HAVE_RLIMIT_RSS) || !defined(RLIMIT_VMEM_IS_RSS))
+-    case RLIMIT_VMEM:
+-	if (head)
+-	    printf("-v: virtual memory size (kbytes)    ");
+-	if (limit != RLIM_INFINITY)
+-	    limit /= 1024;
+-	break;
+-# endif /* HAVE_RLIMIT_VMEM */
+-# if defined HAVE_RLIMIT_AS && !defined(RLIMIT_VMEM_IS_AS)
+-    case RLIMIT_AS:
+-	if (head)
+-	    printf("-v: address space (kbytes)          ");
+-	if (limit != RLIM_INFINITY)
+-	    limit /= 1024;
+-	break;
+-# endif /* HAVE_RLIMIT_AS */
++//# if defined(HAVE_RLIMIT_VMEM) && (!defined(HAVE_RLIMIT_RSS) || !defined(RLIMIT_VMEM_IS_RSS))
++//    case RLIMIT_VMEM:
++//	if (head)
++//	    printf("-v: virtual memory size (kbytes)    ");
++//	if (limit != RLIM_INFINITY)
++//	    limit /= 1024;
++//	break;
++//# endif /* HAVE_RLIMIT_VMEM */
++//# if defined HAVE_RLIMIT_AS && !defined(RLIMIT_VMEM_IS_AS)
++//    case RLIMIT_AS:
++//	if (head)
++//	    printf("-v: address space (kbytes)          ");
++//	if (limit != RLIM_INFINITY)
++//	    limit /= 1024;
++//	break;
++//# endif /* HAVE_RLIMIT_AS */
+ # ifdef HAVE_RLIMIT_LOCKS
+     case RLIMIT_LOCKS:
+ 	if (head)
+@@ -914,13 +914,13 @@
+ # endif /* HAVE_RLIMIT_MEMLOCK */
+ /* If RLIMIT_VMEM and RLIMIT_RSS are defined and equal, avoid *
+  * duplicate case statement.  Observed on QNX Neutrino 6.1.0. */
+-# if defined(HAVE_RLIMIT_VMEM) && !defined(RLIMIT_VMEM_IS_RSS)
+-		case RLIMIT_VMEM:
+-# endif /* HAVE_RLIMIT_VMEM */
++//# if defined(HAVE_RLIMIT_VMEM) && !defined(RLIMIT_VMEM_IS_RSS)
++//		case RLIMIT_VMEM:
++//# endif /* HAVE_RLIMIT_VMEM */
+ /* ditto RLIMIT_VMEM and RLIMIT_AS */
+-# if defined(HAVE_RLIMIT_AS) && !defined(RLIMIT_VMEM_IS_AS) && !defined(RLIMIT_RSS_IS_AS)
+-		case RLIMIT_AS:
+-# endif /* HAVE_RLIMIT_AS */
++//# if defined(HAVE_RLIMIT_AS) && !defined(RLIMIT_VMEM_IS_AS) && !defined(RLIMIT_RSS_IS_AS)
++//		case RLIMIT_AS:
++//# endif /* HAVE_RLIMIT_AS */
+ # ifdef HAVE_RLIMIT_AIO_MEM
+ 		case RLIMIT_AIO_MEM:
+ # endif /* HAVE_RLIMIT_AIO_MEM */
