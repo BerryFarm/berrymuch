@@ -21,7 +21,6 @@ CONFIGURE_CMD="autoconf; ./configure
                 --build=$PBBUILDARCH 
                 --target=$PBTARGETARCH 
                 --prefix=$PREFIX 
-                --disable-nls 
                 CC=$PBTARGETARCH-gcc 
                 "
 package_fetch
