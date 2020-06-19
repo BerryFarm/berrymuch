@@ -16,3 +16,4 @@ sample_profile
 *.cache/
 Makefile
 .useradd
+run.sh

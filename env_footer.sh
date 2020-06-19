@@ -39,4 +39,9 @@ alias ls='ls --color=auto'
 # locale
 export LC_CTYPE=en_US.UTF-8
 
+# python
+export PYTHONHOME=$NATIVE_TOOLS
+export PYTHONPATH="$NATIVE_TOOLS/lib/python3.2:$NATIVE_TOOLS/lib/python3.2/lib-dynload"
+export TEMP="$NATIVE_TOOLS/tmp"
+
 echo "Berrymuch v0.3\n"
