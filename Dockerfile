@@ -24,7 +24,8 @@ RUN apt-get -yq install \
     libxtst6 \
     net-tools \
     lzip \
-    g++ 
+    g++ \
+    zlib1g-dev 
 
 WORKDIR /root
 
