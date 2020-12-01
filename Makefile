@@ -14,5 +14,12 @@ shell: .useradd
 	touch .useradd
 
 shell: .useradd
-	docker run -it -v /Big:/Big -v "${PWD}":/berrymuch -u $(shell id -u):$(shell id -g) yamsergey/bb10-ndk:0.6.2 /bin/bash
+	# WIP for import-gcc-5.4.0, TO BE REMOVED in final PR
+	#docker run -it -v /Big:/Big -v "${PWD}":/berrymuch -u $(shell id -u):$(shell id -g) yamsergey/bb10-ndk:0.6.2 /bin/bash
+	docker run -it -v /opt/qnx800:/opt/qnx800 -v "${PWD}":/berrymuch -u $(shell id -u):$(shell id -g) yamsergey/bb10-ndk:0.6.2 /bin/bash
+	docker run -it -v /opt/qnx800:/opt/qnx800 -v "${PWD}":/berrymuch -u $(shell id -u):$(shell id -g) berrymuch:gcc-540 /bin/bash
+
+# WIP for import-gcc-5.4.0, TO BE REMOVED in final PR
+rootshell: .useradd
+	docker run -it -v /opt/qnx800:/opt/qnx800 -v "${PWD}":/berrymuch berrymuch:gcc-540 /bin/bash
 
