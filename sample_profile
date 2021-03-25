@@ -1,0 +1,5 @@
+umask 002
+CLITOOLS_ENV="/accounts/1000/shared/documents/clitools/env.sh"
+if [ -e $CLITOOLS_ENV ];then
+    . $CLITOOLS_ENV
+fi
