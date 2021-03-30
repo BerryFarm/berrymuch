@@ -2,6 +2,10 @@
 # To compile Term49 from cli
 #
 
+#
+# Notes adapted from a chat with "Dragoon FX", a respected member of our community !
+#
+
   first, obtain your debug token and signing key by using the method taken from
 github.com/mordak/Term48 and re-printed below;
 
@@ -19,20 +23,30 @@ github.com/mordak/Term48 and re-printed below;
 * Run `make` in `signing/Makefile` to request and deploy the token to your device.
 
 
-	then, put your author.p12, bbidtoken.csk and debugtoken.bar in the ~/.rim folder (linux)
+  then, put your author.p12, bbidtoken.csk and debugtoken.bar in the ~/.rim folder (linux)
 
-	then, setup your BB development environment and go top the project folder and using blackberry-nativepackager you can compile and sign the bar.
-	
-an example would be
-
-blackberry-nativepackager -sign -storepass <keystorepass> -package Term48_original.bar bar-descriptor.xml
+    cp author.p12 bbidtoken.csk debugtoken.bar to ~/.rim
 
 
-You can type "blackberry-nativepackager -help" to print the help screen
+  then, setup your BB development environment and go top the project folder and using blackberry-nativepackager you can compile and sign the bar. 
+
+  example:
+
+    blackberry-nativepackager -sign -storepass <keystorepass> -package Term48_original.bar bar-descriptor.xml
+
+
+
+  You may type "blackberry-nativepackager -help" to print the help screen
+
+
+#
+# Reference to Blackberry documentation about packaging and deploying apps
+#
 
 https://developer.blackberry.com/native/documentation/dev/tools/package_and_deploy_app.html
 
-this might help you
+use the many tools under bbndk/host_10_3_1_12/linux/x86/usr/bin
 
-oh and you will find many cli tools under bbndk/host_10_3_1_12/linux/x86/usr/bin directory
-just after installing momentics, you will have to download the sdk and when you first launch momentics, it will try to download them and it'll fail. So you have to download them by going to "help>update api levels" and selecting sdk 10.3.1
+just after installing momentics, you will have to download the sdk and when you first launch momentics, 
+it will try to download them and it'll fail. 
+So you have to download them by going to "help>update api levels" and selecting sdk 10.3.1
