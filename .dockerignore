@@ -1,1 +1,7 @@
 .git
+work/
+ports/
+ports-wip/
+packages/
+archives/
+clitools/
