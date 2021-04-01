@@ -11,12 +11,13 @@ source ../../lib.sh
 TASK=fetch
 
 DISTVER="lua-5.3.5"
+DISTVER="lua-5.4.3"
 DISTSUFFIX="tar.gz"
 DISTFILES="https://www.lua.org/ftp/$DISTVER.$DISTSUFFIX"
 UNPACKCOMD="tar -xzf"
 package_init "$@"
 
-CONFIGURE_CMD=""
+CONFIGURE_CMD="make CC=$PBTARGETARCH-gcc AR=$PBTARGETARCH-ar RANLIB=$PBTARGETARCH-ranlib"
 MYMAKEFLAGS="posix"
 
 package_fetch
