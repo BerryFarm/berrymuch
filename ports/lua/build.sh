@@ -10,17 +10,23 @@ set -e
 source ../../lib.sh
 TASK=fetch
 
-DISTVER="lua-5.3.5"
+DISTVER="lua-5.4.3"
 DISTSUFFIX="tar.gz"
 DISTFILES="https://www.lua.org/ftp/$DISTVER.$DISTSUFFIX"
 UNPACKCOMD="tar -xzf"
 package_init "$@"
 
-CONFIGURE_CMD=""
-MYMAKEFLAGS="posix"
+CONFIGURE_CMD="cd qnx ; make CC=$PBTARGETARCH-gcc AR=$PBTARGETARCH-ar RANLIB=$PBTARGETARCH-ranlib"
+#MYMAKEFLAGS="generic"
 
 package_fetch
-package_patch 
+
+if [ "$TASK" == "patch" ]
+then
+  cp -r $EXECDIR/qnx $WORKDIR
+  TASK=build
+fi
+
 package_build
 
 if [ "$TASK" == "install" ]
