@@ -16,8 +16,7 @@ DISTFILES="https://www.lua.org/ftp/$DISTVER.$DISTSUFFIX"
 UNPACKCOMD="tar -xzf"
 package_init "$@"
 
-CONFIGURE_CMD="cd qnx ; make CC=$PBTARGETARCH-gcc AR=$PBTARGETARCH-ar RANLIB=$PBTARGETARCH-ranlib"
-#MYMAKEFLAGS="generic"
+MYMAKEFLAGS="-C qnx CC=$PBTARGETARCH-gcc AR=$PBTARGETARCH-ar RANLIB=$PBTARGETARCH-ranlib"
 
 package_fetch
 
@@ -28,6 +27,7 @@ then
 fi
 
 package_build
+
 
 if [ "$TASK" == "install" ]
 then
