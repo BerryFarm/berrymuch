@@ -13,13 +13,13 @@ VER="7.16_1.1.2"
 DISTVER="sc-$VER"
 DISTSUFFIX="tar.gz"
 
-DISTFILES="https://github.com/n-t-roff/sc/archive/7.16_1.1.2.tar.gz"
+DISTFILES="https://github.com/n-t-roff/sc/archive/$VER.tar.gz"
 UNPACKCOMD="tar -zxf"
 
 TASK=fetch
 package_init "$@"
 
-WORKDIR="$WORKROOT/sc-7.16_1.1.2"
+WORKDIR="$WORKROOT/$DISTVER"
 CONFIGURE_CMD="./configure"
 
 if [ "$TASK" == "fetch" ]
@@ -28,6 +28,10 @@ then
   echo "Fetching sources"
   if [ ! -f $DISTVER.$DISTSUFFIX ]; then
     curl -fkSLO $DISTFILES
+
+    # very dirty fix for cache of source archives
+    ls $DISTVER.$DISTSUFFIX || ln -s $DISTFILES $DISTVER.$DISTSUFFIX
+
   fi
 
   # Unpack and organize
