@@ -12,7 +12,7 @@ source ../../lib.sh
 BUILD_DEP_BINS=(msgfmt)
 check_required_binaries
 
-DISTVER="git-2.26.0"
+DISTVER="git-2.33.1"
 DISTSUFFIX="tar.xz"
 DISTFILES="https://mirrors.edge.kernel.org/pub/software/scm/git/$DISTVER.$DISTSUFFIX"
 
