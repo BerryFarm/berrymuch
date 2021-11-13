@@ -37,7 +37,8 @@ CONFIGURE_CMD="./configure
 		--with-fpu=vfpv3-d16
 		--with-mode=thumb
                 CC=$PBTARGETARCH-gcc
-                LEXLIB=\"-L$ARCHIVEDIR/$LIBFL_DIR/$PREFIX/lib\ -lfl\"
+                LEXLIB=\" -lfl\"
+                LDFLAGS=\"-L$ARCHIVEDIR/$LIBFL_DIR/$PREFIX/lib\"
                 CFLAGS=\"-I$PWD -I$ARCHIVEDIR/$LIBFL_DIR/$PREFIX/include\"
 		"
 
@@ -51,38 +52,18 @@ then
     curl -fkSLO $DISTFILES
   fi
 
-  mv glimpse_4.18.7.orig.$DISTSUFFIX $DISTVER.$DISTSUFFIX
+  #mv glimpse_4.18.7.orig.$DISTSUFFIX $DISTVER.$DISTSUFFIX
 
   # Unpack and organize
   echo "Unpacking"
   $UNPACKCOMD $DISTVER.$DISTSUFFIX $UNPACKSUFFIX
-  TASK=build
+  TASK=patch
 fi
 
 
-if [ "$TASK" == "build" ]
-then
 
-  cd "$WORKDIR"
-
-  eval $CONFIGURE_CMD
-
-  echo "Patching .. (post-configure)"
-  if [ -e "$EXECDIR/patches" ]; then
-    for apatch in $EXECDIR/patches/*
-    do
-      patch -p0 < $apatch
-    done
-  fi
-
-  echo "Building"
-  cd "$WORKDIR"
-  eval $MAKE_PREFIX make $MYMAKEFLAGS || \
-  eval $MAKE_PREFIX make
-  TASK=install
-fi
-
-
+package_patch 0
+package_build
 package_install
 package_bundle
 
