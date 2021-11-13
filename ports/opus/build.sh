@@ -25,6 +25,7 @@ CONFIGURE_CMD="./configure
                 --build=$PBBUILDARCH 
                 --target=$PBTARGETARCH 
                 --prefix=$PREFIX 
+ 		--disable-rtcd
                 CC=$PBTARGETARCH-gcc 
                 CFLAGS=\"-I$PWD\"
                 "
