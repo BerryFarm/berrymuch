@@ -1,0 +1,15 @@
+
+Building
++ cd /berrymuch/work/rockbox
++ eval cd build ';' PATH=/root/bbndk/host_10_3_1_12/linux/x86/usr/bin:/berrymuch/.rim/bbndk/bin:/root/bbndk/features/com.qnx.tools.jre.linux_1.7.0.51/jre/bin:/root/bbndk/host_10_3_1_12/linux/x86/usr/python32/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/berrymuch/work/rockbox ../tools/rockboxdev.sh --prefix=/accounts/1000/shared/misc/clitools
+++ cd build
+++ PATH=/root/bbndk/host_10_3_1_12/linux/x86/usr/bin:/berrymuch/.rim/bbndk/bin:/root/bbndk/features/com.qnx.tools.jre.linux_1.7.0.51/jre/bin:/root/bbndk/host_10_3_1_12/linux/x86/usr/python32/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/berrymuch/work/rockbox
+++ ../tools/rockboxdev.sh --prefix=/accounts/1000/shared/misc/clitools
+Download directory : /tmp/rbdev-dl (set RBDEV_DOWNLOAD or use --download= to change)
+Install prefix     : /accounts/1000/shared/misc/clitools  (set RBDEV_PREFIX or use --prefix= to change)
+Build dir          : /tmp/rbdev-build (set RBDEV_BUILD or use --builddir= to change)
+Make options       : -I/root/bbndk/target_10_3_1_995/qnx6/usr/include (set MAKEFLAGS or use --makeflags= to change)
+Restart step       :  (set RBDEV_RESTART or use --restart= to change)
+Target arch        :  (set RBDEV_TARGET or use --target to change)
+mkdir: cannot create directory '/accounts': Permission denied
+make: *** [Makefile:8: build-wip.rockbox] Error 1
