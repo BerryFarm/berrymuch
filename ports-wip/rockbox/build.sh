@@ -7,41 +7,29 @@
 #
 # Olivier Kaloudoff <kaloudov@yandex.ru>, 2019
 
-set -e
+set -ex
 source ../../lib.sh
 TASK=fetch
 
 DISTVER="rockbox"
 DISTSUFFIX="git"
-GIT_VER="v3.14-final"
+GIT_VER="v3.15-final"
 
 DISTFILES="https://github.com/Rockbox/$DISTVER.$DISTSUFFIX"
 
 package_init "$@"
 # we must have build libevent first - see CFLAGS and LDFLAGS below
-CONFIGURE_CMD="../tools/configure 
-                --host=$PBHOSTARCH
-                --build=$PBBUILDARCH 
-                --target=sdlapp
+#CONFIGURE_CMD="cd build ; ../tools/configure 
+CONFIGURE_CMD="cd build ; PATH=$PATH:$WORKDIR ../tools/rockboxdev.sh
                 --prefix=$PREFIX 
-		--lcdwidth=800
-		--lcdheight=480
-		--type=N
-                CC=$PBTARGETARCH-gcc 
                 "
 
 if [ "$TASK" == "fetch" ]
 then
   cd "$WORKROOT"
-  [ -d $DISTVER ] || git clone --recursive $DISTFILES $DISTVER --depth 1
-  cd $DISTVER
-  git fetch origin refs/tags/$GIT_VER:refs/tags/$GIT_VER
-  git checkout $GIT_VER
-  rm -rf build
-  mkdir build
-  cd build
-  #cd "$WORKDIR"
-  echo "DEBUG: pwd=$(pwd)"
+  git clone --recursive $DISTFILES $DISTVER --depth 1 --single-branch --branch $GIT_VER
+  cp $EXECDIR/libtool $WORKDIR
+  mkdir "$WORKDIR/build"
   TASK=patch
 fi
 
