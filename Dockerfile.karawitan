@@ -1,6 +1,6 @@
 FROM yamsergey/bb10-ndk:0.6
 
 ARG UID GID WHOAMI
-RUN /usr/sbin/groupadd $WHOAMI --gid $GID
+RUN /usr/sbin/groupadd $WHOAMI --gid $GID || /bin/true
 RUN /usr/sbin/useradd -M $WHOAMI --uid $UID --gid $GID -d /berrymuch
 RUN chown $UID:$GID /
