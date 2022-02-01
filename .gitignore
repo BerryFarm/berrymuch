@@ -16,3 +16,4 @@ sample_profile
 .bash*
 .ssh
 .vim*
+.sw**
