@@ -63,4 +63,6 @@ You may do whatever you like with this code, provided any copyright notices are 
 
 ## See also
 
+* [Wiki](https://github.com/BerryFarm/berrymuch/wiki)
+* [FAQ](https://github.com/BerryFarm/berrymuch/wiki/FAQ)
 * [Useful links](https://github.com/BerryFarm/berrymuch/wiki/Useful-links)
