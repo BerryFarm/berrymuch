@@ -1,0 +1,60 @@
+FROM ubuntu:20.04
+
+RUN apt-get -q update ;\
+    apt-get -yq install \
+    wget sudo unzip strace
+
+RUN wget https://dl.google.com/go/go1.17.7.linux-amd64.tar.gz 
+
+RUN sudo mkdir /opt ;\
+    sudo tar -xvf go1.17.7.linux-amd64.tar.gz -C /opt ;\
+    rm go1.17.7.linux-amd64.tar.gz
+
+ENV GOROOT=/opt/go
+ENV GOPATH=$GOROOT/bin
+ENV CGO_ENABLED=0 
+ENV GOOS=android 
+ENV GOARCH=arm 
+ENV GOARM=7 
+
+RUN wget https://dl.google.com/android/repository/android-ndk-r18b-linux-x86_64.zip
+RUN sudo unzip -d /opt android-ndk-r18b-linux-x86_64.zip ; rm android-ndk-r18b-linux-x86_64.zip
+
+RUN export DEBIAN_FRONTEND=noninteractive
+RUN export TZ=Europe/Paris; apt-get -yq install tzdata
+
+RUN apt-get -q update ;\
+    apt-get -yq install \
+    subversion \
+    curl \
+    tar \
+    gzip \
+    bzip2 \
+    ruby \
+    git \
+    curl \
+    texinfo \
+    autopoint \
+    m4 \
+    autoconf \
+    groff \
+    libgtk2.0-0 \
+    gcc \
+    libxtst6 \
+    net-tools \
+    lzip \
+    g++ \
+    zlib1g-dev 
+
+#ENV CC=arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3 # wrong
+
+ENV CC=x86_64-linux-android-gcc
+
+ENV PATH=/opt/go/bin:/usr/bin:/usr/sbin:/bin:/sbin:/opt/android-ndk-r18b/toolchains/x86_64-4.9/prebuilt/linux-x86_64/bin 
+
+# FROM https://github.com/golang/go/wiki/Mobile
+RUN export PATH=$PATH:/opt/android-ndk-r18b/prebuilt/linux-x86_64:/opt/android-ndk-r18b/simpleperf/bin:/opt/android-ndk-r18b/simpleperf/bin:/opt/android-ndk-r18b/simpleperf/bin/androidx86:/opt/android-ndk-r18b/simpleperf/bin/androidx86_64:/opt/android-ndk-r18b/simpleperf/bin/linuxx86:/opt/android-ndk-r18b/simpleperf/bin/linuxx86_64:/opt/android-ndk-r18b/toolchains/aarch64-linux-android-4.9/prebuiltlinux-x86_64:/opt/android-ndk-r18b/toolchains/arm-linux-androideabi-4.9/prebuiltlinux-x86_64:/opt/android-ndk-r18b/toolchains/llvm/prebuiltlinux-x86_64:/opt/android-ndk-r18b/toolchains/renderscript/prebuiltlinux-x86_64:/opt/android-ndk-r18b/toolchains/x86-4.9/prebuiltlinux-x86_64:/opt/android-ndk-r18b/toolchains/x86_64-4.9/prebuiltlinux-x86_64
+RUN echo TEST DEBUG x86_64-linux-android-gcc
+RUN type x86_64-linux-android-gcc
+RUN go -x install golang.org/x/mobile/cmd/gomobile@latest
+#RUN go install golang.org/x/mobile/cmd/gomobile@latest
