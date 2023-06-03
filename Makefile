@@ -9,6 +9,9 @@ build.%: docker-image
 build-wip.%: docker-image
 	docker run $(DOCKER_OPT) -t -v "${PWD}":/berrymuch -u $(shell id -u):$(shell id -g) yamsergey/bb10-ndk:0.6.3 /bin/bash -c 'cd /berrymuch/ports-wip/$*; ./build.sh -b /root/bbndk'
 
+build-golang.%:
+	( cd ports-golang/$*; CGO_ENABLED=0 GOOS=android GOARCH=arm GOARM=7 go build . )
+
 shell: docker-image
 	docker run $(DOCKER_OPT) -it -v "${PWD}":/berrymuch -u $(shell id -u):$(shell id -g) yamsergey/bb10-ndk:0.6.3 /bin/bash
 
