@@ -21,6 +21,10 @@ build-golang.%: docker-image-golang
 
 	  # -e GOPATH=$HOME/Projects/Proj1 
 
+hello-world:
+	( cd ports-golang/$@ ; CGO_ENABLED=1 GOOS=android GOARCH=arm GOARM=7 strace -v -s 8192 -o log -f go build . ; ls -l log )
+
+
 shell: docker-image
 	docker run $(DOCKER_OPT) -it \
 	  -v "${PWD}":/berrymuch \
@@ -33,10 +37,20 @@ gosh: docker-image-golang
 	  -v "${PWD}":/berrymuch \
 	  -u $(shell id -u):$(shell id -g) \
 	  -e PATH=/opt/go/bin:/usr/bin:/usr/sbin:/bin:/sbin:/root/bbndk/host_10_3_1_12/linux/x86/usr/bin \
-	  android-4.3-ndk:golang /bin/bash
+	  	android-4.3-ndk:golang
+	  #android-4.3-ndk:golang /bin/bash
 
 docker-image:
-	docker build $(DOCKER_OPT) --build-arg UID=$(shell id -u) --build-arg GID=$(shell id -g) --build-arg WHOAMI=$(shell whoami) -f Dockerfile.karawitan -t yamsergey/bb10-ndk:0.6.3 .
+	docker build $(DOCKER_OPT) \
+		--build-arg UID=$(shell id -u) \
+		--build-arg GID=$(shell id -g) \
+		--build-arg WHOAMI=$(shell whoami) \
+		-f Dockerfile.karawitan -t yamsergey/bb10-ndk:0.6.3 .
 
 docker-image-golang:
-	docker build $(DOCKER_OPT_GO) --build-arg UID=$(shell id -u) --build-arg GID=$(shell id -g) --build-arg WHOAMI=$(shell whoami) -f Dockerfile.golang -t android-4.3-ndk:golang .
+	docker build $(DOCKER_OPT_GO) --build-arg UID=$(shell id -u) \
+		--build-arg GID=$(shell id -g) \
+		--build-arg WHOAMI=$(shell whoami) \
+		--build-arg CGO_ENABLED=1 \
+		--build-arg ANDROID_SYSROOT=/opt/android-ndk-r18b/toolchains/x86_64-4.9/prebuilt/linux-x86_64 \
+		-f Dockerfile.golang -t android-4.3-ndk:golang .
