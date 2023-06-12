@@ -22,7 +22,8 @@ build-golang.%: docker-image-golang
 	  # -e GOPATH=$HOME/Projects/Proj1 
 
 hello-world:
-	( cd ports-golang/$@ ; CGO_ENABLED=1 GOOS=android GOARCH=arm GOARM=7 strace -v -s 8192 -o log -f go build . ; ls -l log )
+	uname | egrep -q Linux && ( cd ports-golang/$@ ; CGO_ENABLED=1 GOOS=android GOARCH=arm GOARM=7 strace -v -s 8192 -o log -f go build . ; ls -l log ) || exit 0
+	uname | egrep -q Darwin && ( cd ports-golang/$@ ; CGO_ENABLED=1 GOOS=android GOARCH=arm GOARM=7 go build . )
 
 
 shell: docker-image
