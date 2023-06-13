@@ -29,10 +29,10 @@ RUN apt-get -yq install \
 
 WORKDIR /root
 
-RUN wget http://downloads.blackberry.com/upr/developers/downloads/momentics-2.1.2-201503050937.linux.x86.run 
-RUN chmod +x momentics-2.1.2-201503050937.linux.x86.run
-RUN yes 'y' | LESS='+q' ./momentics-2.1.2-201503050937.linux.x86.run 
-RUN rm momentics-2.1.2-201503050937.linux.x86.run
+RUN wget https://archive.org/download/native-SDK-for-blackberry10/Momentics%20IDE/momentics-2.1.2-201503050937.linux.x86_64.run ; \
+	chmod +x momentics-2.1.2-201503050937.linux.x86.run ; \
+	yes 'y' | LESS='+q' ./momentics-2.1.2-201503050937.linux.x86.run ; \
+	rm momentics-2.1.2-201503050937.linux.x86.run
 
 WORKDIR /root/bbndk
 ENV DISPLAY=:1
