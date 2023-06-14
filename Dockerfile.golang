@@ -44,10 +44,10 @@ RUN apt-get -q update ;\
     net-tools \
     lzip \
     g++ \
-    zlib1g-dev 
+    zlib1g-dev \
+    file
 
 #ENV CC=arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3 # wrong
-
 ENV CC=x86_64-linux-android-gcc
 
 ENV PATH=/opt/go/bin:/usr/bin:/usr/sbin:/bin:/sbin:/opt/android-ndk-r18b/toolchains/x86_64-4.9/prebuilt/linux-x86_64/bin 
