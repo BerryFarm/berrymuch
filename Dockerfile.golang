@@ -2,7 +2,6 @@
 
 FROM i386/ubuntu:20.04
 COPY --from=yamsergey/bb10-ndk:0.6 /root/bbndk /root/bbndk
-#RUN chown -R nobody:nobody /root/bbndk
 RUN chown -R 65534:65534 /root
 
 #RUN export DEBIAN_FRONTEND=noninteractive
@@ -14,9 +13,8 @@ RUN apt-get -q update ;\
     tzdata \
     wget \
     sudo \
-    unzip strace \
+    unzip \
     curl \
-    subversion \
     tar \
     gzip \
     bzip2 \
@@ -32,17 +30,17 @@ RUN apt-get -q update ;\
     gcc \
     libxtst6 \
     net-tools \
-    lzip \
     g++ \
     zlib1g-dev \
     file \
     make
 
-RUN wget https://dl.google.com/go/go1.17.7.linux-amd64.tar.gz 
+#RUN wget https://dl.google.com/go/go1.17.7.linux-amd64.tar.gz 
+RUN wget https://dl.google.com/go/go1.17.7.linux-386.tar.gz
 
 RUN sudo mkdir /opt ;\
-    sudo tar -xvf go1.17.7.linux-amd64.tar.gz -C /opt ;\
-    rm go1.17.7.linux-amd64.tar.gz
+    sudo tar -xvf go1.17.7.linux-386.tar.gz -C /opt ;\
+    rm go1.17.7.linux-386.tar.gz
 
 RUN wget https://dl.google.com/android/repository/android-ndk-r18b-linux-x86_64.zip ; \
     sudo unzip -d /opt android-ndk-r18b-linux-x86_64.zip ; \
@@ -51,15 +49,11 @@ RUN wget https://dl.google.com/android/repository/android-ndk-r18b-linux-x86_64.
 
 #ENV PATH=/opt/go/bin:/usr/bin:/usr/sbin:/bin:/sbin:/opt/android-ndk-r18b/toolchains/x86_64-4.9/prebuilt/linux-x86_64/bin 
 
-RUN touch /tmp/detect
 
 # FROM https://github.com/golang/go/wiki/Mobile
 #RUN export PATH=$PATH:/opt/android-ndk-r18b/prebuilt/linux-x86_64:/opt/android-ndk-r18b/simpleperf/bin:/opt/android-ndk-r18b/simpleperf/bin:/opt/android-ndk-r18b/simpleperf/bin/androidx86:/opt/android-ndk-r18b/simpleperf/bin/androidx86_64:/opt/android-ndk-r18b/simpleperf/bin/linuxx86:/opt/android-ndk-r18b/simpleperf/bin/linuxx86_64:/opt/android-ndk-r18b/toolchains/aarch64-linux-android-4.9/prebuiltlinux-x86_64:/opt/android-ndk-r18b/toolchains/arm-linux-androideabi-4.9/prebuiltlinux-x86_64:/opt/android-ndk-r18b/toolchains/llvm/prebuiltlinux-x86_64:/opt/android-ndk-r18b/toolchains/renderscript/prebuiltlinux-x86_64:/opt/android-ndk-r18b/toolchains/x86-4.9/prebuiltlinux-x86_64:/opt/android-ndk-r18b/toolchains/x86_64-4.9/prebuiltlinux-x86_64
 
 #RUN echo TEST DEBUG x86_64-linux-android-gcc
-
-RUN type x86_64-linux-android-gcc >> /tmp/detect
-# x86_64-linux-android-gcc is /opt/android-ndk-r18b/toolchains/x86_64-4.9/prebuilt/linux-x86_64/bin/x86_64-linux-android-gcc
 
 # we must add this as option $CC --sysroot=
 #bin/x86_64-linux-android-gcc
