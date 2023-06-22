@@ -38,19 +38,11 @@ RUN apt-get -q update ;\
     make \
     strace
 
-RUN wget https://dl.google.com/go/go1.17.7.linux-386.tar.gz
+RUN wget https://dl.google.com/go/go1.17.13.linux-386.tar.gz
 
 RUN sudo mkdir /opt ;\
-    sudo tar -xvf go1.17.7.linux-386.tar.gz -C /opt ;\
-    rm go1.17.7.linux-386.tar.gz
-
-#RUN export CPP=cpp
-#RUN export CC=gcc
-#RUN export CXX=g++
-#RUN export LD=ld
-#RUN export AS=as
-#RUN export AR=ar
-#RUN export RANLIB=ranlib
+    sudo tar -xvf go1.17.13.linux-386.tar.gz -C /opt ;\
+    rm go1.17.13.linux-386.tar.gz
 
 #RUN strace -v -s 8192 -f go install golang.org/x/mobile/cmd/gomobile@latest 2>&1 | tee -a /tmp/detect
 RUN go install golang.org/x/mobile/cmd/gomobile@latest 2>&1 | tee -a /tmp/detect
