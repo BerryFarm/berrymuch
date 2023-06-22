@@ -8,35 +8,44 @@ default: build-golang.hello-world
 #default: docker-image-golang
 
 build: docker-image
-	docker run $(DOCKER_OPT) -t -v "${PWD}":/berrymuch \
-		-u $(shell id -u):$(shell id -g) yamsergey/bb10-ndk:0.6.3 /bin/bash -c 'cd /berrymuch; ./build.sh -b /root/bbndk'
+	docker run $(DOCKER_OPT) -t \
+		-v "${PWD}":/berrymuch \
+		-u $(shell id -u):$(shell id -g) yamsergey/bb10-ndk:0.6.3 /bin/bash \
+		-c 'cd /berrymuch; ./build.sh -b /root/bbndk'
 
 build.%: docker-image
-	docker run $(DOCKER_OPT) -t -v "${PWD}":/berrymuch \
-		-u $(shell id -u):$(shell id -g) yamsergey/bb10-ndk:0.6.3 /bin/bash -c 'cd /berrymuch/ports/$*; ./build.sh -b /root/bbndk'
+	docker run $(DOCKER_OPT) -t \
+		-v "${PWD}":/berrymuch \
+		-u $(shell id -u):$(shell id -g) yamsergey/bb10-ndk:0.6.3 /bin/bash \
+		-c 'cd /berrymuch/ports/$*; ./build.sh -b /root/bbndk'
 
 build-wip.%: docker-image
-	docker run $(DOCKER_OPT) -t -v "${PWD}":/berrymuch \
-		-u $(shell id -u):$(shell id -g) yamsergey/bb10-ndk:0.6.3 /bin/bash -c 'cd /berrymuch/ports-wip/$*; ./build.sh -b /root/bbndk'
+	docker run $(DOCKER_OPT) -t \
+		-v "${PWD}":/berrymuch \
+		-u $(shell id -u):$(shell id -g) yamsergey/bb10-ndk:0.6.3 /bin/bash \
+		-c 'cd /berrymuch/ports-wip/$*; ./build.sh -b /root/bbndk'
+
+  	  #-u 65534:65534 
 
 build-golang.%: docker-image-golang
 	docker run -it $(DOCKER_OPT_GO) \
 	  -t -v "${PWD}":/berrymuch \
-  	  -u 65534:65534 \
+	  -u $(shell id -u):$(shell id -g) \
 	  -e HOME=/tmp \
-	  -e ANDROID_SYSROOT=/opt/android-ndk-r18b/toolchains/x86_64-4.9/prebuilt/linux-x86_64 \
    	  -e CGO_ENABLED=1 \
    	  -e GOOS=android \
    	  -e GOARCH=arm \
    	  -e GOARM=7 \
-	  -e PATH=/usr/bin:/usr/sbin:/bin:/sbin:/opt/go/bin:/opt/android-ndk-r18b/toolchains/x86_64-4.9/prebuilt/linux-x86_64/bin:/root/bbndk/host_10_3_1_12/linux/x86/usr/bin \
+   	  -e CGO_LDFLAGS=-llog \
+	  -e PATH=/usr/bin:/usr/sbin:/bin:/sbin:/opt/go/bin:/root/bbndk/host_10_3_1_12/linux/x86/usr/bin \
 	  -e CC=arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3 \
 	  -e CC_FOR_TARGET=arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3 \
-	  android-4.3-ndk:golang /bin/bash -c '\
-		source /root/bbndk/bbndk-env_10_3_1_995.sh ;\
-		cd /berrymuch/ports-golang/hello-world/  ;\
-		export HOME=/tmp ;\
-		go build -x  . ; go install ; find / -type f -name hello-world | xargs file '
+	  android-4.3-ndk:golang /bin/bash \
+		-c '\
+		source /root/bbndk/bbndk-env_10_3_1_995.sh &&\
+		cd /berrymuch/ports-golang/hello-world/  &&\
+		export HOME=/tmp &&\
+		strace -v -s 8192 -f -o /berrymuch/log go build -x  . && go install && file /tmp/go/bin/hello-world '
 
 hello-world:
 	uname | egrep -q Linux && ( cd ports-golang/$@ ; CGO_ENABLED=1 GOOS=android GOARCH=arm GOARM=7 strace -v -s 8192 -o log -f go build . ; ls -l log ) || exit 0
@@ -61,12 +70,12 @@ gosh: docker-image-golang
 	  -t -v "${PWD}":/berrymuch \
   	  -u 65534:65534 \
 	  -e HOME=/tmp \
-	  -e ANDROID_SYSROOT=/opt/android-ndk-r18b/toolchains/x86_64-4.9/prebuilt/linux-x86_64 \
    	  -e CGO_ENABLED=1 \
    	  -e GOOS=android \
    	  -e GOARCH=arm \
    	  -e GOARM=7 \
-	  -e PATH=/usr/bin:/usr/sbin:/bin:/sbin:/opt/go/bin:/opt/android-ndk-r18b/toolchains/x86_64-4.9/prebuilt/linux-x86_64/bin:/root/bbndk/host_10_3_1_12/linux/x86/usr/bin \
+   	  -e CGO_LDFLAGS=-llog \
+	  -e PATH=/usr/bin:/usr/sbin:/bin:/sbin:/opt/go/bin:/root/bbndk/host_10_3_1_12/linux/x86/usr/bin \
 	  -e CC=arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3 \
 	  android-4.3-ndk:golang /bin/bash -c '\
 		source /root/bbndk/bbndk-env_10_3_1_995.sh ; \
