@@ -3,8 +3,7 @@
 FROM i386/ubuntu:18.04
 COPY --from=yamsergey/bb10-ndk:0.6 /root/bbndk /root/bbndk
 RUN chown -R 65534:65534 /root
-RUN find /root -type f | xargs chmod 644
-RUN find /root -type d | xargs chmod 755
+RUN find /root | xargs chmod 755
 
 #RUN export DEBIAN_FRONTEND=noninteractive
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
