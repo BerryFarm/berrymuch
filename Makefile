@@ -5,8 +5,6 @@ DOCKER_OPT=--platform linux/amd64
 
 default: build-golang.hello-world
 
-#default: docker-image-golang
-
 build: docker-image
 	docker run $(DOCKER_OPT) -t \
 		-v "${PWD}":/berrymuch \
@@ -25,11 +23,9 @@ build-wip.%: docker-image
 		-u $(shell id -u):$(shell id -g) yamsergey/bb10-ndk:0.6.3 /bin/bash \
 		-c 'cd /berrymuch/ports-wip/$*; ./build.sh -b /root/bbndk'
 
-  	  #-u 65534:65534 
-
 build-golang.%: docker-image-golang
 	docker run -it $(DOCKER_OPT_GO) \
-	  -t -v "${PWD}":/berrymuch \
+	  -v "${PWD}":/berrymuch \
 	  -u $(shell id -u):$(shell id -g) \
 	  -e HOME=/tmp \
    	  -e CGO_ENABLED=1 \
@@ -61,14 +57,14 @@ hello-world: hello-world.docker
 shell: docker-image
 	docker run $(DOCKER_OPT) -it \
 	  -v "${PWD}":/berrymuch \
-  	  -u 65534:65534 \
+	  -u $(shell id -u):$(shell id -g) \
 	  -e PATH=/opt/go/bin:/usr/bin:/usr/sbin:/bin:/sbin:/root/bbndk/host_10_3_1_12/linux/x86/usr/bin \
 	  yamsergey/bb10-ndk:0.6.3 /bin/bash
 
 gosh: docker-image-golang
 	docker run -it $(DOCKER_OPT_GO) \
-	  -t -v "${PWD}":/berrymuch \
-  	  -u 65534:65534 \
+	  -v "${PWD}":/berrymuch \
+	  -u $(shell id -u):$(shell id -g) \
 	  -e HOME=/tmp \
    	  -e CGO_ENABLED=1 \
    	  -e GOOS=android \
@@ -92,8 +88,6 @@ docker-image-golang:
 	docker build $(DOCKER_OPT_GO) \
 		--build-arg WHOAMI=$(shell whoami) \
 		-f Dockerfile.golang -t android-4.3-ndk:golang .
-		#--build-arg UID=65534 \
-		#--build-arg GID=65534 \
 
 docker-image:
 	docker build $(DOCKER_OPT) \
