@@ -1,4 +1,8 @@
 
+
+go build: when using gc toolchain, please pass compile flags using -gcflags, and linker flags using -ldflags
+
+
 TODO ( work in progress )
 
 Build a Docker environment for golang cross compilation for arm

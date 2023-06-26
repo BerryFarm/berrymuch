@@ -5,6 +5,33 @@ DOCKER_OPT=--platform linux/amd64
 
 default: build-golang.hello-world
 
+golang-cross-m1:
+RUN wget https://dl.google.com/go/go1.17.13.linux-386.tar.gz
+
+RUN sudo mkdir /opt ;\
+    sudo tar -xvf go1.17.13.linux-386.tar.gz -C /opt ;\
+    rm go1.17.13.linux-386.tar.gz
+	
+build-golang-m1.%: golang-cross-m1
+	docker run -it $(DOCKER_OPT_GO) \
+	  -v "${PWD}":/berrymuch \
+	  -u $(shell id -u):$(shell id -g) \
+	  -e HOME=/tmp \
+   	  -e CGO_ENABLED=1 \
+   	  -e GOOS=android \
+   	  -e GOARCH=arm \
+   	  -e GOARM=7 \
+   	  -e CGO_LDFLAGS=-llog \
+   	  -e CGO_PATH=/root/bbndk/host_10_3_1_12/linux/x86/usr/bin \
+	  -e CC=arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3 \
+	  android-4.3-ndk:golang /bin/bash -c '\
+		source /root/bbndk/bbndk-env_10_3_1_995.sh && \
+	        export PATH=$$PATH:/root/bbndk/host_10_3_1_12/linux/x86/usr/bin:/opt/go/bin ; \
+		cd /berrymuch/ports-golang/hello-world  &&\
+		export HOME=/tmp ; echo $$PATH &&\
+		strace -v -s 8192 -f -o /berrymuch/log go build -x -n  . && go install && file /tmp/go/bin/hello-world '
+
+
 build: docker-image
 	docker run $(DOCKER_OPT) -t \
 		-v "${PWD}":/berrymuch \
