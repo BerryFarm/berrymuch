@@ -1,3 +1,5 @@
+https://go.dev/doc/contribute
+https://go.dev/doc/contribute#checkout_go
 
 
 go build: when using gc toolchain, please pass compile flags using -gcflags, and linker flags using -ldflags
