@@ -1,5 +1,6 @@
 
-#DOCKER_OPT_GO=--platform linux/amd64
+# note about golang binaries for Term4x : GOOS=android should not be set in this case
+
 DOCKER_OPT_GO=--platform linux/386
 DOCKER_OPT=--platform linux/amd64
 
@@ -53,32 +54,64 @@ build-wip.%: docker-image
 build-golang.%: docker-image-golang
 	docker run -it $(DOCKER_OPT_GO) \
 	  -v "${PWD}":/berrymuch \
+	  -v /tmp:/tmp \
 	  -u $(shell id -u):$(shell id -g) \
 	  -e HOME=/tmp \
    	  -e CGO_ENABLED=1 \
-   	  -e GOOS=android \
+   	  -e GOBIN=/berrymuch \
    	  -e GOARCH=arm \
    	  -e GOARM=7 \
    	  -e CGO_LDFLAGS=-llog \
+	  -e CGO_LDFLAGS_DISALLOW=-Wl,-pthread \
    	  -e CGO_PATH=/root/bbndk/host_10_3_1_12/linux/x86/usr/bin \
-	  -e CC=arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3 \
+	  -e CC=arm-unknown-nto-qnx8.0.0eabi-gcc-4.8.3 \
 	  android-4.3-ndk:golang /bin/bash -c '\
 		source /root/bbndk/bbndk-env_10_3_1_995.sh && \
+		export GO111MODULE=off ;\
 	        export PATH=$$PATH:/root/bbndk/host_10_3_1_12/linux/x86/usr/bin:/opt/go/bin ; \
 		cd /berrymuch/ports-golang/hello-world  &&\
-		export HOME=/tmp ; echo $$PATH &&\
-		strace -v -s 8192 -f -o /berrymuch/log go build -x -n  . && go install && file /tmp/go/bin/hello-world '
+		go build -compiler gc -v -work . && \
+		file $$GOBIN/ports-golang/hello-world/hello-world &&\
+		ls -l $$GOBIN/ports-golang/hello-world/hello-world \
+		'
+		#go build -linkshared -compiler gc -v -work .'
+
+		#go build -compiler gccgo -x -a -v -work .' # gccgo not installed
+		#go build -x -a -v -work .' 
 
 hello-world:
-	uname | egrep -q Linux && ( cd ports-golang/$@ ; CGO_ENABLED=1 GOOS=android GOARCH=arm GOARM=7 strace -v -s 8192 -o log -f go build . ; ls -l log ) || exit 0
+	uname | egrep -q Linux && ( \
+		cd ports-golang/$@ ; \
+		CGO_ENABLED=1 \
+		GOARCH=arm \
+		GOARM=7 \
+		CGO_LDFLAGS_DISALLOW=-Wl,-pthread \
+		strace -v -s 8192 -o log -f go build -work . 2>&1 | tee log.cgo ; ls -l log ) || exit 0
 
-	uname | egrep -q Darwin && ( cd ports-golang/$@ ; CGO_ENABLED=1 GOOS=android GOARCH=arm GOARM=7 go build . )
+	uname | egrep -q Darwin && ( cd ports-golang/$@ ; CGO_ENABLED=1 GOARCH=arm GOARM=7 go build . )
 hello-world.baremetal:
-	( cd ports-golang/$@ ; CGO_ENABLED=1 GOOS=android GOARCH=arm GOARM=7 strace -v -s 8192 -o log -f go build . ; ls -l log )
+	( cd ports-golang/$@ ; CGO_ENABLED=1 GOARCH=arm GOARM=7 strace -v -s 8192 -o log -f go build . ; ls -l log )
 
 hello-world.docker: build-golang.hello-world
 
-hello-world: hello-world.docker
+build: docker-image
+	docker run $(DOCKER_OPT) -t \
+		-v "${PWD}":/berrymuch \
+		-u $(shell id -u):$(shell id -g) yamsergey/bb10-ndk:0.6.3 /bin/bash \
+		-c 'cd /berrymuch; ./build.sh -b /root/bbndk'
+
+build.%: docker-image
+	docker run $(DOCKER_OPT) -t \
+		-v "${PWD}":/berrymuch \
+		-u $(shell id -u):$(shell id -g) yamsergey/bb10-ndk:0.6.3 /bin/bash \
+		-c 'cd /berrymuch/ports/$*; ./build.sh -b /root/bbndk'
+
+build-wip.%: docker-image
+	docker run $(DOCKER_OPT) -t \
+		-v "${PWD}":/berrymuch \
+		-u $(shell id -u):$(shell id -g) yamsergey/bb10-ndk:0.6.3 /bin/bash \
+		-c 'cd /berrymuch/ports-wip/$*; ./build.sh -b /root/bbndk'
+
 
 shell: docker-image
 	docker run $(DOCKER_OPT) -it \

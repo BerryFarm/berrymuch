@@ -7,7 +7,28 @@ go build: when using gc toolchain, please pass compile flags using -gcflags, and
 
 TODO ( work in progress )
 
-Build a Docker environment for golang cross compilation for arm
+Build a Docker environment for golang cross compilation for GOOS/GOARCH qnx/arm GOARM=7
+
+What about QNX golang support ?
+https://groups.google.com/g/golang-nuts/c/1gIqyz1fGJo
+
+Konstantin Khomoutov
+2 Dec 2016, 16:56:15
+to Yuriy Yarosh, golang-nuts
+There exists a document describing a policy of porting Go to a new
+platform [1]. If you're OK with the requirement, you can bring this
+question on the golang-dev mailing list.
+
+1. https://github.com/golang/go/wiki/PortingPolicy
+
+
+QNX Neutrino OS Guides > System Architecture > Dynamic Linking
+How shared objects are used
+To understand how a program makes use of shared objects, let's first see the format of an executable and then examine the steps that occur when the program starts.
+
+ELF format
+
+http://www.qnx.com/developers/docs/qnxcar2/index.jsp?topic=%2Fcom.qnx.doc.neutrino.sys_arch%2Ftopic%2Fdll_HOWUSED.html
 
 ###
 

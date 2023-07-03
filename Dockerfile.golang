@@ -35,13 +35,22 @@ RUN apt-get -q update ;\
     zlib1g-dev \
     file \
     make \
-    strace
+    strace \
+    vim \
+    rsync
 
-RUN wget https://dl.google.com/go/go1.17.13.linux-386.tar.gz
+RUN wget https://dl.google.com/go/go1.20.4.linux-386.tar.gz
 
 RUN sudo mkdir /opt ;\
-    sudo tar -xvf go1.17.13.linux-386.tar.gz -C /opt ;\
-    rm go1.17.13.linux-386.tar.gz
+    sudo tar -xvf go1.20.4.linux-386.tar.gz -C /opt ;\
+    rm go1.20.4.linux-386.tar.gz
 
-#RUN strace -v -s 8192 -f go install golang.org/x/mobile/cmd/gomobile@latest 2>&1 | tee -a /tmp/detect
-RUN go install golang.org/x/mobile/cmd/gomobile@latest 2>&1 | tee -a /tmp/detect
+#Gomobile is a tool for building and running mobile apps written in Go. (Android, iOS)
+#RUN GO111MODULE=off go install golang.org/x/mobile/cmd/gomobile@latest
+
+
+RUN mv /root/bbndk/host_10_3_1_12/linux/x86/usr/bin/arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3 /root/bbndk/host_10_3_1_12/linux/x86/usr/bin/arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3.orig
+
+RUN echo IyEvYmluL3NoCgpBUkdTPSQoZWNobyAkKiB8IHRyICcgJyAnXG4nIHwgZWdyZXAgLXYgIlwtcHRocmVhZCIgfCB0ciAnXG4nICcgJykKc2V0IC14Ci9yb290L2JibmRrL2hvc3RfMTBfM18xXzEyL2xpbnV4L3g4Ni91c3IvYmluL2FybS11bmtub3duLW50by1xbng4LjAuMGVhYmktZ2NjLTQuNi4zLm9yaWcgJEFSR1MKc2V0ICt4Cg== | base64 -d > /root/bbndk/host_10_3_1_12/linux/x86/usr/bin/arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3
+
+RUN chmod a+x /root/bbndk/host_10_3_1_12/linux/x86/usr/bin/arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3
