@@ -8,7 +8,7 @@
 
 set -e
 source ../../lib.sh
-DISTVER="readline-8.0"
+DISTVER="readline-8.1"
 DISTSUFFIX="tar.gz"
 TASK=fetch
 
