@@ -8,12 +8,12 @@
 
 set -e
 source ../../lib.sh
-DISTVER="gettext-0.18.1.1"
-DISTSUFFIX="tar.gz"
+DISTVER="gettext-0.21.1"
+DISTSUFFIX="tar.xz"
 TASK=fetch
 
 DISTFILES="http://ftp.gnu.org/gnu/gettext/$DISTVER.$DISTSUFFIX"
-UNPACKCOMD="tar -xzf"
+UNPACKCOMD="tar -xJf"
 
 package_init "$@"
 CONFIGURE_CMD="./configure 
