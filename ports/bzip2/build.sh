@@ -8,7 +8,7 @@
 
 set -e
 source ../../lib.sh
-DISTVER="bzip2-1.0.6"
+DISTVER="bzip2-1.0.8"
 DISTSUFFIX="tar.gz"
 TASK=fetch
 
