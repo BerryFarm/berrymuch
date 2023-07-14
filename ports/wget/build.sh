@@ -9,7 +9,7 @@
 set -e
 source ../../lib.sh
 
-DISTVER="wget-1.20.3"
+DISTVER="wget-1.21.4"
 DISTSUFFIX="tar.lz"
 TASK=fetch
 
