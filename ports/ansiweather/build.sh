@@ -8,7 +8,7 @@
 set -e
 source ../../lib.sh
 
-VER="1.15.0"
+VER="1.19.0"
 DISTVER="ansiweather-$VER"
 DISTSUFFIX="tar.gz"
 
