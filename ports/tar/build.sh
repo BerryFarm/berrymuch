@@ -8,7 +8,7 @@
 
 set -e
 source ../../lib.sh
-DISTVER="tar-1.32"
+DISTVER="tar-1.34"
 DISTSUFFIX="tar.gz"  # so much for bootstrapping..
 TASK=fetch
 
