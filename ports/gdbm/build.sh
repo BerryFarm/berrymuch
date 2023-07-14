@@ -8,7 +8,7 @@
 
 set -e
 source ../../lib.sh
-DISTVER="gdbm-1.9.1"
+DISTVER="gdbm-1.23"
 DISTSUFFIX="tar.gz"
 TASK=fetch
 
