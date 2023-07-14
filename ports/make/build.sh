@@ -8,7 +8,7 @@
 
 set -e
 source ../../lib.sh
-DISTVER="make-3.82"
+DISTVER="make-4.2.1"
 DISTSUFFIX="tar.bz2"
 TASK=fetch
 
