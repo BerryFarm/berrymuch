@@ -7,7 +7,7 @@
 
 set -e
 source ../../lib.sh
-DISTVER="m4-1.4.18"
+DISTVER="m4-1.4.19"
 DISTSUFFIX="tar.gz"
 TASK=fetch
 
