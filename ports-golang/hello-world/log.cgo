@@ -1,0 +1,46 @@
+WORK=/tmp/go-build3964022538
+# runtime/cgo
++ /root/bbndk/host_10_3_1_12/linux/x86/usr/bin/arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3.orig -I /opt/go/src/runtime/cgo -fPIC -marm -fmessage-length=0 -I $WORK/b043/ -O2 -g -Wall -Werror -fno-stack-protector -o $WORK/b043/_x001.o -c _cgo_export.c
++ set +x
+# runtime/cgo
++ /root/bbndk/host_10_3_1_12/linux/x86/usr/bin/arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3.orig -I /opt/go/src/runtime/cgo -fPIC -marm -fmessage-length=0 -I $WORK/b043/ -O2 -g -Wall -Werror -fno-stack-protector -o $WORK/b043/_x002.o -c cgo.cgo2.c
++ set +x
+# runtime/cgo
++ /root/bbndk/host_10_3_1_12/linux/x86/usr/bin/arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3.orig -I /opt/go/src/runtime/cgo -fPIC -marm -fmessage-length=0 -I $WORK/b043/ -O2 -g -Wall -Werror -fno-stack-protector -o $WORK/b043/_x003.o -c gcc_android.c
+gcc_android.c:6:25: fatal error: android/log.h: No such file or directory
+compilation terminated.
++ set +x
+# runtime/cgo
++ /root/bbndk/host_10_3_1_12/linux/x86/usr/bin/arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3.orig -I /opt/go/src/runtime/cgo -fPIC -marm -fmessage-length=0 -I $WORK/b043/ -O2 -g -Wall -Werror -fno-stack-protector -o $WORK/b043/_x004.o -c gcc_context.c
++ set +x
+# runtime/cgo
++ /root/bbndk/host_10_3_1_12/linux/x86/usr/bin/arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3.orig -I /opt/go/src/runtime/cgo -fPIC -marm -fmessage-length=0 -I $WORK/b043/ -O2 -g -Wall -Werror -fno-stack-protector -o $WORK/b043/_x005.o -c gcc_libinit.c
++ set +x
+# runtime/cgo
++ /root/bbndk/host_10_3_1_12/linux/x86/usr/bin/arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3.orig -I /opt/go/src/runtime/cgo -fPIC -marm -fmessage-length=0 -I $WORK/b043/ -O2 -g -Wall -Werror -fno-stack-protector -o $WORK/b043/_x006.o -c gcc_linux_arm.c
++ set +x
+# runtime/cgo
++ /root/bbndk/host_10_3_1_12/linux/x86/usr/bin/arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3.orig -I /opt/go/src/runtime/cgo -fPIC -marm -fmessage-length=0 -I $WORK/b043/ -O2 -g -Wall -Werror -fno-stack-protector -o $WORK/b043/_x007.o -c gcc_setenv.c
++ set +x
+# runtime/cgo
++ /root/bbndk/host_10_3_1_12/linux/x86/usr/bin/arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3.orig -I /opt/go/src/runtime/cgo -fPIC -marm -fmessage-length=0 -I $WORK/b043/ -O2 -g -Wall -Werror -fno-stack-protector -o $WORK/b043/_x008.o -c gcc_traceback.c
++ set +x
+# runtime/cgo
++ /root/bbndk/host_10_3_1_12/linux/x86/usr/bin/arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3.orig -I /opt/go/src/runtime/cgo -fPIC -marm -fmessage-length=0 -I $WORK/b043/ -O2 -g -Wall -Werror -fno-stack-protector -o $WORK/b043/_x009.o -c gcc_util.c
++ set +x
+# runtime/cgo
++ /root/bbndk/host_10_3_1_12/linux/x86/usr/bin/arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3.orig -I /opt/go/src/runtime/cgo -fPIC -marm -fmessage-length=0 -I $WORK/b043/ -O2 -g -Wall -Werror -fno-stack-protector -o $WORK/b043/_x010.o -c linux_syscall.c
+linux_syscall.c: In function '_cgo_libc_setresgid':
+linux_syscall.c:67:2: error: implicit declaration of function 'setresgid' [-Werror=implicit-function-declaration]
+linux_syscall.c: In function '_cgo_libc_setresuid':
+linux_syscall.c:73:2: error: implicit declaration of function 'setresuid' [-Werror=implicit-function-declaration]
+cc1: all warnings being treated as errors
++ set +x
+# runtime/cgo
++ /root/bbndk/host_10_3_1_12/linux/x86/usr/bin/arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3.orig -I /opt/go/src/runtime/cgo -fPIC -marm -fmessage-length=0 -I $WORK/b043/ -O2 -g -Wall -Werror -fno-stack-protector -o $WORK/b043/_x011.o -c gcc_arm.S
++ set +x
+# runtime/cgo
++ /root/bbndk/host_10_3_1_12/linux/x86/usr/bin/arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3.orig -I /opt/go/src/runtime/cgo -fPIC -marm -fmessage-length=0 -I $WORK/b043/ -O2 -g -Wall -Werror -fno-stack-protector -o $WORK/b043/_cgo_main.o -c _cgo_main.c
++ set +x
+# runtime/cgo
+cgo: cannot parse $WORK/b043/_cgo_.o as ELF, Mach-O, PE or XCOFF

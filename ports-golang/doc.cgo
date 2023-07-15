@@ -1,0 +1,14 @@
+
+#cgo darwin,!arm64 LDFLAGS: -lpthread
+#cgo darwin,arm64 LDFLAGS: -framework CoreFoundation
+#cgo dragonfly LDFLAGS: -lpthread
+#cgo freebsd LDFLAGS: -lpthread
+#cgo android LDFLAGS: -llog
+#cgo !android,linux LDFLAGS: -lpthread
+#cgo netbsd LDFLAGS: -lpthread
+#cgo openbsd LDFLAGS: -lpthread
+#cgo aix LDFLAGS: -Wl,-berok
+#cgo solaris LDFLAGS: -lxnet
+#cgo darwin CFLAGS: -Wno-nullability-completeness
+#cgo CFLAGS: -Wall -Werror
+#cgo solaris CPPFLAGS: -D_POSIX_PTHREAD_SEMANTICS\n\n*/\nimport \"C\"\n", 3276
