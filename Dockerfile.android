@@ -59,3 +59,10 @@ RUN sudo mkdir /opt ;\
 # https://github.com/leleliu008/ndk-pkg, a package manager for Android NDK to build projects that are written in C/C++/Rust/Golang.
 #https://stuff.mit.edu/afs/sipb/project/android/docs/tools/sdk/tools-notes.html
 
+
+ADD ./arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3-wrapper /tmp 
+# no -pthread option temporary workaround for arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3
+RUN cd /root/bbndk/host_10_3_1_12/linux/x86/usr/bin/; \
+mv arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3 arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3.orig ; \
+mv /tmp/arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3-wrapper arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3 ; \
+chmod a+x arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3
