@@ -9,7 +9,7 @@
 set -e
 source ../../lib.sh
 
-DISTVER="tig-2.5.0"
+DISTVER="tig-2.5.8"
 DISTSUFFIX="tar.gz"
 
 TASK=fetch
