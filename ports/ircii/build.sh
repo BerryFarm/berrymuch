@@ -9,12 +9,12 @@
 set -e
 source ../../lib.sh
 
-DISTVER="ircii-20190117"
-DISTSUFFIX="tar.gz"
+DISTVER="ircii-20210314"
+DISTSUFFIX="tar.bz2"
 TASK=fetch
 
 DISTFILES="http://ircii.warped.com/$DISTVER.$DISTSUFFIX"
-UNPACKCOMD="tar -zxf"
+UNPACKCOMD="tar -jxf"
 
 package_init "$@"
 
