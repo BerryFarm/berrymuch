@@ -1,3 +1,12 @@
+
+***********************************
+Compile seafile needs Vala compiler
+
+The Vala compiler produces C code. So you will also need a C compiler to produce the executable binary of the program. The binary runs on the native platform, although cross-compiling for other platforms is possible.
+
+
+***********************************
+
 To have the build.sh script running on Darwin 15.6.0
 aclocal installed from brew, I had to follow the below instructions
 
