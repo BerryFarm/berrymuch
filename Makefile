@@ -48,17 +48,21 @@ build-android-m1.%: android-cross-m1
 		export HOME=/tmp ; echo $$PATH &&\
 		strace -v -s 8192 -f -o /berrymuch/log go build -x -n  . && go install && file /tmp/go/bin/hello-world '
 
+# cgo: C compiler "arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3" not found: exec: "arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3": executable file not found in $PATH
+# make: *** [Makefile:52: build-android.syncthing] Error 2
+
 build-android.%: docker-image.android
 	docker run -it $(DOCKER_OPT_GO) \
 	  -v "${PWD}":/berrymuch \
-	  -u $(shell id -u):$(shell id -g) \
 	  -e HOME=/tmp \
    	  -e CGO_ENABLED=1 \
    	  -e GOOS=android \
    	  -e GOARCH=arm \
    	  -e GOARM=7 \
+	  -u $(shell id -u):$(shell id -g) \
    	  -e CGO_LDFLAGS=-llog \
    	  -e CGO_PATH=/root/bbndk/host_10_3_1_12/linux/x86/usr/bin \
+	  -e PATH=/usr/bin:/usr/sbin:/bin:/sbin:/opt/go/bin:/root/bbndk/host_10_3_1_12/linux/x86/usr/bin \
 	  -e CC=arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3 \
 	  android-4.3-ndk:0.1 /bin/bash -c '\
 		source /root/bbndk/bbndk-env_10_3_1_995.sh && \
@@ -66,6 +70,26 @@ build-android.%: docker-image.android
 		cd /berrymuch/ports-android/$* &&\
 		export HOME=/tmp ; echo $$PATH &&\
 		strace -v -s 8192 -f -o /berrymuch/log go build -x -n  . && go install && file /tmp/go/bin/hello-world '
+
+gosh: docker-image.android
+	docker run -it $(DOCKER_OPT_GO) \
+	  -v "${PWD}":/berrymuch \
+	  -e HOME=/tmp \
+   	  -e CGO_ENABLED=1 \
+   	  -e GOOS=android \
+   	  -e GOARCH=arm \
+   	  -e GOARM=7 \
+	  #-u $(shell id -u):$(shell id -g) \
+   	  -e CGO_LDFLAGS=-llog \
+   	  -e CGO_PATH=/root/bbndk/host_10_3_1_12/linux/x86/usr/bin \
+	  -e PATH=/usr/bin:/usr/sbin:/bin:/sbin:/opt/go/bin:/root/bbndk/host_10_3_1_12/linux/x86/usr/bin \
+	  -e CC=arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3 \
+	  android-4.3-ndk:android /bin/bash -c '\
+	  	export PATH=$$PATH:/root/bbndk/host_10_3_1_12/linux/x86/usr/bin ; \
+	  	export PATH=$$PATH:/opt/go/bin ; \
+		source /root/bbndk/bbndk-env_10_3_1_995.sh ; \
+		bash \
+ 	   '
 
 
 build: docker-image
@@ -94,23 +118,6 @@ syncthing:
 hello-world.baremetal:
 	( cd ports-golang/$@ ; CGO_ENABLED=1 GOOS=android GOARCH=arm GOARM=7 strace -v -s 8192 -o log -f go build . ; ls -l log )
 
-gosh: docker-image.android
-	docker run -it $(DOCKER_OPT_GO) \
-	  -v "${PWD}":/berrymuch \
-	  -e HOME=/tmp \
-   	  -e CGO_ENABLED=1 \
-   	  -e GOOS=android \
-   	  -e GOARCH=arm \
-   	  -e GOARM=7 \
-   	  -e CGO_LDFLAGS=-llog \
-	  -e PATH=/usr/bin:/usr/sbin:/bin:/sbin:/opt/go/bin:/root/bbndk/host_10_3_1_12/linux/x86/usr/bin \
-	  -e CC=arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3 \
-	  android-4.3-ndk:android /bin/bash -c '\
-	  	export PATH=$$PATH:/root/bbndk/host_10_3_1_12/linux/x86/usr/bin ; \
-	  	export PATH=$$PATH:/opt/go/bin ; \
-		source /root/bbndk/bbndk-env_10_3_1_995.sh ; \
-		bash \
- 	   '
 
 gosh.root: docker-image.golang
 	docker run $(DOCKER_OPT_GO) -it \
