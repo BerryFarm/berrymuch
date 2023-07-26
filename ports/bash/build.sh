@@ -8,8 +8,10 @@
 
 set -e
 source ../../lib.sh
-DISTVER="bash-5.0"
+DISTVER="bash-5.2.15"
 DISTSUFFIX="tar.gz"
+
+# we must have build readline first
 
 TASK=fetch
 
@@ -25,7 +27,7 @@ CONFIGURE_CMD="autoconf; ./configure
                 CC=$PBTARGETARCH-gcc 
                 "
 package_fetch
-package_patch
+package_patch 1
 package_build
 package_install
 package_bundle

@@ -1,11 +1,13 @@
---- configure.ac.orig	2019-11-28 23:27:19.000000000 +0100
-+++ configure.ac	2019-11-28 23:30:33.000000000 +0100
-@@ -1113,7 +1113,7 @@
- 		*)	AC_DEFINE(PGRP_PIPE) ;;
- 		esac ;;
+diff --git a/configure.ac b/configure.ac
+index 50a6e20..ff61d03 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -1178,7 +1178,7 @@ linux*)		LOCAL_LDFLAGS=-rdynamic		 # allow dynamic loading
  netbsd*|openbsd*)	LOCAL_CFLAGS="-DDEV_FD_STAT_BROKEN" ;;
--*qnx[[67]]*)	LOCAL_LIBS="-lncurses" ;;
-+*qnx[[678]]*)	LOCAL_LIBS="-lncurses" ;;
- *qnx*)		LOCAL_CFLAGS="-Dqnx -F -3s" LOCAL_LDFLAGS="-3s" LOCAL_LIBS="-lunix -lncurses" ;;
+ freebsd*|midnightbsd*)	LOCAL_CFLAGS='-DHEREDOC_PIPESIZE=4096' ;;
+ *qnx[[67]]*)	LOCAL_LIBS="-lncurses" ;;
+-*qnx*)		LOCAL_CFLAGS="-Dqnx -F -3s" LOCAL_LDFLAGS="-3s" LOCAL_LIBS="-lunix -lncurses" ;;
++*qnx*)		LOCAL_CFLAGS="-Dqnx -F" LOCAL_LDFLAGS="" LOCAL_LIBS="-lunix -lncurses" ;;
  powerux*)	LOCAL_LIBS="-lgen" ;;
  cygwin*)	LOCAL_CFLAGS=-DRECYCLES_PIDS ;;
+ opennt*|interix*) LOCAL_CFLAGS="-DNO_MAIN_ENV_ARG -DBROKEN_DIRENT_D_INO -D_POSIX_SOURCE -D_ALL_SOURCE -DRECYCLES_PIDS" ;;
