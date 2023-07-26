@@ -10,7 +10,6 @@ echo AuthorizedKeysFile	.ssh/authorized_keys > $HOME/.ssh/sshd_config
 echo HostKey ~/.ssh/ssh_host_rsa_key         >> ~/.ssh/sshd_config
 echo HostKey ~/.ssh/ssh_host_ecdsa_key       >> ~/.ssh/sshd_config
 echo HostKey ~/.ssh/ssh_host_ed25519_key     >> ~/.ssh/sshd_config
-HostKey ~/.ssh/ssh_host_ed25519_key          >> ~/.ssh/sshd_config
 ```
 
 Now you may launch the ssh daemon
