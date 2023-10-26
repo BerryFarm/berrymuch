@@ -53,3 +53,6 @@ mv /tmp/arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3-wrapper /root/bbndk/host_10_3_1_1
 chmod a+x /root/bbndk/host_10_3_1_12/linux/x86/usr/bin/arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3
 
 RUN chmod 755 /root
+RUN /opt/go/bin/go install golang.org/x/mobile/cmd/gomobile@latest
+
+RUN apt-get install -y libegl1-mesa-dev libgles2-mesa-dev libx11-dev
