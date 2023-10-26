@@ -1,0 +1,6 @@
+#!/bin/sh
+CMD="$0".orig
+ARGS=$(echo "$*" | sed 's/ /\\ /g' | grep -Ev "\-pthread" | tr "\n" " ")
+set -x
+$CMD $ARGS
+set +x

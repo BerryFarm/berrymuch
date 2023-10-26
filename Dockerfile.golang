@@ -47,15 +47,13 @@ RUN sudo mkdir /opt ;\
 #RUN strace -v -s 8192 -f go install golang.org/x/mobile/cmd/gomobile@latest 2>&1 | tee -a /tmp/detect
 RUN go install golang.org/x/mobile/cmd/gomobile@latest 2>&1 | tee -a /tmp/detect
 
+
+ADD arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3-wrapper /tmp
+
 # no -pthread option temporary workaround for arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3
 RUN cd /root/bbndk/host_10_3_1_12/linux/x86/usr/bin/; \
-mv arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3 arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3.orig ; \
-mv /root/bbndk/host_10_3_1_12/linux/x86/usr/bin/arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3 ; \
-echo '\
-#!/bin/sh \
-CMD=$0.orig \
-ARGS=$(echo $* | tr " " "\" | egrep -v "\-pthread" | tr "\n" " ") \
-set -x \
-$CMD $ARGS \
-set +x \
-' > arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3 ; chmod a+x arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3 
+cp arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3 arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3.orig ; \
+mv /tmp/arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3-wrapper /root/bbndk/host_10_3_1_12/linux/x86/usr/bin/arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3 ;\
+chmod a+x /root/bbndk/host_10_3_1_12/linux/x86/usr/bin/arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3
+
+RUN chmod 755 /root
