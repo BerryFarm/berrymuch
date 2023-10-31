@@ -21,3 +21,7 @@ Might be usefull tools
 
 https://stuff.mit.edu/afs/sipb/project/android/docs/tools/sdk/tools-notes.html
 
+
+# "ARM EABI v7a System Image API 18 (revision 5)"
+# https://dl.google.com/android/repository/sys-img/android/armeabi-v7a-18_r05.zip
+
