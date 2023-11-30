@@ -95,14 +95,6 @@ build-wip.%: docker-image
 		-c 'cd /berrymuch/ports-wip/$*; ./build.sh -b /root/bbndk'
 
 
-syncthing:
-	uname | egrep -q Linux && ( cd ports-android/$@ ; CGO_ENABLED=1 GOOS=android GOARCH=arm GOARM=7 strace -v -s 8192 -o log -f go build . ; ls -l log ) || exit 0
-
-	uname | egrep -q Darwin && ( cd ports-android/$@ ; CGO_ENABLED=1 GOOS=android GOARCH=arm GOARM=7 go build . )
-hello-world.baremetal:
-	( cd ports-golang/$@ ; CGO_ENABLED=1 GOOS=android GOARCH=arm GOARM=7 strace -v -s 8192 -o log -f go build . ; ls -l log )
-
-
 gosh.root: docker-image.gomobile
 	docker run $(DOCKER_OPT_GO) -it \
 	  -v "$(CURDIR)":/berrymuch \
