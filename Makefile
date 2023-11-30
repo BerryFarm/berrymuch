@@ -1,17 +1,17 @@
 
 #DOCKER_OPT_GO=--platform linux/amd64
-DOCKER_OPT_GO=--platform linux/386
+DOCKER_OPT_ANDROID=--platform linux/386
 DOCKER_OPT=--platform linux/amd64
 
-default: build-android.syncthing
+default: build-gomobile.syncthing
 
 docker-image.%:
-	docker build $(DOCKER_OPT_GO) \
+	docker build $(DOCKER_OPT_ANDROID) \
 		--build-arg WHOAMI=$(shell whoami) \
 		-f Dockerfile.$* -t android-4.3-ndk:$* .
 
-build-android.%: docker-image.gomobile
-	docker run -it $(DOCKER_OPT_GO) \
+build-gomobile.%: docker-image.gomobile
+	docker run -it $(DOCKER_OPT_ANDROID) \
 	  -v "${PWD}":/berrymuch \
 	  -e HOME=/tmp \
    	  -e CGO_ENABLED=1 \
@@ -26,12 +26,36 @@ build-android.%: docker-image.gomobile
 	  android-4.3-ndk:gomobile /bin/bash -c '\
 		source /root/bbndk/bbndk-env_10_3_1_995.sh && \
 	        export PATH=$$PATH:/root/bbndk/host_10_3_1_12/linux/x86/usr/bin:/opt/go/bin:/root/go/bin ; \
-		cd /berrymuch/ports-android/$* &&\
+		cd /berrymuch/ports-gomobile/$* &&\
 		export HOME=/tmp ; echo $$PATH &&\
 		gomobile init ; go build -x -n  . && go install && file /tmp/go/bin/hello-world '
-		#strace -v -s 8192 -f -o /berrymuch/log go build -x -n  . && go install && file /tmp/go/bin/hello-world '
 
-gosh: docker-image.android
+build-android-wip.%: docker-image.android
+	docker run -it $(DOCKER_OPT_ANDROID) \
+	  -v "${PWD}":/berrymuch \
+	  -e HOME=/tmp \
+	  -e PATH=/usr/bin:/usr/sbin:/bin:/sbin:/root/bbndk/host_10_3_1_12/linux/x86/usr/bin \
+	  -e CC=arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3 \
+	  android-4.3-ndk:android /bin/bash -c '\
+		source /root/bbndk/bbndk-env_10_3_1_995.sh && \
+	        export PATH=$$PATH:/root/bbndk/host_10_3_1_12/linux/x86/usr/bin ; \
+		cd /berrymuch/ports-android-wip/$* &&\
+		export HOME=/tmp ; echo $$PATH &&\
+		./build.sh '
+
+
+droidsh: docker-image.gomobile
+	docker run -it $(DOCKER_OPT_ANDROID) \
+          -v "${PWD}":/berrymuch \
+          -e HOME=/tmp \
+          -e PATH=/usr/bin:/usr/sbin:/bin:/sbin:/opt/go/bin:/root/bbndk/host_10_3_1_12/linux/x86/usr/bin \
+          -e CC=arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3 \
+         android-4.3-ndk:android \
+		/bin/bash 
+
+         #-u $(shell id -u):$(shell id -g) \
+
+gosh: docker-image.gomobile
 	docker run -it $(DOCKER_OPT_GO) \
 	  -v "${PWD}":/berrymuch \
 	  -e HOME=/tmp \
@@ -46,7 +70,7 @@ gosh: docker-image.android
 	  -e CC=arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3 \
 	  android-4.3-ndk:android "/bin/bash \
 	  	export PATH=$$PATH:/root/bbndk/host_10_3_1_12/linux/x86/usr/bin ; \
-	  	export PATH=$$PATH:/opt/go/bin ; \
+	  	export PATH=$$PATH:/opt/go/bin:/root/go/bin ; \
 		source /root/bbndk/bbndk-env_10_3_1_995.sh ; \
 		bash \
  	   '

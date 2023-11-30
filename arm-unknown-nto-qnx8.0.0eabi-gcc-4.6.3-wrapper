@@ -1,6 +1,36 @@
 #!/bin/sh
+LD_LIBRARY_PATH=/root/bbndk/host_10_3_1_12/linux/x86/usr/lib:/root/bbndk/target_10_3_1_995/qnx6/../linux/x86/usr/lib/qt4/lib:
+
+CPUVARDIR=armle-v7
+
+QDE=/root/bbndk
+QML2_IMPORT_PATH=/root/bbndk/target_10_3_1_995/qnx6/../linux/x86/usr/lib/qt5/qml
+QT_LIB_PATH=/root/bbndk/target_10_3_1_995/qnx6/../linux/x86/usr/lib/qt5/lib
+QT_PLUGIN_PATH=/root/bbndk/target_10_3_1_995/qnx6/../linux/x86/usr/lib/qt5/plugins
+PATH=/root/bbndk/host_10_3_1_12/linux/x86/usr/bin:/root/.rim/bbndk/bin:/root/bbndk/features/com.qnx.tools.jre.linux_1.7.0.51/jre/bin:/root/bbndk/host_10_3_1_12/linux/x86/usr/python32/bin:/opt/go/bin:/usr/bin:/usr/sbin:/bin:/sbin:/root/bbndk/host_10_3_1_12/linux/x86/usr/bin
+MAKEFLAGS=-I/root/bbndk/target_10_3_1_995/qnx6/usr/include
+
+QNX_HOST=/root/bbndk/host_10_3_1_12/linux/x86
+QNX_TARGET=/root/bbndk/target_10_3_1_995/qnx6
+QNX_CONFIGURATION=/root/.rim/bbndk
 CMD="$0".orig
-ARGS=$(echo "$*" | sed 's/ /\\ /g' | grep -Ev "\-pthread" | tr "\n" " ")
+ARGS=$(echo $* | sed 's/-pthread//g' )
+
+export CGO_ENABLED=1
+export GOOS=android
+export GOARCH=arm
+export GOARM=7 
+export CGO_LDFLAGS="-llog -lc"
+export CGO_PATH=/root/bbndk/host_10_3_1_12/linux/x86/usr/bin
+
+
+# fixme should be consumed at "gomobile init"
+#export CFLAGS=-I/Android/ndk/android-ndk-r18b/sysroot/usr/include/android/log.h
+export CFLAGS="$CFLAGS -I/Android/ndk/android-ndk-r18b/sysroot/usr/include"
+export CFLAGS="$CFLAGS -I/Android/ndk/android-ndk-r18b/sysroot/usr/include/arm-linux-androideabi"
+
+
 set -x
-$CMD $ARGS
+echo $WORK
+$CMD $ARGS $CFLAGS
 set +x

@@ -6,7 +6,6 @@ COPY --from=yam \
      --chown=65534:65534 \
      /root/bbndk /root/bbndk
 
-#RUN export DEBIAN_FRONTEND=noninteractive
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 
 RUN apt-get -q update ;\
@@ -38,14 +37,13 @@ RUN apt-get -q update ;\
     make \
     strace
 
-RUN wget https://dl.google.com/go/go1.17.13.linux-386.tar.gz
 
-RUN sudo mkdir /opt ;\
-    sudo tar -xvf go1.17.13.linux-386.tar.gz -C /opt ;\
-    rm go1.17.13.linux-386.tar.gz
-
-#RUN strace -v -s 8192 -f go install golang.org/x/mobile/cmd/gomobile@latest 2>&1 | tee -a /tmp/detect
-#RUN go install golang.org/x/mobile/cmd/gomobile@latest 2>&1 | tee -a /tmp/detect
+ADD ./arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3-wrapper /tmp 
+# no -pthread option temporary workaround for arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3
+RUN cd /root/bbndk/host_10_3_1_12/linux/x86/usr/bin/; \
+mv arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3 arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3.orig ; \
+mv /tmp/arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3-wrapper arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3 ; \
+chmod a+x arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3
 
 #RUN cd /tmp; wget https://dl.google.com/android/repository/platform-tools_r18-linux.zip; cd /opt; unzip /tmp/platform-tools*zip
 
@@ -59,10 +57,3 @@ RUN sudo mkdir /opt ;\
 # https://github.com/leleliu008/ndk-pkg, a package manager for Android NDK to build projects that are written in C/C++/Rust/Golang.
 #https://stuff.mit.edu/afs/sipb/project/android/docs/tools/sdk/tools-notes.html
 
-
-ADD ./arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3-wrapper /tmp 
-# no -pthread option temporary workaround for arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3
-RUN cd /root/bbndk/host_10_3_1_12/linux/x86/usr/bin/; \
-mv arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3 arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3.orig ; \
-mv /tmp/arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3-wrapper arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3 ; \
-chmod a+x arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3

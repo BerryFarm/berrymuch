@@ -44,6 +44,53 @@ RUN sudo mkdir /opt ;\
     sudo tar -xvf go1.18.1.linux-386.tar.gz -C /opt ;\
     rm go1.18.1.linux-386.tar.gz
 
+
+RUN chmod 755 /root
+
+ENV PATH /bin:/usr/bin:/sbin:/usr/sbin:/opt/go/bin:/root/go/bin
+
+RUN go install golang.org/x/mobile/cmd/gomobile@latest
+
+RUN apt-get install -y libegl1-mesa-dev libgles2-mesa-dev libx11-dev
+
+RUN apt-get install -y vim
+
+#Android SDK Platform 18 (revision 3)
+RUN mkdir -p /Android/sdk/platforms/android-4.3.1
+WORKDIR /Android/sdk/platforms
+RUN wget https://dl.google.com/android/repository/android-18_r03.zip
+RUN unzip android-18_r03.zip
+
+# Install Sources for Android 18 (revision 1) to android-18/src
+RUN mkdir -p /Android/sdk/sources
+WORKDIR /Android/sdk/sources/
+RUN wget https://dl.google.com/android/repository/sources-18_r01.zip
+RUN unzip sources-18_r01.zip
+RUN mv src android-18
+
+# to ndk/android-ndk-r18b
+RUN mkdir -p /Android/ndk
+WORKDIR /Android/ndk
+RUN wget https://dl.google.com/android/repository/android-ndk-r18b-linux-x86_64.zip
+RUN unzip android-ndk-r18b-linux-x86_64.zip
+
+
+RUN mkdir /app
+WORKDIR /berrymuch/ports-gomobile/ex-network
+RUN gomobile init
+
+
+#/Android/ndk/android-ndk-r18b/sysroot/usr/include/android/log.h
+
+#root@4bb07fa58a14:/Android/ndk#  /root/go/bin/gomobile  init -ndk /Android/ndk/android-ndk-r18b
+#flag provided but not defined: -ndk
+#usage: /root/go/bin/gomobile init [-openal dir]
+#
+#If a OpenAL source directory is specified with -openal, init will
+#build an Android version of OpenAL for use with gomobile build
+#and gomobile install.
+#root@4bb07fa58a14:/Android/ndk#
+
 ADD arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3-wrapper /tmp
 
 # no -pthread option temporary workaround for arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3
@@ -51,8 +98,3 @@ RUN cd /root/bbndk/host_10_3_1_12/linux/x86/usr/bin/; \
 cp arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3 arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3.orig ; \
 mv /tmp/arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3-wrapper /root/bbndk/host_10_3_1_12/linux/x86/usr/bin/arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3 ;\
 chmod a+x /root/bbndk/host_10_3_1_12/linux/x86/usr/bin/arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3
-
-RUN chmod 755 /root
-RUN /opt/go/bin/go install golang.org/x/mobile/cmd/gomobile@latest
-
-RUN apt-get install -y libegl1-mesa-dev libgles2-mesa-dev libx11-dev
