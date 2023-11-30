@@ -12,7 +12,7 @@ docker-image.%:
 
 build-gomobile.%: docker-image.gomobile
 	docker run -it $(DOCKER_OPT_ANDROID) \
-	  -v "${PWD}":/berrymuch \
+	  -v "$(CURDIR)":/berrymuch \
 	  -e HOME=/tmp \
    	  -e CGO_ENABLED=1 \
    	  -e GOOS=android \
@@ -32,7 +32,7 @@ build-gomobile.%: docker-image.gomobile
 
 build-android-wip.%: docker-image.android
 	docker run -it $(DOCKER_OPT_ANDROID) \
-	  -v "${PWD}":/berrymuch \
+	  -v "$(CURDIR)":/berrymuch \
 	  -e HOME=/tmp \
 	  -e PATH=/usr/bin:/usr/sbin:/bin:/sbin:/root/bbndk/host_10_3_1_12/linux/x86/usr/bin \
 	  -e CC=arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3 \
@@ -46,7 +46,7 @@ build-android-wip.%: docker-image.android
 
 droidsh: docker-image.gomobile
 	docker run -it $(DOCKER_OPT_ANDROID) \
-          -v "${PWD}":/berrymuch \
+          -v "$(CURDIR)":/berrymuch \
           -e HOME=/tmp \
           -e PATH=/usr/bin:/usr/sbin:/bin:/sbin:/opt/go/bin:/root/bbndk/host_10_3_1_12/linux/x86/usr/bin \
           -e CC=arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3 \
@@ -78,19 +78,19 @@ gosh: docker-image.gomobile
 
 build: docker-image
 	docker run $(DOCKER_OPT) -t \
-		-v "${PWD}":/berrymuch \
+		-v "$(CURDIR)":/berrymuch \
 		-u $(shell id -u):$(shell id -g) yamsergey/bb10-ndk:0.6.3 /bin/bash \
 		-c 'cd /berrymuch; ./build.sh -b /root/bbndk'
 
 build.%: docker-image
 	docker run $(DOCKER_OPT) -t \
-		-v "${PWD}":/berrymuch \
+		-v "$(CURDIR)":/berrymuch \
 		-u $(shell id -u):$(shell id -g) yamsergey/bb10-ndk:0.6.3 /bin/bash \
 		-c 'cd /berrymuch/ports/$*; ./build.sh -b /root/bbndk'
 
 build-wip.%: docker-image
 	docker run $(DOCKER_OPT) -t \
-		-v "${PWD}":/berrymuch \
+		-v "$(CURDIR)":/berrymuch \
 		-u $(shell id -u):$(shell id -g) yamsergey/bb10-ndk:0.6.3 /bin/bash \
 		-c 'cd /berrymuch/ports-wip/$*; ./build.sh -b /root/bbndk'
 
@@ -105,7 +105,7 @@ hello-world.baremetal:
 
 gosh.root: docker-image.gomobile
 	docker run $(DOCKER_OPT_GO) -it \
-	  -v "${PWD}":/berrymuch \
+	  -v "$(CURDIR)":/berrymuch \
 	  -e PATH=/opt/go/bin:/usr/bin:/usr/sbin:/bin:/sbin:/root/bbndk/host_10_3_1_12/linux/x86/usr/bin \
 	  	android-4.3-ndk:gomobile
 
