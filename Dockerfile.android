@@ -38,22 +38,51 @@ RUN apt-get -q update ;\
     strace
 
 
-ADD ./arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3-wrapper /tmp 
 # no -pthread option temporary workaround for arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3
+ADD ./arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3-wrapper /tmp 
 RUN cd /root/bbndk/host_10_3_1_12/linux/x86/usr/bin/; \
 mv arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3 arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3.orig ; \
 mv /tmp/arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3-wrapper arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3 ; \
 chmod a+x arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3
 
-#RUN cd /tmp; wget https://dl.google.com/android/repository/platform-tools_r18-linux.zip; cd /opt; unzip /tmp/platform-tools*zip
+
+# Get Android stuff
+
+ENV PATH=$PATH:/root/bbndk/features/com.qnx.tools.jre.linux_1.7.0.51/jre/bin
+
+RUN cd /tmp; wget http://dl.google.com/android/android-sdk_r22.0.5-linux.tgz; cd /opt; tar -zxvf /tmp/android-sdk_r22.0.5-linux.tgz
+
+ENV ANDROID_HOME=/tmp/android-sdk-linux
+ENV PATH=$PATH:/opt/android-sdk-linux/tools
+
+# Install platform-tools
+RUN echo yes | android update sdk --no-ui --filter 'platform-tools'
+
+# SDK api 18 for 4.3 
+RUN echo yes | android update sdk -u -a  -t 14
+
+# Install build-tools
+RUN echo yes | android update sdk -u -a  -t 1
+
+
+#RUN cd /tmp; wget http://dl.google.com/android/ndk/android-ndk32-r10b-linux-x86.tar.bz2; tar -jxvf android-ndk32-r10b-linux-x86.tar.bz2
+#ENV ANDROID_NDK_PATH=/tmp/android-ndk-r10b
 
 #Android 4.3 API level 18
 #https://developer.android.com/tools/releases/platforms#4.3
-
-#Android SDK Platform-tools r18 or higher is required.
-#Android SDK Tools 22.0.4 or higher is recommended.
 
 #Might be usefull tools
 # https://github.com/leleliu008/ndk-pkg, a package manager for Android NDK to build projects that are written in C/C++/Rust/Golang.
 #https://stuff.mit.edu/afs/sipb/project/android/docs/tools/sdk/tools-notes.html
 
+#RUN cd /tmp; wget https://dl.google.com/android/repository/android-18_r03.zip; unzip android-18_r03.zip
+#ENV ANDROID_SDK_PATH=/tmp/android-4.3.1
+
+RUN export PATH=$PATH:$ANDROID_HOME/tools
+RUN export PATH=$PATH:$ANDROID_HOME/platform-tools
+RUN export PATH=$PATH:$ANDROID_HOME/build-tools
+
+RUN echo -n "export PATH=" > /entrypoint.sh
+RUN echo $PATH >> /entrypoint.sh
+RUN echo "/bin/bash -l" >> /entrypoint.sh
+RUN chmod +x /entrypoint.sh

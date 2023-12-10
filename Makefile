@@ -44,14 +44,12 @@ build-android-wip.%: docker-image.android
 		./build.sh '
 
 
-droidsh: docker-image.gomobile
+droidsh: docker-image.android
 	docker run -it $(DOCKER_OPT_ANDROID) \
           -v "$(CURDIR)":/berrymuch \
           -e HOME=/tmp \
-          -e PATH=/usr/bin:/usr/sbin:/bin:/sbin:/opt/go/bin:/root/bbndk/host_10_3_1_12/linux/x86/usr/bin \
           -e CC=arm-unknown-nto-qnx8.0.0eabi-gcc-4.6.3 \
-         android-4.3-ndk:android \
-		/bin/bash 
+         android-4.3-ndk:android 
 
          #-u $(shell id -u):$(shell id -g) \
 
