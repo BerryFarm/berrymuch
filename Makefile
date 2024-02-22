@@ -3,7 +3,11 @@
 DOCKER_OPT_ANDROID=--platform linux/386
 DOCKER_OPT=--platform linux/amd64
 
+
 default: build-gomobile.syncthing
+
+help:
+	@cat .Makefile.doc
 
 docker-image.%:
 	docker build $(DOCKER_OPT_ANDROID) \

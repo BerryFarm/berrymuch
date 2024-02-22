@@ -1,0 +1,12 @@
+
+  default: build-gomobile.syncthing 
+ 
+  droidsh 
+  gosh 
+ 
+  build-android-wip.<port> 
+  build-android.<port> 
+ 
+  build.<port> 
+  build-wip.<port> 
+
