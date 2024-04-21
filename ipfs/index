@@ -1,38 +1,60 @@
 
-m1:ipfs v0.5-rc2-31-gca55f4860 🌘 kalou ipfs add ../packages/*zip
-added QmcjrFSWY4dbVUAp81WXoAoVp9tGvcpMhCrtU9CyDMumdD calcurse-4.5.1.zip
-added QmanoqPu7gMy8f9sMhKoNV6nh3eejkXf1j533wHcJJvoHc cflow-1.5.zip
+QmNfGUq8HBzTeRxqiV5tn83gf1kjXpixxkTKouEk4mb3hY
+QmQBNUvTcAU8qFMXDrJvQ4SyADBjLwJn4jNNePm7Vw3m7F
+QmQeGdTuS2TehttZQkrwM47Z66VwZoNx51nMsUuzYGCbZg
+QmQzjmbYfBiVuRukt9o9MHB8Mp2VEapxCp4gZhPgATdcVr
+QmT6sCjB4TPnnwmaPtBsz68eL6xQV7pXqmatRXGnpSoQHT
+QmUeiqgZrpZQXUG7ewJRy4yBBavqn9TrCzQiCr4iuVwkou
+QmV4cnzJ7Jb5oi1ZfSBDSajY1SMEsGhU62JqQFBTy34QMk
+QmVNpJRDXka2wpYVsivKPABDzkMThfp21AdQ21N8L4QePy
+QmWfTUGpsfMwtdZvfuZrcXoVP5NFsVKUQHhrX6oVEyG2Ff
+QmWpooSX7yrmz2quhTS3nCBcDukKyUL6u234yCLvraAxh6
+QmXdAKr9rdSppHujmpbK3JdpqAcG1hdYRbwHBWNYnNivh3
+QmXg2GW9wHHv9PHA7DHnDgPRvyVXAAL6uUy3pwXn7GK3oK
+QmYafd5xSfqXtb7Kqigk8KucuoEDR65xdVjxL3WjrsVaCV
+QmYbFu1bnDjhx2wS1MAHP6yBmE3WA1DFxa6VCKKQB6q9g3
+QmYd1kCfM8UuPFAkQyNJtYxDYnULxYdEr8iugPJhp8gmc7
+QmZsivj7ryL8Z6mwKbs7z5TsDRXYo9UxFHBoKyCSqmpWTs
+QmanoqPu7gMy8f9sMhKoNV6nh3eejkXf1j533wHcJJvoHc
+QmaoUEZJPfE1Ro3fdfP7UaBzzv6fTSt4QUZFLEaKxLCqUP
+QmbEMod3gxnZxQBMGFBmkEGfrTnfNVw5g2MH4THnFDF2CN
+QmcXJ4xaydJqomG3erKSKH9n2ZuTqRx7ryfx8S6VsRa7dD
+QmcjrFSWY4dbVUAp81WXoAoVp9tGvcpMhCrtU9CyDMumdD
+QmdEEnZ2ELi2rPXtmXv744MHNbMUXP9bgWTf6G68hJNgMm
+Qmf3hSgN8M8uzgMUro8eZ2sm8q8qBiAsaMdGdipXs2EaFw
+Qmf9RUZytgHo6S6eCd1FhhTrKSrvjo9kzSadadvn3ooDAN
+QmfSX8aKk4JAG3peq96pufn2skMjk7GSC65NS1bjGhHCMm
+added QmNfGUq8HBzTeRxqiV5tn83gf1kjXpixxkTKouEk4mb3hY vim-8.0.zip
+added QmQBNUvTcAU8qFMXDrJvQ4SyADBjLwJn4jNNePm7Vw3m7F libuuid-1.0.3.zip
 added QmQeGdTuS2TehttZQkrwM47Z66VwZoNx51nMsUuzYGCbZg coreutils-8.29.zip
-added QmZsivj7ryL8Z6mwKbs7z5TsDRXYo9UxFHBoKyCSqmpWTs curl-7.76.0.zip
-added QmYafd5xSfqXtb7Kqigk8KucuoEDR65xdVjxL3WjrsVaCV diffutils-3.2.zip
+added QmQzjmbYfBiVuRukt9o9MHB8Mp2VEapxCp4gZhPgATdcVr zsh-5.0.2.zip
+added QmSvuzi9V35gQbJ4GYaDfvMQNVkT3ucBETfWPBKNWuGYUp Syncthing-0.9.15.apk
 added QmT6sCjB4TPnnwmaPtBsz68eL6xQV7pXqmatRXGnpSoQHT findutils-4.7.0.zip
+added QmUaBno1ap9BWAfPRgs53vJ6dAAUfZy4L713Dwh71n61km Syncthing-0.9.13.apk
+added QmUeiqgZrpZQXUG7ewJRy4yBBavqn9TrCzQiCr4iuVwkou wget-1.20.3.zip
+added QmUi1RpNdLKJ2QRHfHKgPFeZZXxBEWSEaxfZnhP5Hhh6e2 syncthing-0-5-28.apk
+added QmV4cnzJ7Jb5oi1ZfSBDSajY1SMEsGhU62JqQFBTy34QMk rsync-3.1.3.zip
+added QmVNpJRDXka2wpYVsivKPABDzkMThfp21AdQ21N8L4QePy youtube-dl.zip
+added QmWfTUGpsfMwtdZvfuZrcXoVP5NFsVKUQHhrX6oVEyG2Ff yank.zip
+added QmWpooSX7yrmz2quhTS3nCBcDukKyUL6u234yCLvraAxh6 make-3.82.zip
+added QmXdAKr9rdSppHujmpbK3JdpqAcG1hdYRbwHBWNYnNivh3 task-2.4.2.zip
+added QmXg2GW9wHHv9PHA7DHnDgPRvyVXAAL6uUy3pwXn7GK3oK openssl-1.0.2u.zip
+added QmYUVzoCQND8Mv2t9cRAwPkj1ydLbqiZHVm2ELWq1pgHqy Syncthing-1.2.0.apk
+added QmYafd5xSfqXtb7Kqigk8KucuoEDR65xdVjxL3WjrsVaCV diffutils-3.2.zip
 added QmYbFu1bnDjhx2wS1MAHP6yBmE3WA1DFxa6VCKKQB6q9g3 git-2.33.1.zip
 added QmYd1kCfM8UuPFAkQyNJtYxDYnULxYdEr8iugPJhp8gmc7 grep-3.4.zip
-added QmQBNUvTcAU8qFMXDrJvQ4SyADBjLwJn4jNNePm7Vw3m7F libuuid-1.0.3.zip
+added QmZHi6euTg5qhq4srnmv2FXgVzp9VAng5S8wtgv1CNpQKT syncthing-0-7-21.apk
+added QmZsivj7ryL8Z6mwKbs7z5TsDRXYo9UxFHBoKyCSqmpWTs curl-7.76.0.zip
+added QmanoqPu7gMy8f9sMhKoNV6nh3eejkXf1j533wHcJJvoHc cflow-1.5.zip
+added QmaoUEZJPfE1Ro3fdfP7UaBzzv6fTSt4QUZFLEaKxLCqUP tig-2.5.0.zip
+added QmbEMod3gxnZxQBMGFBmkEGfrTnfNVw5g2MH4THnFDF2CN patch-2.7.1.zip
+added Qmc74vPibtaQogRRxXpYUSpB6t6nhZLveKPVcXP8aFfuhr Syncthing-0.9.14.apk
+added QmcXJ4xaydJqomG3erKSKH9n2ZuTqRx7ryfx8S6VsRa7dD xz-5.2.3.zip
+added QmcjrFSWY4dbVUAp81WXoAoVp9tGvcpMhCrtU9CyDMumdD calcurse-4.5.1.zip
+added QmdEEnZ2ELi2rPXtmXv744MHNbMUXP9bgWTf6G68hJNgMm tar-1.32.zip
+added QmdrRfSAv59uo44WirgyHmPfh5ZRcueeMbKJLrfcDTY657 Syncthing-0.9.16.apk
 added Qmf3hSgN8M8uzgMUro8eZ2sm8q8qBiAsaMdGdipXs2EaFw lynx2.8.9rel.1.zip
-added QmWpooSX7yrmz2quhTS3nCBcDukKyUL6u234yCLvraAxh6 make-3.82.zip
+added Qmf6yd3R2oWtb8au1biiAYoMJZAwnfnS1XghLcngpPo5SP org_mozilla_fennec_aurora_68_3a1_2015666601_minAPI16armeabi_v7anodpi.apk
 added Qmf9RUZytgHo6S6eCd1FhhTrKSrvjo9kzSadadvn3ooDAN man-1.6g.zip
 added QmfSX8aKk4JAG3peq96pufn2skMjk7GSC65NS1bjGhHCMm onig-6.9.4.zip
-added QmXg2GW9wHHv9PHA7DHnDgPRvyVXAAL6uUy3pwXn7GK3oK openssl-1.0.2u.zip
-added QmbEMod3gxnZxQBMGFBmkEGfrTnfNVw5g2MH4THnFDF2CN patch-2.7.1.zip
-added QmV4cnzJ7Jb5oi1ZfSBDSajY1SMEsGhU62JqQFBTy34QMk rsync-3.1.3.zip
-added QmdEEnZ2ELi2rPXtmXv744MHNbMUXP9bgWTf6G68hJNgMm tar-1.32.zip
-added QmXdAKr9rdSppHujmpbK3JdpqAcG1hdYRbwHBWNYnNivh3 task-2.4.2.zip
-added QmaoUEZJPfE1Ro3fdfP7UaBzzv6fTSt4QUZFLEaKxLCqUP tig-2.5.0.zip
-added QmNfGUq8HBzTeRxqiV5tn83gf1kjXpixxkTKouEk4mb3hY vim-8.0.zip
-added QmUeiqgZrpZQXUG7ewJRy4yBBavqn9TrCzQiCr4iuVwkou wget-1.20.3.zip
-added QmcXJ4xaydJqomG3erKSKH9n2ZuTqRx7ryfx8S6VsRa7dD xz-5.2.3.zip
-added QmWfTUGpsfMwtdZvfuZrcXoVP5NFsVKUQHhrX6oVEyG2Ff yank.zip
-added QmVNpJRDXka2wpYVsivKPABDzkMThfp21AdQ21N8L4QePy youtube-dl.zip
-added QmQzjmbYfBiVuRukt9o9MHB8Mp2VEapxCp4gZhPgATdcVr zsh-5.0.2.zip
-
-
-m1:~  🌔 kalou ipfs add Downloads/*ync*apk
-added QmUaBno1ap9BWAfPRgs53vJ6dAAUfZy4L713Dwh71n61km Syncthing-0.9.13.apk
-added Qmc74vPibtaQogRRxXpYUSpB6t6nhZLveKPVcXP8aFfuhr Syncthing-0.9.14.apk
-added QmSvuzi9V35gQbJ4GYaDfvMQNVkT3ucBETfWPBKNWuGYUp Syncthing-0.9.15.apk
-added QmdrRfSAv59uo44WirgyHmPfh5ZRcueeMbKJLrfcDTY657 Syncthing-0.9.16.apk
-added QmYUVzoCQND8Mv2t9cRAwPkj1ydLbqiZHVm2ELWq1pgHqy Syncthing-1.2.0.apk
-added QmUi1RpNdLKJ2QRHfHKgPFeZZXxBEWSEaxfZnhP5Hhh6e2 syncthing-0-5-28.apk
-added QmZHi6euTg5qhq4srnmv2FXgVzp9VAng5S8wtgv1CNpQKT syncthing-0-7-21.apk
- 113.98 MiB / 113.98 MiB [===========================================================================================] 100.00%
+m1:ipfs v0.5-rc2-31-gca55f4860 🌘 kalou ipfs add ../packages/*zip

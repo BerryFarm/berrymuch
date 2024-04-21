@@ -18,6 +18,8 @@ ls-bb10-barfiles: ipfs-binary-installed
 
 ipfs-binary-installed:
 	@which ipfs
+doc.:
+	@cat .Makefile.doc
 
 build: docker-image
 	docker run $(DOCKER_OPT) -t -v "${PWD}":/berrymuch -u $(shell id -u):$(shell id -g) yamsergey/bb10-ndk:0.6.3 /bin/bash -c 'cd /berrymuch; ./build.sh -b /root/bbndk'
