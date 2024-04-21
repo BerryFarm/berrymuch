@@ -7,7 +7,7 @@
 
 set -e
 source ../../lib.sh
-DISTVER="dropbear-2019.78"
+DISTVER="dropbear-2022.83"
 DISTSUFFIX="tar.bz2"
 TASK=fetch
 
