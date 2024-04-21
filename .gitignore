@@ -17,3 +17,9 @@ sample_profile
 .ssh
 .vim*
 .sw**
+ports
+ports-android
+ports-android-wip
+ports-golang
+ports-gomobile
+ports-wip

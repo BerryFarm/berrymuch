@@ -1,9 +1,13 @@
 DOCKER_OPT=--platform linux/386
 
+auto: ipfstab ls-bb10-barfiles
+
 show-ipfs-features: ls-bb10-barfiles
 
+.ipfstab: ipfs/index
+	@grep added $< | sed 's/added //' > $@
 
-ls-bb10-barfiles: ipfs-binary-installed
+ls-bb10-barfiles: ipfs-fetcher
 	ipfs  files ls /bb10/bar  |\
 	xargs -n $(shell echo $$(tput cols) / 24*4 | bc) echo 
 
@@ -20,6 +24,8 @@ ipfs-binary-installed:
 	@which ipfs
 doc.:
 	@cat .Makefile.doc
+ipfs-fetcher:
+	@which wget || which curl
 
 build: docker-image
 	docker run $(DOCKER_OPT) -t -v "${PWD}":/berrymuch -u $(shell id -u):$(shell id -g) yamsergey/bb10-ndk:0.6.3 /bin/bash -c 'cd /berrymuch; ./build.sh -b /root/bbndk'

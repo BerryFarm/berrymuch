@@ -1,5 +1,6 @@
 #!/bin/sh
 
+
 # versions up to 0.4 were slowing down the device (see #54)
 D=/accounts/1000/shared/documents/clitools
 if [ -d $D ]; then
@@ -21,9 +22,25 @@ if [ -d $D ]; then
     exit 0
  fi
 fi
-   
+
 D=/accounts/1000/shared/misc/clitools
 mkdir -p $D;
+
+ipfs_installer () {
+
+}
+	
+echo
+echo "do you want to perform a net install using ipfs ?"
+echo -n "(y/n)"
+read -n 1 answer
+echo
+
+[ $answer == "y" ] && {
+	ipfs_installer
+	exit 0
+}
+   
 mv clitools.zip $D
 cd $D
 touch .nomedia .noindex
