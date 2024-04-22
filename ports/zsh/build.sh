@@ -10,13 +10,13 @@
 
 set -e
 source ../../lib.sh
-DISTVER="zsh-5.0.2"
-DISTSUFFIX="tar.gz"
+DISTVER="zsh-5.9"
+DISTSUFFIX="tar.xz"
 
 TASK=fetch
 
-DISTFILES="http://www.zsh.org/pub/old/$DISTVER.$DISTSUFFIX"
-UNPACKCOMD="tar -xf"
+DISTFILES="http://www.zsh.org/pub/$DISTVER.$DISTSUFFIX"
+UNPACKCOMD="tar -xJf"
 package_init "$@"
 CONFIGURE_CMD="autoconf; ./configure 
                 --host=$PBHOSTARCH
@@ -26,7 +26,7 @@ CONFIGURE_CMD="autoconf; ./configure
                 CC=$PBTARGETARCH-gcc 
                 "
 package_fetch
-package_patch
+package_patch 1
 package_build
 package_install
 package_bundle
