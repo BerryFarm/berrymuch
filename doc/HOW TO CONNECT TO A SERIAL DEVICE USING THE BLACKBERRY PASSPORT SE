@@ -1,0 +1,11 @@
+# HOW TO CONNECT TO A SERIAL DEVICE USING THE BLACKBERRY PASSPORT SE
+
+## Steps
+
+- you need a microusb cable to connect to the device
+- to see if your device is connected and recognized look for serusb1 in /dev 
+- you can try "echo hello > /dev/serusb1" or "cat > /dev/serusb1" 
+- depending the device and its purpose you may need to program it etc
+
+so far I have tested an Arduino UNO and Tessel 2. the Tessel 2 has running that I can interact with using the echo command
+
