@@ -7,5 +7,7 @@
 - you can try "echo hello > /dev/serusb1" or "cat > /dev/serusb1" 
 - depending the device and its purpose you may need to program it etc
 
-so far I have tested an Arduino UNO and Tessel 2. the Tessel 2 has running that I can interact with using the echo command
+
+## Tested Units
+so far I have tested an Arduino UNO and Tessel 2. the Tessel 2 has a terminal running that I can interact with using the echo command
 
