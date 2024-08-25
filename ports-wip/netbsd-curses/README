@@ -4,3 +4,7 @@
   * `funopen2` it replaces isn't available in QNX either
 * The only feasible replacement seems to be using `tmpfile`
   * There is a `fmem_open` wrapper using it: https://github.com/Snaipe/fmem/blob/master/src/fmem-tmpfile.c
+
+## See dirty patchset from Extrowerk
+
+https://github.com/extrowerk/netbsd-curses/commit/16d9957fa7c28e87cbd07b505bafd5cc617485a0
