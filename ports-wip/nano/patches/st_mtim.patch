@@ -1,0 +1,16 @@
+diff --git a/config.h.in b/config.h.in
+index 5d3a9a1..d8764d3 100644
+--- a/config.h.in
++++ b/config.h.in
+@@ -1494,6 +1494,9 @@
+ # define _GL_ATTRIBUTE_MALLOC /* empty */
+ #endif
+ 
+-
+ /* Define as a macro for copying va_list variables. */
+-#undef va_copy
++/* #undef va_copy */
++
++#ifdef __QNXNTO__
++define st_mtim st_mtime
++#endif
