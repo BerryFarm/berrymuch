@@ -48,6 +48,8 @@ We use `Docker` container to build the project.
 You can build the project by `make build`
 Or start the container and connect to it with `make shell`, then you will have everything configured for you inside the conatiner.
 
+Alternativelly, you may also use `make build.coreutils` to build only the coreutils package available below ports/ , and `make build-wip.ncurses` to build the ncurses package below ports-wip/ .
+
 For details you can check `Makefile`
 
 You may need to [patch](https://github.com/BerryFarm/berrymuch/wiki/Git-Workflow-HOWTO-create-a-patch-easily-using-git) an existing port
