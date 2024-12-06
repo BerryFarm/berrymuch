@@ -1,18 +1,53 @@
-build: .useradd
-	docker run -t -v "${PWD}":/berrymuch -u $(shell id -u):$(shell id -g) yamsergey/bb10-ndk:0.6.1 /bin/bash -c 'cd /berrymuch; ./build.sh -b /root/bbndk -t build'
 
-shell: .useradd
-	docker run -it -v "${PWD}":/berrymuch -u $(shell id -u):$(shell id -g) yamsergey/bb10-ndk:0.6.1 /bin/bash
+DOCKER_OPT=--platform linux/386
 
-.useradd:
-	-@docker rm /yamsergey/bb10-ndk:0.6.1 /yam_useradd /yam_groupadd 2> /dev/null
-	docker run -it --name yam_groupadd -v "${PWD}":/root/berrymuch yamsergey/bb10-ndk:0.6 /usr/sbin/groupadd $(shell whoami) --gid $(shell id -g)
-	docker commit yam_groupadd yamsergey/bb10-ndk:0.6.1
-	docker run -it --name yam_useradd yamsergey/bb10-ndk:0.6.1 /usr/sbin/useradd -M $(shell whoami) --uid $(shell id -u) --gid $(shell id -g) -d /berrymuch
-	docker commit yam_useradd yamsergey/bb10-ndk:0.6.2
+IPFS_SRV=docker run \
+	--name ipfsd \
+	-v /data/ipfs:/data/ipfs \
+	-v /data/kara/berrymuch/ports:/ports \
+	 ipfs/go-ipfs
 
-	touch .useradd
+#IPFS=docker exec -t \
+IPFS=docker exec -i /ipfsd 
+#	-v /data/ipfs:/data/ipfs 
+	#-v $(pwd)/ports:/ports 
 
-shell: .useradd
-	docker run -it -v /Big:/Big -v "${PWD}":/berrymuch -u $(shell id -u):$(shell id -g) yamsergey/bb10-ndk:0.6.2 /bin/bash
+default:
+	cat export.ipfs	
 
+import: export.ipfs
+	grep -oE 'Qm\w+ \S+' export.ipfs > cleaned_export.ipfs
+	bash -c 'while read hash file; do \
+	        wget http://ipfs.io/ipfs/$$hash -O $$file; \
+	done < cleaned_export.ipfs'
+
+
+sh:
+	$(IPFS) sh
+
+export: export.ipfs
+
+export.ipfs:
+	#docker run --name ipfsd ipfs/go-ipfs
+	#docker exec -it /ipfsd sh
+	#find . -type f -name \*.zip | xargs -I__ docker exec /ipfsd ipfs add --quiet /__ 
+	find . -type f -name \*.zip | xargs -I__ docker exec /ipfsd ipfs add /__ | tee export.ipfs
+
+srv:
+	docker rm -f /ipfsd
+	$(IPFS_SRV)
+
+build: docker-image
+	docker run $(DOCKER_OPT) -t -v "${PWD}":/berrymuch -u $(shell id -u):$(shell id -g) yamsergey/bb10-ndk:0.6.3 /bin/bash -c 'cd /berrymuch; ./build.sh -b /root/bbndk'
+
+build.%: docker-image
+	docker run $(DOCKER_OPT) -t -v "${PWD}":/berrymuch -u $(shell id -u):$(shell id -g) yamsergey/bb10-ndk:0.6.3 /bin/bash -c 'cd /berrymuch/ports/$*; ./build.sh -b /root/bbndk'
+
+build-wip.%: docker-image
+	docker run $(DOCKER_OPT) -t -v "${PWD}":/berrymuch -u $(shell id -u):$(shell id -g) yamsergey/bb10-ndk:0.6.3 /bin/bash -c 'cd /berrymuch/ports-wip/$*; ./build.sh -b /root/bbndk'
+
+shell: docker-image
+	docker run $(DOCKER_OPT) -it -v "${PWD}":/berrymuch -u $(shell id -u):$(shell id -g) yamsergey/bb10-ndk:0.6.3 /bin/bash
+
+docker-image:
+	docker build $(DOCKER_OPT) --build-arg UID=$(shell id -u) --build-arg GID=$(shell id -g) --build-arg WHOAMI=$(shell whoami) -f Dockerfile.karawitan -t yamsergey/bb10-ndk:0.6.3 .
