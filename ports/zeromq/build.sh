@@ -8,7 +8,7 @@
 
 set -e
 source ../../lib.sh
-DISTVER="zeromq-4.2.3"
+DISTVER="zeromq-4.2.5"
 DISTSUFFIX="tar.gz"
 TASK=fetch
 
