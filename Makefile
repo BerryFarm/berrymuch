@@ -14,3 +14,6 @@ shell: docker-image
 
 docker-image:
 	docker build $(DOCKER_OPT) --build-arg UID=$(shell id -u) --build-arg GID=$(shell id -g) --build-arg WHOAMI=$(shell whoami) -f Dockerfile.karawitan -t yamsergey/bb10-ndk:0.6.3 .
+
+strip_all:
+	/usr/bin/find . -type f | grep -E "bin/" | xargs /root/bbndk/host_10_3_1_12/linux/x86/usr/bin/arm-unknown-nto-qnx8.0.0eabi-strip-2.24 2> /dev/null ; /bin/true
