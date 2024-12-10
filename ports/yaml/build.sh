@@ -8,7 +8,7 @@
 
 set -e
 source ../../lib.sh
-DISTVER="yaml-0.1.4"
+DISTVER="yaml-0.2.5"
 DISTSUFFIX="tar.gz"
 TASK=fetch
 
