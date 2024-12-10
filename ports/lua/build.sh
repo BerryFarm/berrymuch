@@ -10,7 +10,7 @@ set -e
 source ../../lib.sh
 TASK=fetch
 
-DISTVER="lua-5.3.5"
+DISTVER="lua-5.3.6"
 DISTSUFFIX="tar.gz"
 DISTFILES="https://www.lua.org/ftp/$DISTVER.$DISTSUFFIX"
 UNPACKCOMD="tar -xzf"
