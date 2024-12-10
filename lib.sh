@@ -287,6 +287,7 @@ if [ "$TASK" == "bundle" ]
 then
   echo "Bundling"
   cd "$DESTDIR/$PREFIX"
+  make strip_all -C /berrymuch
   zip -r -y -u "$ZIPFILE" * || true
   mv "$DESTDIR" "$ARCHIVEDIR/$DISTVER"
 fi
