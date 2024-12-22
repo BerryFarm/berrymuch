@@ -10,7 +10,7 @@
 
 set -e
 source ../../lib.sh
-DISTVER="zlib-1.2.11"
+DISTVER="zlib-1.3.1"
 DISTSUFFIX="tar.gz"
 TASK=fetch
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env bash 
 
 # This code Copyright 2012 Todd Mortimer <todd.mortimer@gmail.com>
 #
@@ -6,6 +6,7 @@
 # copyright notice and this paragraph are preserved.
 
 set -e
+set -x
 
 source lib.sh
 
