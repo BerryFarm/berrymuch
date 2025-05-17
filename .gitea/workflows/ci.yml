@@ -1,17 +1,25 @@
 name: CI
 
-# https://git.kalou.net/kalou/berrymuch/src/branch/master/.gitlab/build-freshest-port-wip.sh
-
 on:
   push:
     branches: [ main, master ]
 
 jobs:
   build:
-    strategy:
-      matrix:
-        runner: [Linux-x86_64]
-    runs-on: ${{ matrix.runner }}
+    runs-on: [berrymuch]
     steps:
-      - name: Print hostname
-        run: make build.nano
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+   - name: Find last updated WIP port and build
+        run: |
+          PFX=/berrymuch
+
+          # Find the last updated directory in $PFX/ports-wip/
+          PORT_NAME=$(ls -1t "$PFX/ports-wip/" | head -n1)
+
+          echo "Last updated port: $PORT_NAME"
+
+          cd "$PFX/ports-wip/$PORT_NAME"
+
+          bash -x ./build.sh
