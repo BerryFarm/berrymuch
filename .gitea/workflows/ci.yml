@@ -8,7 +8,7 @@ jobs:
   build:
     strategy:
       matrix:
-        runner: [berrymuch]
+        runner: [Linux-x86_64]
     runs-on: ${{ matrix.runner }}
     steps:
       - name: Print hostname
