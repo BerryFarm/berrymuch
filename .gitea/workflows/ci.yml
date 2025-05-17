@@ -7,19 +7,14 @@ on:
 jobs:
   build:
     runs-on: [berrymuch]
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-   - name: Find last updated WIP port and build
-        run: |
-          PFX=/berrymuch
-
-          # Find the last updated directory in $PFX/ports-wip/
-          PORT_NAME=$(ls -1t "$PFX/ports-wip/" | head -n1)
-
-          echo "Last updated port: $PORT_NAME"
-
-          cd "$PFX/ports-wip/$PORT_NAME"
-
-          bash -x ./build.sh
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    - name: "Find last updated WIP port and build"
+      run: |
+        PFX=/berrymuch
+        # Find the last updated directory in $PFX/ports-wip/
+        PORT_NAME=$(ls -1t "$PFX/ports-wip/" | head -n1)
+        echo "Last updated port: $PORT_NAME"
+        cd "$PFX/ports-wip/$PORT_NAME"
+        bash -x ./build.sh
