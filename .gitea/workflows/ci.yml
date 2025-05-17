@@ -1,0 +1,15 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        runner: [berrymuch]
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - name: Print hostname
+        run: make build.nano
