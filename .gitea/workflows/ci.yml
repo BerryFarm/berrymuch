@@ -15,4 +15,4 @@ jobs:
           PORT_NAME=$(ls -1t "$PFX/ports-wip/" | head -n1)
           echo "Last updated port: $PORT_NAME"
           cd "$PFX/ports-wip/$PORT_NAME"
-          bash -x ./build.sh
+          make build-wip.$PORT_NAME
