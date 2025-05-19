@@ -13,7 +13,7 @@ jobs:
         with:
           depth: 1
           branch: 'main'
-          repository: 'berrymuch'
+          repository: 'kalou/berrymuch'
       - name: "Find last updated WIP port and build"
         run: |
           PFX=$HOME/berrymuch
