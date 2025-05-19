@@ -14,5 +14,4 @@ jobs:
           # Find the last updated directory in $PFX/ports-wip/
           PORT_NAME=$(ls -1t "$PFX/ports-wip/" | head -n1)
           echo "Last updated port: $PORT_NAME"
-          cd "$PFX/ports-wip/$PORT_NAME"
           make build-wip.$PORT_NAME
