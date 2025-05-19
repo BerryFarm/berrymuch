@@ -8,6 +8,12 @@ jobs:
   build:
     runs-on: [berrymuch]
     steps:
+      - name: Clone 
+        uses: actions/checkout@v4
+        with:
+          depth: 1
+          branch: 'main'
+          repository: 'berrymuch'
       - name: "Find last updated WIP port and build"
         run: |
           PFX=$HOME/berrymuch
