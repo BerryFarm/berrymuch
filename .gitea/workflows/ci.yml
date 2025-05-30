@@ -6,18 +6,19 @@ on:
 
 jobs:
   build:
-      Linux-x86_64:host, berrymuch, Linux-amd64:host, Linux-x86_64 ]
+    runs-on: ubuntu-latest
     steps:
-      - name: Clone 
+      - name: Checkout berrymuch repository
         uses: actions/checkout@v4
         with:
-          depth: 1
-          branch: 'main'
-          repository: 'kalou/berrymuch'
-      - name: "Find last updated WIP port and build"
+          repository: kalou/berrymuch
+          ref: main
+          path: berrymuch
+
+      - name: Find last updated WIP port and build
         run: |
-          PFX=$HOME/berrymuch
-          # Find the last updated directory in $PFX/ports-wip/
+          PFX=$GITHUB_WORKSPACE/berrymuch
           PORT_NAME=$(ls -1t "$PFX/ports-wip/" | head -n1)
           echo "Last updated port: $PORT_NAME"
+          cd "$PFX"
           make build-wip.$PORT_NAME
