@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: [ berrymuch ]
+    runs-on: [ Linux-x86_64 ]
     steps:
       - name: Checkout berrymuch repository
         uses: actions/checkout@v4
