@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: [ Linux-x86_64:host, berrymuch:host, Linux-amd64, Linux-x86_64 ]
+      Linux-x86_64:host, berrymuch, Linux-amd64:host, Linux-x86_64 ]
     steps:
       - name: Clone 
         uses: actions/checkout@v4
