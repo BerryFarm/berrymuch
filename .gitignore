@@ -7,7 +7,6 @@ work/
 *.tar.bz2
 *.zip
 .profile
-conf/
 clitools/
 archive/
 env.sh
