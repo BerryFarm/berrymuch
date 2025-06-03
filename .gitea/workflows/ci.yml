@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master, wip ]
+
+jobs:
+  build:
+    runs-on: [ Linux-x86_64:host, Linux-x86_64 ]
+    steps:
+      - name: Checkout berrymuch repository
+        uses: actions/checkout@v4
+        with:
+          repository: kalou/berrymuch
+          ref: main
+          path: berrymuch
+
+      - name: Find last updated WIP port and build
+        run: |
+          PFX=$GITHUB_WORKSPACE/berrymuch
+          PORT_NAME=$(ls -1t "$PFX/ports-wip/" | head -n1)
+          echo "Last updated port: $PORT_NAME"
+          cd "$PFX"
+          make build-wip.$PORT_NAME
+
+      - name: Publish to IPFS "blockchain"
+        run: |
+          make export.ipfs

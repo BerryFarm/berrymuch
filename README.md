@@ -34,7 +34,7 @@ The project is standing on the shoulders of giants including [playbook-dev-tools
 
 * Go to [Releases](https://github.com/berryamin/berrymuch/releases) and grab the latest `clitools.zip` and `install.sh`
 * Put both into the `documents/` directory on your device
-* Install a terminal app (we recommend [term49](https://github.com/BerryFarm/Term49/releases)) and run:
+* Install a terminal app (we recommend [Term49](https://github.com/BerryFarm/Term49/releases)) and run:
 
   ```
   cd /accounts/1000/shared/misc/clitools

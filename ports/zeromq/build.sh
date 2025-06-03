@@ -12,7 +12,7 @@ DISTVER="zeromq-4.2.5"
 DISTSUFFIX="tar.gz"
 TASK=fetch
 
-DISTFILES="https://github.com/zeromq/libzmq/releases/download/v4.2.3/$DISTVER.$DISTSUFFIX"
+DISTFILES="https://github.com/zeromq/libzmq/releases/download/v4.2.5/$DISTVER.$DISTSUFFIX"
 UNPACKCOMD="tar -xzf"
 
 package_init "$@"
