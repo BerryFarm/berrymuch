@@ -11,7 +11,7 @@
 
 PBHOSTARCH=arm-unknown-nto-qnx8.0.0eabi
 PBBUILDARCH=`gcc -dumpmachine`
-PBTARGETARCH=arm-unknown-nto-qnx8.0.0eabi
+PBTARGETARCH=`gcc -dumpmachine`
 
 DEFAULTPREFIX='/accounts/1000/shared/misc/clitools'
 
@@ -141,7 +141,7 @@ function init()
   init_confdir
   process_args "$@"
   configure_dirs
-  source_bbtools
+  #source_bbtools
   get_foundry_login
   get_prefix
 }
@@ -204,7 +204,7 @@ function package_init()
 {
   configure_dirs
   process_subargs "$@"
-  source_bbtools
+  #source_bbtools
   get_foundry_login
   get_prefix
 
@@ -286,7 +286,7 @@ function package_bundle()
 if [ "$TASK" == "bundle" ]
 then
   echo "Bundling"
-  cd "$DESTDIR/$PREFIX"
+  cd "$DESTDIR"
   zip -r -y -u "$ZIPFILE" * || true
   mv "$DESTDIR" "$ARCHIVEDIR/$DISTVER"
 fi
