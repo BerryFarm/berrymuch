@@ -1,0 +1,20 @@
+#!/bin/sh
+
+cb=/accounts/1000/clipboard/text.plain
+
+if [ -t 0 ] && [ -t 1 ]
+then # show
+	echo "$(cat $cb)"
+
+elif [ -t 0 ] && [ ! -t 1 ]
+then # paste
+	cat $cb
+
+elif [ ! -t 0 ] && [ -t 1 ]
+then # copy
+	printf "$(cat)" > $cb
+
+elif [ ! -t 0 ] && [ ! -t 1 ]
+then # copy & redirect
+	printf "$(cat)" | tee $cb
+fi
